@@ -1,0 +1,11 @@
+# OS junk
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# local-only reference material (the source handbook)
+reference/
+
+# logs / temp
+*.log
+_contact_sheet.jpg
