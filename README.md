@@ -8,9 +8,13 @@ A Dior-inspired storefront for **StyleHub × MatchBuy AI** with a catalogue of *
 
 ---
 
-## 1. Run
+## 1. Run / access online
 
-Double-click `index.html` (photos are local; works offline). Or `python -m http.server 8000`. Fonts from Google Fonts when online.
+- **Live online:** https://clarbel21.github.io/AIID-Product-Idea/ (GitHub Pages — auto-deploys on every push; note github.io can be intermittent from mainland China)
+- **Offline:** double-click `index.html` (photos are local; works fully offline)
+- **Local server:** `python -m http.server 8000` or `python serve.py`
+
+Fonts load from Google Fonts when online; graceful fallback offline.
 
 ## 2. Files
 
