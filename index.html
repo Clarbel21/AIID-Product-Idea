@@ -723,7 +723,6 @@ function media(item, contain){
 /* ---------- brands: real houses, real links ---------- */
 const BRANDS = {
   'POMELO':{url:'https://www.pomelofashion.com/'},
-  'MAX MARA':{url:'https://us.maxmara.com/'},
   'NIKE':{url:'https://www.nike.com/'},
   'ADIDAS':{url:'https://www.adidas.com/'},
   '73HOURS':{url:'http://www.73hours.com.cn/'},
@@ -763,18 +762,12 @@ const CATALOGUE = [
   {id:'zara3', brand:'ZARA', name:'Metallic-Effect Crinkle Dress', price:749, img:'assets/zara3.jpg', cat:'dress', tone:'cool', moods:['sexy','elegant'], occs:['party','date'], styles:['bold'], url:'https://www.zara.cn/cn/en/long-metallic-effect-crinkle-dress-p04786718.html', why:'Long, metallic, crinkled — the whole evening in one piece.'},
   {id:'zara4', brand:'ZARA', name:'ZW Collection Hooded Parka', price:649, img:'assets/zara4.jpg', cat:'outerwear', tone:'dark', moods:['minimal','cute'], occs:['everyday'], styles:['casual'], url:'https://www.zara.cn/cn/en/zw-collection-hooded-pocket-parka-p06539240.html', why:'ZW utility parka — the everyday layer with pockets for everything.'},
   {id:'zara5', brand:'ZARA', name:'Split Suede Heeled Ankle Boots', price:649, img:'assets/zara5.jpg', cat:'shoes', tone:'warm', moods:['elegant','sexy'], occs:['date','office','party'], styles:['classic'], url:'https://www.zara.cn/cn/en/split-suede-heeled-anble-boot-p12106810.html', why:'Split suede and a heel — boots that work from desk to dinner.'},
-  /* MAX MARA — real products */
-  {id:'mm1', brand:'MAX MARA', name:'Camel Wool Coat', price:18900, img:'assets/maxmara.jpg', cat:'outerwear', tone:'warm', moods:['elegant','minimal'], occs:['office','everyday'], styles:['classic'], url:'https://us.maxmara.com/', why:'The house coat — camel wool that finishes every neutral look.'},
-  {id:'mm2', brand:'MAX MARA', name:'Teddy Bear Icon Coat · Camel', price:31900, img:'assets/mm-teddy-cream.jpg', cat:'outerwear', tone:'warm', moods:['elegant','cute'], occs:['everyday'], styles:['classic'], url:'https://us.maxmara.com/', why:'The icon: alpaca-wool teddy in signature camel.'},
-  {id:'mm3', brand:'MAX MARA', name:'Teddy Bear Coat · Brown', price:29900, img:'assets/mm-teddy-brown.jpg', cat:'outerwear', tone:'warm', moods:['elegant'], occs:['office','everyday'], styles:['classic'], url:'https://us.maxmara.com/', why:'Deep brown teddy — the same cloud-like volume, richer tone.'},
-  {id:'mm4', brand:'MAX MARA', name:'Teddy Bear Coat · Grey', price:29900, img:'assets/mm-teddy-grey.jpg', cat:'outerwear', tone:'cool', moods:['minimal','elegant'], occs:['office'], styles:['minimal'], url:'https://us.maxmara.com/', why:'Cool-grey teddy for monochrome winter layers.'},
-  {id:'mm5', brand:'MAX MARA', name:'Teddy Bear Coat · Espresso', price:27900, img:'assets/mm-teddy-brown2.jpg', cat:'outerwear', tone:'dark', moods:['sexy','elegant'], occs:['date','party'], styles:['classic'], url:'https://us.maxmara.com/', why:'Espresso teddy — evening outerwear with real presence.'},
   /* NIKE — real products */
-  {id:'nk1', brand:'NIKE', name:"Air Force 1 '07 · White", price:799, img:'assets/nike.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.nike.com/t/air-force-1-07-mens-shoes-WrLlWX', why:'The white court icon — it finishes everything from poplin to denim.'},
-  {id:'nk2', brand:'NIKE', name:"Air Force 1 '07 LX · Pony Hair", price:949, img:'assets/nike-pony.jpg', cat:'shoes', tone:'light', moods:['sexy','elegant'], occs:['date','party'], styles:['sporty'], url:'https://www.nike.com/w/air-force-1-shoes-5sj3zy', why:'A texture twist on the icon — sneaker comfort, evening attitude.'},
-  {id:'nk3', brand:'NIKE', name:'Dunk Low · Panda', price:849, img:'assets/nike-dunk-panda.png', cat:'shoes', tone:'dark', moods:['minimal','sexy'], occs:['everyday','party'], styles:['sporty','casual'], url:'https://www.nike.com/w/dunk-shoes-5sj3zy', why:'Black-on-white Dunks — the streetwear anchor of any casual look.'},
-  {id:'nk4', brand:'NIKE', name:'Dunk Low · Championship Red', price:849, img:'assets/nike-dunk-red.jpg', cat:'shoes', tone:'warm', moods:['cute','sexy'], occs:['party','everyday'], styles:['sporty'], url:'https://www.nike.com/w/dunk-shoes-5sj3zy', why:'A red pop at the feet — the only accent a neutral look needs.'},
-  {id:'nk5', brand:'NIKE', name:"Air Force 1 '07 LV8 · White", price:849, img:'assets/nike-af1-studio.png', cat:'shoes', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://www.nike.com/w/air-force-1-shoes-5sj3zy', why:'Clean leather, padded collar — white sneakers that go with literally everything.'},
+  {id:'nk1', brand:'NIKE', name:"Air Force 1 '07 · White", price:799, img:'assets/nike.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.nike.com/w/air-force-1-shoes', why:'The white court icon — it finishes everything from poplin to denim.'},
+  {id:'nk2', brand:'NIKE', name:"Air Force 1 '07 LX · Pony Hair", price:949, img:'assets/nike-pony.jpg', cat:'shoes', tone:'light', moods:['sexy','elegant'], occs:['date','party'], styles:['sporty'], url:'https://www.nike.com/w/air-force-1-shoes', why:'A texture twist on the icon — sneaker comfort, evening attitude.'},
+  {id:'nk3', brand:'NIKE', name:'Dunk Low · Panda', price:849, img:'assets/nike-dunk-panda.png', cat:'shoes', tone:'dark', moods:['minimal','sexy'], occs:['everyday','party'], styles:['sporty','casual'], url:'https://www.nike.com/w/dunk-shoes', why:'Black-on-white Dunks — the streetwear anchor of any casual look.'},
+  {id:'nk4', brand:'NIKE', name:'Dunk Low · Championship Red', price:849, img:'assets/nike-dunk-red.jpg', cat:'shoes', tone:'warm', moods:['cute','sexy'], occs:['party','everyday'], styles:['sporty'], url:'https://www.nike.com/w/dunk-shoes', why:'A red pop at the feet — the only accent a neutral look needs.'},
+  {id:'nk5', brand:'NIKE', name:"Air Force 1 '07 LV8 · White", price:849, img:'assets/nike-af1-studio.png', cat:'shoes', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://www.nike.com/w/air-force-1-shoes', why:'Clean leather, padded collar — white sneakers that go with literally everything.'},
   /* ADIDAS — real products */
   {id:'ad1', brand:'ADIDAS', name:'Samba OG · White', price:699, img:'assets/adidas.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'The terrace classic — gum sole, three stripes, forever.'},
   {id:'ad2', brand:'ADIDAS', name:'Samba OG · Taupe', price:749, img:'assets/adidas-taupe.jpg', cat:'shoes', tone:'warm', moods:['cute','elegant'], occs:['everyday','date'], styles:['casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'Taupe suede warms up denim and grey tailoring alike.'},
@@ -787,18 +780,18 @@ const CATALOGUE = [
   {id:'sh3', brand:'73HOURS', name:'Cream Bow Kitten Sandals', price:890, img:'assets/73h-bow.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['date'], styles:['romantic'], url:'http://www.73hours.com.cn/', why:'Bow-tied kitten heels — softness you can walk in for hours.'},
   {id:'sh4', brand:'73HOURS', name:'Pointed-Toe Pumps', price:1190, img:'assets/73h-pumps.jpg', cat:'shoes', tone:'dark', moods:['sexy','elegant'], occs:['party','date'], styles:['classic'], url:'http://www.73hours.com.cn/', why:'A black stiletto with red-lip energy — the party full stop.'},
   {id:'sh5', brand:'73HOURS', name:'Lace Kitten Heel · Nude', price:890, img:'assets/73h-lace.jpg', cat:'shoes', tone:'cool', moods:['elegant','minimal'], occs:['office','date'], styles:['classic'], url:'http://www.73hours.com.cn/', why:'Pointed toes in muted tones — the office-to-dinner workhorse.'},
-  /* JW PEI — real products */
-  {id:'jp1', brand:'JW PEI', name:'Cleo Box Bag · Brown', price:859, img:'assets/jwpei1.jpg', cat:'bag', tone:'warm', moods:['cute','elegant'], occs:['date','everyday'], styles:['minimal'], url:'https://www.jwpei.com/products/cleo-faux-straw-box-shape-top-handle-bag-brown', why:'The box-shape Cleo in faux straw — sculptural, light, everywhere right now.'},
-  {id:'jp2', brand:'JW PEI', name:'Noor Top Handle · Pink Croc', price:789, img:'assets/jwpei2.jpg', cat:'bag', tone:'light', moods:['cute','sexy'], occs:['date','party'], styles:['romantic'], url:'https://www.jwpei.com/products/noor-top-handle-bag-pink-croc', why:'Pink croc with a top handle — playful, polished, photogenic.'},
-  {id:'jp3', brand:'JW PEI', name:'Hana Mini Tote · Navy', price:719, img:'assets/jwpei3.jpg', cat:'bag', tone:'cool', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://www.jwpei.com/products/hana-mini-tote-bag-navy-blue', why:'A neat navy mini tote — quiet structure for every day.'},
-  {id:'jp4', brand:'JW PEI', name:'Tulip Shoulder Bag · Forest Green', price:1069, img:'assets/jwpei6.jpg', cat:'bag', tone:'cool', moods:['elegant','sexy'], occs:['date','party'], styles:['classic'], url:'https://www.jwpei.com/products/tulip-shape-shoulder-bag-forest-green', why:'Forest green in a tulip silhouette — deep, rich, evening-ready.'},
-  {id:'jp5', brand:'JW PEI', name:'Nala Woven Tote · Navy', price:719, img:'assets/jwpei5.jpg', cat:'bag', tone:'cool', moods:['minimal','cute'], occs:['everyday','office'], styles:['casual'], url:'https://www.jwpei.com/products/nala-woven-texture-wide-tote-bag-navy-blue', why:'Woven texture in navy — craft-feel for everyday carry.'},
+  /* JW PEI — live catalogue data */
+  {id:'jp1', brand:'JW PEI', name:'Hana Medium Tote · Claret', price:1019, img:'assets/jwp1.jpg', cat:'bag', tone:'warm', moods:['cute','elegant'], occs:['office','date'], styles:['minimal'], url:'https://www.jwpei.com/products/hana-medium-tote-bag-claret', why:'Claret grained leather with gold feet — a quiet statement for work and after.'},
+  {id:'jp2', brand:'JW PEI', name:'Noor Top Handle · Elephant Grey', price:719, img:'assets/jwpei2.jpg', cat:'bag', tone:'cool', moods:['minimal','sexy'], occs:['everyday','office'], styles:['minimal'], url:'https://www.jwpei.com/products/noor-top-handle-bag-elephant-gray', why:'Sculpted grey top handle — the quiet one that sharpens neutrals.'},
+  {id:'jp3', brand:'JW PEI', name:'Hana Mini Tote · Navy', price:719, img:'assets/jwp3.jpg', cat:'bag', tone:'cool', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://www.jwpei.com/products/hana-mini-tote-bag-navy-blue', why:'A neat navy mini — hands-free structure for every day.'},
+  {id:'jp4', brand:'JW PEI', name:'Cleo Box Bag · Black Croc', price:789, img:'assets/jwp4.jpg', cat:'bag', tone:'dark', moods:['elegant','sexy'], occs:['date','party'], styles:['classic'], url:'https://www.jwpei.com/products/cleo-box-shape-top-handle-bag-black-croc', why:'Black croc-emboss box bag — the evening anchor of the edit.'},
+  {id:'jp5', brand:'JW PEI', name:'Hana Medium Tote · Navy', price:1019, img:'assets/jwp5.jpg', cat:'bag', tone:'cool', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://www.jwpei.com/products/hana-medium-tote-bag-navy-blue', why:'The navy Hana — soft structure for errand days and brunch.'},
   /* SONGMONT — real products */
-  {id:'sg1', brand:'SONGMONT', name:'Woven Leather Tote', price:2290, img:'assets/songmont-tote.jpg', cat:'bag', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['classic'], url:'https://songmontofficial.com/collections/bags', why:'Hand-woven leather with a beaded tassel — craft you can carry.'},
-  {id:'sg2', brand:'SONGMONT', name:'Luna Crescent Bag · Cream', price:2390, img:'assets/songmont-luna.jpg', cat:'bag', tone:'light', moods:['cute','elegant'], occs:['date','party'], styles:['romantic'], url:'https://songmontofficial.com/products/luna-bag', why:'The signature crescent — four ways to wear, endless charm.'},
-  {id:'sg3', brand:'SONGMONT', name:'Luna Crescent Bag · Tan', price:2390, img:'assets/songmont-tan.jpg', cat:'bag', tone:'warm', moods:['elegant','sexy'], occs:['date','party'], styles:['classic'], url:'https://songmontofficial.com/products/luna-bag', why:'Tan full-grain leather — the warm take on the crescent.'},
-  {id:'sg4', brand:'SONGMONT', name:'Buckle Handbag · Black', price:1990, img:'assets/songmont-black.jpg', cat:'bag', tone:'dark', moods:['minimal','sexy'], occs:['office','party'], styles:['minimal'], url:'https://songmontofficial.com/collections/bags', why:'Black leather, gold buckles — structure with an edge.'},
-  {id:'sg5', brand:'SONGMONT', name:'Drawstring Bucket Bag · Burgundy', price:1690, img:'assets/songmont-burgundy.jpg', cat:'bag', tone:'warm', moods:['cute','sexy'], occs:['date'], styles:['romantic'], url:'https://songmontofficial.com/collections/bags', why:'Burgundy drawstring — a rich jewel tone for evenings.'},
+  {id:'sg1', brand:'SONGMONT', name:'Woven Leather Tote', price:2290, img:'assets/songmont-tote.jpg', cat:'bag', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['classic'], url:'https://songmontofficial.com/collections/all', why:'Hand-woven leather with a beaded tassel — craft you can carry.'},
+  {id:'sg2', brand:'SONGMONT', name:'Luna Crescent Bag · Cream', price:2390, img:'assets/songmont-luna.jpg', cat:'bag', tone:'light', moods:['cute','elegant'], occs:['date','party'], styles:['romantic'], url:'https://songmontofficial.com/collections/all', why:'The signature crescent — four ways to wear, endless charm.'},
+  {id:'sg3', brand:'SONGMONT', name:'Luna Crescent Bag · Tan', price:2390, img:'assets/songmont-tan.jpg', cat:'bag', tone:'warm', moods:['elegant','sexy'], occs:['date','party'], styles:['classic'], url:'https://songmontofficial.com/collections/all', why:'Tan full-grain leather — the warm take on the crescent.'},
+  {id:'sg4', brand:'SONGMONT', name:'Buckle Handbag · Black', price:1990, img:'assets/songmont-black.jpg', cat:'bag', tone:'dark', moods:['minimal','sexy'], occs:['office','party'], styles:['minimal'], url:'https://songmontofficial.com/collections/all', why:'Black leather, gold buckles — structure with an edge.'},
+  {id:'sg5', brand:'SONGMONT', name:'Drawstring Bucket Bag · Burgundy', price:1690, img:'assets/songmont-burgundy.jpg', cat:'bag', tone:'warm', moods:['cute','sexy'], occs:['date'], styles:['romantic'], url:'https://songmontofficial.com/collections/all', why:'Burgundy drawstring — a rich jewel tone for evenings.'},
   /* DEMELLIER — real products */
   {id:'dm1', brand:'DEMELLIER', name:'The Small Hudson · Dark Green', price:3890, img:'assets/demellier1.jpg', cat:'bag', tone:'dark', moods:['elegant','minimal'], occs:['office','everyday'], styles:['classic'], url:'https://demellierlondon.com/products/the-small-hudson-dark-green-small-grain', why:'Dark green small-grain leather — refined, compact, London-made.'},
   {id:'dm2', brand:'DEMELLIER', name:'The Brooklyn · Warm Brown', price:5690, img:'assets/demellier2.jpg', cat:'bag', tone:'warm', moods:['elegant'], occs:['office','date'], styles:['classic'], url:'https://demellierlondon.com/products/the-brooklyn-warm-brown-small-grain', why:'Warm brown grain — quiet luxury with real presence.'},
@@ -818,10 +811,10 @@ const CATALOGUE = [
 
 /* ---------- state ---------- */
 const state = {
-  view:'home', productId:'mm1', phase:'idle',
+  view:'home', productId:'ur1', phase:'idle',
   colorIdx:0, sizePDP:'M', sizeModal:null, modalSlot:null,
   altIdx:{}, look:null, timers:[],
-  journeyStep:1, occasion:null, mood:null,
+  journeyStep:1, occasion:null, mood:null, budget:null, budget:null,
   cart:0, tryonPhoto:null,
   wishlist:[],
 };
@@ -830,7 +823,7 @@ const $ = s => document.querySelector(s);
 const money = n => '¥' + n.toLocaleString('en-US');
 const byId = id => CATALOGUE.find(c=>c.id===id);
 const product = () => byId(state.productId);
-const BRAND_ORDER = ['URBAN REVIVO','ZARA','FOREVER 21','MAX MARA','73HOURS','NIKE','ADIDAS','JW PEI','SONGMONT','DEMELLIER','SWAROVSKI'];
+const BRAND_ORDER = ['URBAN REVIVO','ZARA','FOREVER 21','73HOURS','NIKE','ADIDAS','JW PEI','SONGMONT','DEMELLIER','SWAROVSKI'];
 
 function getSelf(){
   const p=product(), c=(p.colors||[{name:p.colors?.[0]?.name||'As shown', img:p.img}])[state.colorIdx]||p.colors[0];
@@ -844,6 +837,9 @@ function artForCat(cat){return {top:'shirt', outerwear:'coat', bottom:'wideleg',
 const DEF_SIZES={top:['XS','S','M','L','XL'],outerwear:['XS','S','M','L','XL'],bottom:['36','38','40','42'],dress:['XS','S','M','L'],shoes:['36','37','38','39','40'],bag:['One size'],accessory:['One size']};
 function sizesFor(cat){return DEF_SIZES[cat]||['S','M','L'];}
 function occLabel(){const o=OCCASIONS.find(o=>o.id===state.occasion);return o?o.en:'';}
+function budgetEntry(){return BUDGETS.find(b=>b.id===state.budget)||null;}
+function budgetMaxNum(){const b=budgetEntry();return (b&&isFinite(b.max))?b.max:Infinity;}
+function budgetLabel(){const b=budgetEntry();return b?b.en:'No limit';}
 function moodLabel(){const m=MOODS.find(m=>m.id===state.mood);return m?m.en:'';}
 
 /* ---------- ✦ the matching algorithm ----------
@@ -852,6 +848,7 @@ function moodLabel(){const m=MOODS.find(m=>m.id===state.mood);return m?m.en:'';}
    diversity − price drift, then the best piece per slot. */
 const OCCASIONS=[{id:'everyday',en:'Everyday'},{id:'office',en:'Office'},{id:'date',en:'Date night'},{id:'party',en:'Party'}];
 const MOODS=[{id:'minimal',en:'Minimal'},{id:'cute',en:'Cute'},{id:'elegant',en:'Elegant'},{id:'sexy',en:'Sexy'}];
+const BUDGETS=[{id:'b2500',en:'Under ¥2,500',min:0,max:2500},{id:'b3500',en:'¥2,500–3,500',min:2500,max:3500},{id:'b5000',en:'¥3,500–5,000',min:3500,max:5000},{id:'any',en:'No limit',min:0,max:Infinity}];
 const SLOTS_FOR={
   top:['bottom','shoes','bag','accessory'],
   outerwear:['top','bottom','shoes','accessory'],
@@ -870,6 +867,7 @@ function toneScore(a,b){
 }
 function matchOutfit(){
   const self=getSelf();
+  const bMax=budgetMaxNum();
   const used=[self.brand];
   const chosen=[];
   for(const slot of (SLOTS_FOR[self.cat]||['bottom','shoes','bag','accessory'])){
@@ -877,7 +875,12 @@ function matchOutfit(){
     for(const c of CATALOGUE){
       if(c.id===self.id || c.cat!==slot || chosen.includes(c)) continue;
       let s=50;
-      if(c.moods?.length) s += c.moods.includes(state.mood)?30:-25;   // mood mismatch is penalised
+      if(c.moods?.length) s += c.moods.includes(state.mood)?30:-25;
+      if(isFinite(bMax)){
+        const spent=self.price+chosen.reduce((t,x)=>t+x.price,0);
+        const projected=spent+c.price;
+        if(projected>bMax) s-=30+Math.min(45,Math.round((projected-bMax)/40)*5); // keeps the look inside range
+      }   // mood mismatch is penalised
       if(c.occs?.length)   s += c.occs.includes(state.occasion)?18:-12; // occasion mismatch too
       s+=toneScore(self.tone,c.tone);
       if(!used.includes(c.brand)) s+=8;              // cross-house bonus
@@ -1057,12 +1060,15 @@ function renderBrief(){
         <div class="chips">${OCCASIONS.map(o=>`<button class="chip ${state.occasion===o.id?'sel':''}" data-action="pick-occ" data-id="${o.id}">${o.en}</button>`).join('')}</div></div>
       <div class="q-block"><div class="q-head"><span class="q">How do you want to feel?</span></div>
         <div class="chips">${MOODS.map(m=>`<button class="chip ${state.mood===m.id?'sel':''}" data-action="pick-mood" data-id="${m.id}">${m.en}</button>`).join('')}</div></div>
-      <button class="btn btn-primary" data-action="build-look" id="buildBtn" style="${state.occasion&&state.mood?'':'opacity:.35;pointer-events:none'}">
+      <div class="q-block"><div class="q-head"><span class="q">What’s your budget?</span></div>
+        <div class="chips">${BUDGETS.map(b=>`<button class="chip ${state.budget===b.id?'sel':''}" data-action="pick-budget" data-id="${b.id}">${b.en}</button>`).join('')}
+        <div style="font-size:11px;color:var(--gray2);margin-top:8px">FN-05 · Budget matching — pieces that break your range get scored down.</div></div>
+      <button class="btn btn-primary" data-action="build-look" id="buildBtn" style="${state.occasion&&state.mood&&state.budget?'':'opacity:.35;pointer-events:none'}">
         <span class="b-title">✨ Build my look</span><span class="b-sub">score the whole edit · FN-01</span></button>
-      <div class="brief-hint">${state.occasion&&state.mood?`Scoring ${CATALOGUE.length-1} pieces across ${Object.keys(BRANDS).length} houses for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:'pick one from each — the algorithm will do the rest'}</div>
+      <div class="brief-hint">${state.occasion&&state.mood&&state.budget?`Scoring ${CATALOGUE.length-1} pieces across ${Object.keys(BRANDS).length} houses for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:'pick one from each — the algorithm will do the rest'}</div>
     </div>`;
 }
-function pickBrief(kind,id){if(kind==='occ')state.occasion=id;else state.mood=id;state.picked={};state.altIdx={};state.look=null;renderBrief();}
+function pickBrief(kind,id){if(kind==='budget')state.budget=id;else if(kind==='occ')state.occasion=id;else state.mood=id;state.picked={};state.altIdx={};state.look=null;renderBrief();}
 
 /* ---------- scan ---------- */
 function startScan(){
@@ -1151,7 +1157,7 @@ function renderResults(){
       <div class="stat"><div class="v">${Math.min(97,avg)}%</div><div class="k">Match index</div></div>
     </div>
     ${boardHTML}${analysisHTML}${cardsHTML}
-    <div class="budget-line reveal" style="animation-delay:.5s"><span>FN-05 · Budget matching — styled within ${money(budget)}</span><span class="ok">total ${money(total)} ✓</span></div>
+    <div class="budget-line reveal" style="animation-delay:.5s"><span>FN-05 · Budget matching — “${budgetLabel()}”</span><span class="ok">${total<=budgetMaxNum()?`total ${money(total)} ✓`:`over by ${money(total-budgetMaxNum())} — try ⟳`}</span></div>
     <div class="restyle-link reveal"><a data-action="restyle">↺ Change occasion or mood</a></div>`;
   renderFoot();
 }
@@ -1287,6 +1293,7 @@ document.addEventListener('click',e=>{
     case 'close-drawer': closeDrawer(); break;
     case 'pick-occ': pickBrief('occ',el.dataset.id); break;
     case 'pick-mood': pickBrief('mood',el.dataset.id); break;
+    case 'pick-budget': pickBrief('budget',el.dataset.id); break;
     case 'build-look': startScan(); break;
     case 'restyle': renderBrief(); break;
     case 'shuffle': shuffleSlot(el.dataset.slot); break;

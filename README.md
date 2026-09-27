@@ -69,6 +69,7 @@ Because mood mismatch is *penalised*, each feeling builds a genuinely different 
 - **Wishlist fixed** — the panel now opens correctly, hearts **fill and pop in blush** when tapped, and the list persists in `localStorage`. Stale entries for removed products are filtered on load.
 - **Sporty & Rich section removed** per feedback. To re-enable true colour switching elsewhere, add `colors:[{name,img},…]` to any product.
 - **Direct shopping (FN-06)** — Buy Now opens the piece on the house’s real website; StyleHub never handles payment.
+- **Budget matching (FN-05)** — the style brief asks your budget (Under ¥2,500 / ¥2,500–3,500 / ¥3,500–5,000 / No limit); the scoring steers every slot and the results line reports honestly (fits / over by X).
 
 ## 6. Modify
 

@@ -1,0 +1,135 @@
+{
+ "UR:button-front-peplum-off-shoulder-sleeveless-cotton-shirt-uwg860127": {
+  "title": "Button-Front Peplum Off-Shoulder Sleeveless Cotton Shirt",
+  "price": "59.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UWG860127W0A_1.jpg?v=1788835099"
+ },
+ "UR:oversized-wrap-front-thin-stretch-cotton-shirt-uwj260107": {
+  "title": "Oversized Wrap Front Thin Stretch Cotton Shirt",
+  "price": "59.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UWJ260107WA1_1_0f14c46b-2791-43d5-a6a4-03ccd7997882.jpg?v=1788771653"
+ },
+ "UR:tailored-pleated-shirts-uwm260016": {
+  "title": "Nipped Waist Pleated Long Sleeve Cotton Shirt",
+  "price": "49.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UWM260016B6A1.jpg?v=1778313687"
+ },
+ "UR:cutout-fitted-mock-neck-sleeveless-cotton-blouse-uyv260074": {
+  "title": "Cutout Fitted Mock Neck Sleeveless Cotton Blouse",
+  "price": "49.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UYV260074K1A_1.jpg?v=1788834730"
+ },
+ "UR:ruffle-midi-fishtail-skirt-uwj540010": {
+  "title": "Ruched Split Hem Fishtail Cotton Midi Skirt",
+  "price": "69.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UWJ540010K0A1.jpg?v=1778326188"
+ },
+ "UR:pinstripe-weave-high-waist-buttoned-wrap-overlay-draped-panel-asymmetric-hemline-skirt-uwj560048": {
+  "title": "Pinstripe High Waist Draped Asymmetric Wrap Midi Skirt",
+  "price": "69.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UWJ560048BA5_1.jpg?v=1783411757"
+ },
+ "UR:midi-denim-skirt-uwm840026": {
+  "title": "Vertical Panel Seam Raw Edge Washed Denim Midi Skirt",
+  "price": "49.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UWM840026L9A1.jpg?v=1778326336"
+ },
+ "DEM:the-small-hudson-dark-green-small-grain": {
+  "title": "The Small Hudson",
+  "price": "425.00",
+  "currency": "GBP",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0591/4535/5438/files/The-Small-Hudson-crossbody-bag-dark-green-small-grain-1.jpg?v=1788872605"
+ },
+ "DEM:the-brooklyn-warm-brown-small-grain": {
+  "title": "The Brooklyn",
+  "price": "625.00",
+  "currency": "GBP",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0591/4535/5438/files/The_Brooklyn_WarmTan_SmallGrain_1.jpg?v=1785316185"
+ },
+ "DEM:the-midi-stockholm-midnight-blue-fine-grain": {
+  "title": "The Midi Stockholm",
+  "price": "465.00",
+  "currency": "GBP",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0591/4535/5438/files/The-Midi-stockholm-Midnight-Fine-Grain-1_edab8823-8a89-4e56-abb1-e286e3456484.jpg?v=1789979824"
+ },
+ "DEM:the-florence-crossbody-bordeaux-fine-grain": {
+  "title": "The Florence Crossbody",
+  "price": "495.00",
+  "currency": "GBP",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0591/4535/5438/files/The_Florence_Crossbody_Bordeux_FineGrain_1.jpg?v=1784213203"
+ },
+ "DEM:the-large-siena-bucket-hazel-suede": {
+  "title": "The Large Siena Bucket",
+  "price": "475.00",
+  "currency": "GBP",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0591/4535/5438/files/The_Large_Siena_Bucket_Hazel_1.jpg?v=1788871376"
+ },
+ "JWP:cleo-box-shape-top-handle-bag-brown": {
+  "title": "Cleo Box Shape Top Handle Bag - Brown",
+  "price": "99.00",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0150/6292/5412/files/1779100100698-l11ncjxj1iq.jpg?v=1779101980"
+ },
+ "JWP:hana-mini-tote-bag-navy-blue": {
+  "title": "Hana Mini Tote Bag - Navy Blue",
+  "price": "99.00",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0150/6292/5412/files/1786693452527-vp3oh1j35x.jpg?v=1786696181"
+ },
+ "JWP:nala-woven-texture-wide-tote-bag-navy-blue": {
+  "title": "Nala Woven Texture Wide Tote Bag - Navy Blue",
+  "price": "139.00",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0150/6292/5412/files/1784711859241-ozizlsi2l7f.jpg?v=1784715762"
+ },
+ "JWP:tulip-shape-shoulder-bag-forest-green": {
+  "title": "Tulip Shape Shoulder Bag - Forest Green",
+  "price": "149.00",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0150/6292/5412/files/qudxr4ehh8.jpg?v=1786936927"
+ },
+ "JWP:hana-medium-tote-bag-claret": {
+  "title": "Hana Medium Tote Bag - Claret",
+  "price": "139.00",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0150/6292/5412/files/JH306B04-43-FRONT.jpg?v=1752236767"
+ },
+ "UR:textured-striped-v-neck-short-sleeve-cotton-shirt-uyv260075": {
+  "title": "Textured Striped V-neck Short Sleeve Cotton Shirt",
+  "price": "49.90",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0504/7644/9942/files/UYV260075GG5_1.jpg?v=1788162925"
+ },
+ "JWP:noor-top-handle-bag-pink-croc": {
+  "title": "Noor Top Handle Bag - Pink Croc",
+  "price": "109.00",
+  "currency": "USD",
+  "available": true,
+  "img": "https://cdn.shopify.com/s/files/1/0150/6292/5412/files/1777084185849-tin41apnmqa.jpg?v=1777345925"
+ }
+}
