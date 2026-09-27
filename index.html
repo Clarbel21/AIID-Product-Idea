@@ -951,7 +951,7 @@ function toast(msg){$('#toastMsg').textContent=msg;const t=$('#toast');t.classLi
 function showHome(){state.view='home';closeDrawer();closeModal();$('#pdp').classList.remove('on');$('#home').classList.add('on');window.scrollTo({top:0});}
 function openProduct(id,autoMatch){
   state.productId=id;state.colorIdx=0;state.sizePDP='M';
-  state.phase='idle';state.occasion=null;state.mood=null;state.altIdx={};state.picked={};state.look=null;
+  state.phase='idle';state.occasion=null;state.mood=null;state.budget=null;state.slots=(SLOTS_FOR[product().cat]||[]).slice();state.altIdx={};state.picked={};state.look=null;
   renderPDP();
   $('#home').classList.remove('on');$('#pdp').classList.add('on');state.view='pdp';
   setJourney(1);window.scrollTo({top:0});
@@ -1096,7 +1096,7 @@ function renderBrief(){
       <div class="q-block"><div class="q-head"><span class="q">How do you want to feel?</span></div>
         <div class="chips">${MOODS.map(m=>`<button class="chip ${state.mood===m.id?'sel':''}" data-action="pick-mood" data-id="${m.id}">${m.en}</button>`).join('')}</div></div>
       <div class="q-block"><div class="q-head"><span class="q">Which pieces should I complete?</span></div>
-        <div class="chips">${['bottom','shoes','bag','accessory'].map(s=>`<button class="chip ${state.slots.includes(s)?'sel':''}" data-action="pick-slot" data-id="${s}">${SLOT_META[s].en}</button>`).join('')}
+        <div class="chips">${(SLOTS_FOR[getSelf().cat]||[]).filter(s=>s!=='self').map(s=>`<button class="chip ${state.slots.includes(s)?'sel':''}" data-action="pick-slot" data-id="${s}">${SLOT_META[s].en}</button>`).join('')}
         <button class="chip" data-action="all-slots" style="${state.slots.length===4?'display:none':''}">Select all</button></div>
       <div class="q-block"><div class="q-head"><span class="q">What’s your budget?</span></div>
         <div class="chips">${BUDGETS.map(b=>`<button class="chip ${state.budget===b.id?'sel':''}" data-action="pick-budget" data-id="${b.id}">${b.en}</button>`).join('')}
