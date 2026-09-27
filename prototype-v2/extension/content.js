@@ -15,7 +15,9 @@
     const title = productJson?.name || meta('meta[property="og:title"]') || document.querySelector("h1")?.innerText?.trim() || document.title;
     const rawPrice = offer?.price || offer?.lowPrice || meta('meta[property="product:price:amount"]') || meta('meta[itemprop="price"]');
     const currency = offer?.priceCurrency || meta('meta[property="product:price:currency"]') || "";
-    const image = imageFromJson || meta('meta[property="og:image"]') || document.querySelector('main img[src], [role="main"] img[src], img[src]')?.src || "";
+    const rawImage = imageFromJson || meta('meta[property="og:image"]') || document.querySelector('main img[src], [role="main"] img[src], img[src]')?.src || "";
+    let image = "";
+    try { const parsedImage = new URL(rawImage, location.href); if (parsedImage.protocol === "https:") image = parsedImage.href; } catch { /* Ignore malformed image metadata. */ }
     const brandValue = productJson?.brand;
     const brand = typeof brandValue === "string" ? brandValue : brandValue?.name || "";
     return {
