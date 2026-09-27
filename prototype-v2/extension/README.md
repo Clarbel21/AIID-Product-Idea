@@ -8,7 +8,7 @@ This folder contains an installable Chrome Manifest V3 extension and a local Nod
 - Detect common product details from JSON-LD Product data, Open Graph metadata, and visible page headings: title, brand, price, currency, and image.
 - Send the selected product to the local service for product analysis and cross-store recommendations.
 - Use OpenAI for live text and image analysis when `OPENAI_API_KEY` is set.
-- Use SerpApi's Google Shopping results when `SERPAPI_API_KEY` is set. The response can contain product, price, image, merchant, and outbound link data.
+- Use SerpApi's Google Shopping results when `SERPAPI_API_KEY` is set. Results can contain product, price, image, merchant, and outbound link data. When the provider supplies a direct merchant link, the card opens it; otherwise it clearly opens the Google Shopping offer page.
 - Open recommendation links in a separate tab. MatchBuy does not collect payment or handle checkout.
 - Use a clearly labeled sample analysis and sample catalog when API keys are not configured.
 
@@ -40,5 +40,5 @@ Browser settings pages and the Chrome Web Store do not allow the panel to be inj
 
 The extension does not read shopping pages until you click its toolbar button. When you ask for matches, it sends the page title, detected product fields, page URL, retailer hostname, and product image URL to the local service. When configured, product information and the image URL are sent to OpenAI for analysis; search terms are sent to SerpApi. Review those providers' terms and privacy policies before using real shoppers' data.
 
-The extension does not sign into retailer accounts, read cart contents, buy items, or process payment. Retailer policies and stock can change. Shopping links depend on provider results; some may lead to a Google product result if a direct retailer link is unavailable. This is a prototype, not a production extension or affiliate integration.
+The extension does not sign into retailer accounts, read cart contents, buy items, or process payment. Retailer policies and stock can change. SerpApi's Google Shopping integration is a third-party shopping search source, not an official feed from each retailer. For stable retailer product links, affiliate attribution, and commercial use, MatchBuy would need direct retailer feeds or approved affiliate-network access. This is a prototype, not a production extension or affiliate integration.
 
