@@ -114,7 +114,8 @@ async function liveShopping(style) {
   }));
   const explanations = style.explanations;
   const items = resultSets.flatMap((rows, categoryIndex) => rows.map((row) => {
-    const direct = row.link || row.product_link || "";
+    const directMerchantLink = row.link || "";
+    const direct = directMerchantLink || row.product_link || "";
     let safeUrl = "";
     try { const parsed = new URL(direct); if (parsed.protocol === "https:") safeUrl = parsed.href; } catch { /* omit invalid links */ }
     return {
@@ -123,6 +124,7 @@ async function liveShopping(style) {
       brand: String(row.source || "Retailer").slice(0, 80),
       price: String(row.price || "Price not listed").slice(0, 40),
       url: safeUrl,
+      linkType: directMerchantLink ? "retailer" : "shopping",
       imageUrl: typeof row.thumbnail === "string" && /^https:\/\//i.test(row.thumbnail) ? row.thumbnail : "",
       reason: explanations[categoryIndex] || "Matches the style and category of the item you selected."
     };
