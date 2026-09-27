@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "MatchBuy AI — Shopping Assistant",
+  "version": "0.2.0",
+  "description": "Find pieces that match what you are shopping for.",
+  "minimum_chrome_version": "109",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1:4177/*", "http://localhost:4177/*"],
+  "action": {
+    "default_title": "Open MatchBuy AI",
+    "default_popup": "popup.html"
+  },
+  "background": { "service_worker": "background.js", "type": "module" }
+}
+
