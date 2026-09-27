@@ -1,17 +1,22 @@
-# MatchBuy AI — website prototype v3
+# MatchBuy AI — complete website prototype v3
 
-Open index.html in a browser. This is a standalone website; no extension, server, or API key is required.
+Open `index.html` in this folder, or the root `index.html` in the branch. The version in this folder uses the full original catalog and its shared assets one directory above.
 
-## Working features
-- Search and filter catalog pieces by category.
-- Select a product, choose a category, and show up to three simple style matches.
-- Open the corresponding retailer product page in a new browser tab.
-- Responsive layout for desktop and mobile.
+## What it includes
 
-## Product data integrity
-This demo uses a curated subset of products already present in the original MatchBuy catalog. Images load from the original project’s public assets; product links point to brand/retailer pages. Prices are reference values inherited from the old prototype, not live prices. Current availability is unknown. The interface says so and sends shoppers to the retailer to confirm.
+- The complete original storefront and retailer catalog (57 product records across 11 brands).
+- Product detail views, a product-based MatchBuy flow, adjustable occasion/mood/budget choices, and cross-store outfit suggestions.
+- Searchable retailer links, product imagery, wishlist, and local concept try-on preview.
+- Responsive layout and the original visual direction.
 
-The match logic ranks this curated catalog by its existing tags. It is not a live AI feed and does not invent products. For a production catalog, use retailer-authorized product feeds, affiliate APIs, or retailer APIs, and retain the product source URL, retrieval time, currency, and confirmed price/availability timestamps. If price or stock cannot be confirmed, say “check retailer” instead of guessing.
+## Product data and limits
 
-## Backup
-This page is in prototype-v3/ on prototype/matchbuy-curated-web-v3. It does not overwrite the original site or the earlier v2 simulation/extension work.
+The catalog is carried forward from the original MatchBuy project, including retailer product names, brand imagery, reference prices, and retailer URLs. Original project documentation says some catalog data was captured from brand pages and Shopify product endpoints. The capture dates are not recorded, so prices are indicative RMB references and current stock is not verified.
+
+Most catalog URLs are product pages. Some Nike, Adidas, and 73Hours entries point to brand collections or homepages; the interface identifies those as browsing links instead of claiming an exact SKU page. Confirm current product, price, size, and availability with the retailer.
+
+Matching uses the catalog's tagged attributes and a scoring algorithm. It does not call a live AI shopping API. The try-on panel is a local concept preview, not a live generative model. The retailer remains responsible for checkout and payment.
+
+## Backups
+
+This improvement is on `prototype/matchbuy-curated-web-v3`. It leaves the original `main` branch and earlier v2 simulation/extension branch intact.
