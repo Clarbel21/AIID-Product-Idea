@@ -1,32 +1,1390 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MatchBuy — Find what goes with it</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="cache-control" content="no-store">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StyleHub × MatchBuy AI — Find the match. Complete the look. Buy it.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FCFBF9'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' text-anchor='middle' fill='%230F0F0F'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
-:root{--ink:#20211e;--muted:#77766f;--paper:#f6f3ee;--white:#fffefa;--line:#e7e2da;--green:#32493c;--rust:#bd6e4c;--sage:#dbe3d8}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}a{color:inherit}.top{padding:13px;text-align:center;background:var(--green);color:#f7f3eb;font-size:10px;letter-spacing:.13em}.nav{height:72px;padding:0 6vw;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{font:600 26px 'Playfair Display',serif;letter-spacing:-.04em}.brand em{font-style:normal;color:var(--rust)}.nav a{text-decoration:none;font-size:12px;margin-left:24px;color:#605f59}.wrap{max-width:1300px;margin:auto;padding:45px 5vw 75px}.hero{display:grid;grid-template-columns:1fr .9fr;gap:52px;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:10px;color:var(--rust);font-weight:700}.hero h1{font:500 clamp(42px,6vw,74px)/1.03 'Playfair Display',serif;letter-spacing:-.045em;margin:16px 0}.hero p{font-size:14px;line-height:1.75;color:var(--muted);max-width:490px}.heroart{height:310px;background:linear-gradient(120deg,#d5c9bc,#eee7dd 48%,#c2b9ab);position:relative;overflow:hidden}.heroart:before,.heroart:after{content:"";position:absolute;border-radius:48% 48% 8% 8%;box-shadow:inset 15px 0 24px #ffffff35}.heroart:before{width:185px;height:260px;left:23%;top:9%;transform:rotate(-8deg);background:linear-gradient(140deg,#e7ddd1,#a99b8a)}.heroart:after{width:125px;height:220px;left:59%;top:17%;transform:rotate(7deg);background:linear-gradient(120deg,#536258,#263c32)}.artlabel{position:absolute;bottom:17px;left:17px;z-index:1;background:#fffefaeb;padding:12px;font-size:9px;letter-spacing:.1em;text-transform:uppercase}.head{margin:48px 0 19px}.head h2{font:500 32px 'Playfair Display',serif;margin:5px 0}.head p{font-size:12px;color:var(--muted)}.layout{display:grid;grid-template-columns:1fr 310px;gap:18px;align-items:start}.catalog,.panel{background:var(--white);border:1px solid var(--line);box-shadow:0 18px 48px #312b2110}.catalog{padding:20px}.toolbar{display:flex;justify-content:space-between;gap:10px;margin-bottom:18px}.filters{display:flex;gap:6px;flex-wrap:wrap}.pill,.choice{padding:8px 12px;border:1px solid var(--line);border-radius:99px;background:none;color:#625f58;font-size:10px;cursor:pointer}.pill.active{background:var(--green);color:white;border-color:var(--green)}input{padding:9px 11px;border:1px solid var(--line);background:none;font-size:11px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{border:1px solid var(--line);min-width:0}.photo{height:210px;background:#eeebe5;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.badge{position:absolute;top:9px;left:9px;background:#fffefaed;padding:5px 7px;font-size:8px;text-transform:uppercase}.body{padding:12px}.retailer{font-size:9px;color:var(--muted);letter-spacing:.12em}.name{font:500 15px/1.25 'Playfair Display',serif;margin:6px 0;min-height:38px}.price{font-size:11px;font-weight:700}.price small{font-size:8px;color:var(--muted);font-weight:400}.actions{display:flex;gap:6px;margin-top:11px}.actions button,.actions a{flex:1;padding:9px 5px;text-align:center;border:1px solid var(--green);background:var(--green);color:white;text-decoration:none;font-size:9px;cursor:pointer}.actions a{background:none;color:var(--green)}.panel{padding:20px;position:sticky;top:12px}.panel h3{font:500 24px 'Playfair Display',serif;margin:5px 0}.panel>p{font-size:11px;line-height:1.6;color:var(--muted)}.selected{border:1px solid var(--line);padding:9px;display:flex;align-items:center;gap:9px;margin:14px 0}.selected img{width:52px;height:58px;object-fit:cover}.selected strong{font:500 13px 'Playfair Display',serif;display:block}.selected span{font-size:9px;color:var(--muted)}.choices{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.choice.active{background:var(--sage);color:var(--green)}.primary{width:100%;border:0;background:var(--green);color:white;padding:13px;cursor:pointer;font-size:11px}.hint{font-size:9px!important}.results{border-top:1px solid var(--line);margin-top:15px;padding-top:12px}.item{display:flex;align-items:center;gap:8px;margin:10px 0}.item img{width:43px;height:48px;object-fit:cover}.item div{flex:1}.item strong{font:500 12px 'Playfair Display',serif;display:block}.item small{font-size:8px;color:var(--muted)}.item a{font-size:9px;color:var(--green);font-weight:bold}.empty{font-size:10px;line-height:1.6;color:var(--muted)}.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:40px}.trust>div{background:var(--white);padding:19px}.trust b{font:500 17px 'Playfair Display',serif}.trust p,.data{font-size:10px;line-height:1.7;color:var(--muted)}.data{background:#ece8df;padding:20px;margin-top:22px;color:#5e5b54}.data b{color:var(--ink)}footer{padding:20px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:9px;color:var(--muted)}.hidden{display:none!important}@media(max-width:950px){.layout{grid-template-columns:1fr}.panel{position:static}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.nav{height:60px}.nav a{display:none}.wrap{padding-top:26px}.hero{grid-template-columns:1fr;gap:18px}.heroart{height:225px}.hero h1{font-size:49px}.toolbar{flex-direction:column}.grid{gap:8px}.photo{height:165px}.catalog{padding:11px}.trust{grid-template-columns:1fr}.name{font-size:13px}.body{padding:9px}}
-</style></head><body>
-<div class="top">A BETTER WAY TO FINISH THE LOOK · CURATED FROM REAL RETAILER CATALOGS</div>
-<nav class="nav"><div class="brand">matchbuy<em>.</em></div><div><a href="#discover">Discover</a><a href="#how">How it works</a><a href="#data">Product data</a></div><a href="#discover">Find a match ↓</a></nav>
-<main class="wrap"><section class="hero"><div><div class="eyebrow">Your outfit, thoughtfully finished</div><h1>Love one piece.<br>Find what goes with it.</h1><p>Choose a real item in the catalog. MatchBuy suggests pieces from real brands and takes you straight to the retailer’s product page.</p></div><div class="heroart"><div class="artlabel">A considered edit · Spring style</div></div></section>
-<section id="discover"><div class="head"><div class="eyebrow">The MatchBuy edit</div><h2>Start with a piece you love</h2><p>Choose an item, then build a coordinated edit around it.</p></div><div class="layout"><div class="catalog"><div class="toolbar"><div class="filters"><button class="pill active" data-filter="all">All pieces</button><button class="pill" data-filter="Clothing">Clothing</button><button class="pill" data-filter="Bags">Bags</button><button class="pill" data-filter="Jewelry">Jewelry</button></div><input id="search" placeholder="Search brands or styles…" aria-label="Search products"></div><div class="grid" id="grid"></div></div>
-<aside class="panel"><div class="eyebrow">Your starting point</div><h3>Build your match</h3><p>Select any catalog item, choose what you’re shopping for, and see retailer-linked suggestions.</p><div class="selected" id="selected"></div><div class="choices"><button class="choice active" data-kind="Any">Any category</button><button class="choice" data-kind="Clothing">Clothing</button><button class="choice" data-kind="Bags">Bags</button><button class="choice" data-kind="Jewelry">Jewelry</button></div><button class="primary" id="matchBtn">Show my matches</button><p class="hint">Suggestions come from the catalog in this prototype. No invented listings.</p><div class="results" id="results"><div class="empty">Select an item, then click “Show my matches.”</div></div></aside></div></section>
-<section id="how" class="trust"><div><b>Real catalog items</b><p>Every item is from products already listed in your original MatchBuy project.</p></div><div><b>Direct retailer pages</b><p>Each retailer button opens that item’s product page in a new tab.</p></div><div><b>Clear about freshness</b><p>Prices are inherited reference values. Retailers control current price and stock.</p></div></section>
-<section id="data" class="data"><b>How product data works</b><br>This prototype uses your original catalog for product names, images, brands, reference prices, and product links. It is a curated snapshot—not a live feed. Current availability is unknown and prices may have changed. A production catalog should use retailer-authorized affiliate feeds or APIs and keep each source URL and last-checked time. If current price or stock cannot be confirmed, MatchBuy should say “check retailer” instead of guessing.</section></main><footer><span>matchbuy. · Thoughtful shopping starts with what you love.</span><span>Prototype · Catalog snapshot · Retailers handle checkout</span></footer>
+/* StyleHub × MatchBuy AI v6 — Dior-inspired home, real-brand catalogue,
+   scoring-based matching, direct-to-brand checkout. Bodoni Moda + Jost. */
+:root{
+  --ink:#0F0F0F; --ink2:#3C3C3C; --gray:#9A9A9A; --gray2:#8C8C8C;
+  --paper:#FCFBF9; --desk:#E7E4DF; --rule:#DEDBD6;
+  --blush:#E3BFC6; --blush-t:#FAF0F1; --blush-d:#B4838C; --ok:#2E6B4F;
+  --serif:"Bodoni Moda","Didot","Bodoni MT","Playfair Display",Georgia,serif;
+  --sans:"Jost","Helvetica Neue","Segoe UI",Arial,sans-serif;
+  --shadow:0 2px 22px rgba(15,15,15,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);font-family:var(--sans);font-weight:300;color:var(--ink);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body.locked{overflow:hidden}
+button{font-family:var(--sans);font-weight:300;cursor:pointer;border:none;background:none;color:inherit}
+img,svg{display:block}
+.ml{font-size:10px;font-weight:400;letter-spacing:.32em;text-transform:uppercase;color:var(--gray)}
+.ml.ink{color:var(--ink)}
+.figcap{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--gray2)}
+
+.catalog-data{max-width:1380px;margin:18px auto 0;padding:16px 30px;background:#F7F0F0;border-top:1px solid #E8D7D9;border-bottom:1px solid #E8D7D9;font-size:12px;line-height:1.65;color:var(--ink2)}.catalog-data strong{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--ink)}.catalog-data .data-meta{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blush-d);margin-right:8px}.catalog-data a{color:var(--ink);text-underline-offset:3px}
+/* ---------- chrome (shared) ---------- */
+.announce{background:var(--ink);color:var(--paper);text-align:center;font-size:9px;letter-spacing:.32em;text-transform:uppercase;padding:9px 16px}
+.masthead{border-bottom:1px solid var(--rule);background:var(--paper)}
+.mast-in{max-width:1380px;margin:0 auto;padding:0 30px}
+.mast-grid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;gap:20px}
+.mast-links{display:flex;gap:26px;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2)}
+.mast-links span{cursor:pointer;padding:6px 0;border-bottom:1px solid transparent}
+.mast-links span:hover{color:var(--ink);border-color:var(--ink)}
+.wordmark{text-align:center;cursor:pointer}
+.wordmark .wm{font-family:var(--serif);font-size:30px;letter-spacing:.3em;font-weight:500;line-height:1}
+.wordmark .wm-sub{font-size:8px;letter-spacing:.5em;text-transform:uppercase;color:var(--blush-d);margin-top:4px}
+.mast-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.hicon{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:15px}
+.hicon:hover{background:var(--blush-t)}
+.hcount{position:absolute;top:0;right:-2px;min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:var(--blush-d);color:#fff;font-size:9.5px;display:grid;place-items:center}
+.hcount.hidden{display:none}
+
+/* ---------- HOME ---------- */
+#home{display:none;min-height:100vh;flex-direction:column}
+#home.on{display:flex}
+.hero{position:relative;height:min(84vh,740px);overflow:hidden;background:var(--ink)}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;opacity:.92}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,15,15,.55),rgba(15,15,15,.08) 55%)}
+.hero-copy{position:absolute;left:0;right:0;bottom:9%;text-align:center;color:var(--paper);padding:0 20px}
+.hero-copy h1{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5.4vw,64px);line-height:1.12;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.hero-copy h1 em{font-style:italic}
+.hero-copy .ml{color:rgba(252,251,249,.85);display:block;margin:14px 0 22px;letter-spacing:.42em}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hbtn{display:inline-block;padding:14px 30px;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all .2s}
+.hbtn.solid{background:var(--paper);color:var(--ink)}
+.hbtn.solid:hover{background:var(--blush-t)}
+.hbtn.line{border:1px solid rgba(252,251,249,.75);color:var(--paper)}
+.hbtn.line:hover{background:var(--paper);color:var(--ink)}
+
+.bsection{max-width:1380px;margin:0 auto;padding:54px 30px 8px}
+.bsection .bhead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:26px;flex-wrap:wrap}
+.bsection .bhead h2{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);font-weight:400;letter-spacing:.06em}
+.bsection .bhead .ml{letter-spacing:.28em}
+.brow{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.cat-card{cursor:pointer;position:relative}
+.cat-photo{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:linear-gradient(165deg,var(--blush-t),#F0DFE2)}
+.cat-photo .ph{position:absolute;inset:0}
+.cat-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.cat-card:hover .cat-photo img{transform:scale(1.045)}
+.cat-photo .ph svg{position:absolute;inset:0;margin:auto;width:62%}
+.wish{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(252,251,249,.94);display:grid;place-items:center;font-size:13px;color:var(--ink);z-index:2;transition:transform .15s}
+.wish:hover{transform:scale(1.08)}
+.wish.on{color:#C04A5A;background:var(--blush-t)}
+.hero-fav.on{color:#C04A5A;background:var(--blush-t)}
+@keyframes wishPop{50%{transform:scale(1.3)}}
+.wish.on,.hero-fav.on{animation:wishPop .3s}
+.match-cta{position:absolute;left:8px;right:8px;bottom:8px;background:var(--ink);color:var(--paper);font-size:9px;letter-spacing:.26em;text-transform:uppercase;padding:10px 6px;text-align:center;opacity:0;transform:translateY(8px);transition:all .25s;border-radius:2px;z-index:2}
+.cat-card:hover .match-cta{opacity:1;transform:none}
+.cat-brand{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray);margin:11px 0 3px}
+.cat-name{font-family:var(--serif);font-size:16.5px;font-weight:400;line-height:1.3}
+.cat-price{font-family:var(--serif);font-size:14.5px;color:var(--ink2);margin-top:3px}
+.cat-url{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--blush-d);margin-top:5px;opacity:0;transition:opacity .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cat-card:hover .cat-url{opacity:1}
+
+.houses{background:var(--blush-t);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:56px}
+.houses-in{max-width:1380px;margin:0 auto;padding:40px 30px;text-align:center}
+.houses-in h3{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:6px}
+.houses-in .ml{display:block;margin-bottom:24px}
+.house-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 36px}
+.house{font-family:var(--serif);font-size:16px;letter-spacing:.14em;color:var(--ink2);display:inline-flex;align-items:center;gap:7px;border-bottom:1px solid transparent;padding-bottom:3px;transition:all .2s}
+.house:hover{color:var(--ink);border-color:var(--blush-d)}
+.house i{font-style:normal;font-size:10px;color:var(--blush-d)}
+.mb-band{max-width:1380px;margin:0 auto;padding:60px 30px 26px}
+.mb-card{border:1px solid var(--ink);border-radius:3px;padding:42px 46px;display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center;background:linear-gradient(150deg,#fff,var(--blush-t))}
+.mb-card h3{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);font-weight:400;line-height:1.25;margin-bottom:12px}
+.mb-card h3 em{font-style:italic}
+.mb-card p{font-size:13.5px;color:var(--ink2);max-width:52ch}
+.mb-steps .mb-step{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.mb-steps .mb-step:last-child{border-bottom:none}
+.mb-step .rn{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--blush-d);width:22px;flex:none}
+.mb-step h5{font-family:var(--serif);font-size:16px;font-weight:400}
+.mb-step p{font-size:11.5px;color:var(--gray2);margin-top:1px}
+.mb-card .btn{margin-top:18px}
+.services{max-width:1380px;margin:0 auto;padding:36px 30px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.svc{padding:8px 26px;border-left:1px solid var(--rule);font-size:12px;color:var(--ink2)}
+.svc:first-child{border-left:none;padding-left:0}
+.svc b{display:block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin-bottom:5px;font-weight:400}
+.home-foot{border-top:1px solid var(--ink);background:var(--paper)}
+.home-foot-in{max-width:1380px;margin:0 auto;padding:24px 30px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+.home-foot .ml{letter-spacing:.24em}
+
+/* ---------- PDP ---------- */
+#pdp{display:none;min-height:100vh;flex-direction:column}
+#pdp.on{display:flex}
+.pdp-wrap{max-width:1280px;width:100%;margin:0 auto;padding:28px 30px 10px;flex:1}
+.pdp-crumbs{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:28px;gap:10px;flex-wrap:wrap}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gray);cursor:pointer}
+.back-link:hover{color:var(--ink)}
+.pdp-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:58px;align-items:start;margin-bottom:26px}
+.gallery{position:sticky;top:92px}
+.hero{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:4/4.35;background:linear-gradient(165deg,var(--blush-t),#F0DFE2)}
+.hero .ph-frame{position:absolute;inset:0}
+.hero .ph-frame img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.hero .ph-frame svg{position:absolute;inset:0;margin:auto;width:60%}
+.hero-badge{position:absolute;top:14px;left:14px;background:var(--paper);padding:6px 12px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;z-index:2}
+.hero-fav{position:absolute;top:12px;right:12px;background:var(--paper);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:14px;z-index:2}
+.hero.flash{animation:heroFlash 1.2s}
+@keyframes heroFlash{0%,55%{outline:1.5px solid var(--ink);outline-offset:4px}100%{outline:1.5px solid transparent;outline-offset:4px}}
+.gal-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:9px}
+.pdp-info .brand-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+.pdp-info h1{font-family:var(--serif);font-size:clamp(32px,3.4vw,44px);font-weight:400;line-height:1.1;margin-bottom:10px}
+.price-line{display:flex;align-items:baseline;gap:14px;margin:14px 0 2px}
+.price{font-family:var(--serif);font-size:30px;font-weight:400}
+.tax-note{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:20px}
+.opt-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);margin:18px 0 10px;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--rule);padding-top:14px}
+.opt-label .val{color:var(--gray);letter-spacing:.1em}
+.swatches{display:flex;gap:12px}
+.swatch{width:46px;height:58px;border-radius:3px;border:1px solid var(--rule);overflow:hidden;background:#fff;transition:box-shadow .15s;padding:0}
+.swatch img{width:100%;height:100%;object-fit:cover}
+.swatch.sel{box-shadow:0 0 0 1.5px var(--ink);outline:2px solid var(--paper);outline-offset:1px}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size-chip{min-width:44px;height:36px;padding:0 12px;border:1px solid var(--rule);background:transparent;font-size:12px;letter-spacing:.08em;color:var(--ink2);transition:all .15s}
+.size-chip:hover{border-color:var(--ink);color:var(--ink)}
+.size-chip.sel{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.cta-stack{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:3px;padding:15px 22px;transition:all .2s;user-select:none;width:100%}
+.btn.row{flex-direction:row;gap:10px}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary .b-title{font-size:13px;letter-spacing:.28em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.btn-primary .b-sub{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--blush)}
+.btn-primary:hover{box-shadow:0 10px 28px -10px rgba(15,15,15,.5)}
+.btn-line{background:transparent;border:1px solid var(--ink);color:var(--ink)}
+.btn-line .b-title{font-size:12px;letter-spacing:.28em;text-transform:uppercase}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
+.btn-ghost{background:transparent;border:1px solid var(--rule);color:var(--ink2)}
+.btn-ghost .b-title{font-size:11px;letter-spacing:.26em;text-transform:uppercase}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+.pulse-dot{position:absolute;top:-5px;right:-5px;width:11px;height:11px;border-radius:50%;background:var(--blush);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(227,191,198,.7)}70%{box-shadow:0 0 0 9px rgba(227,191,198,0)}100%{box-shadow:0 0 0 0 rgba(227,191,198,0)}}
+.mb-tip{position:absolute;right:-4px;top:-46px;z-index:30;white-space:nowrap;background:var(--ink);color:var(--paper);font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:8px 13px;animation:float 1.8s ease-in-out infinite}
+.mb-tip:after{content:"";position:absolute;bottom:-4px;right:22px;width:8px;height:8px;background:var(--ink);transform:rotate(45deg)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.mb-note{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-top:4px}
+.mb-note b{color:var(--ink2);font-weight:400}
+.desc{margin-top:22px;font-size:14.5px;color:var(--ink2);max-width:54ch}
+.trust-row{display:flex;gap:18px;margin-top:20px;padding-top:16px;border-top:1px solid var(--rule);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);flex-wrap:wrap;align-items:center}
+.brand-visit{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--blush-d);padding-bottom:2px}
+.brand-visit:hover{color:var(--blush-d)}
+.chapters{max-width:1280px;margin:0 auto;padding:0 30px 36px}
+.chapter{border-top:1px solid var(--rule);padding:24px 4px 26px}
+.chap-head{display:flex;align-items:baseline;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.chap-head .rn{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gray)}
+.chap-head h3{font-family:var(--serif);font-size:25px;font-weight:400}
+.chap-head .ml{margin-left:auto}
+.fn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px}
+.fn{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.fn .no{font-size:9px;letter-spacing:.2em;color:var(--blush-d);white-space:nowrap;padding-top:3px}
+.fn h5{font-family:var(--serif);font-size:15px;font-weight:400}
+.fn p{font-size:11.5px;color:var(--gray2);margin-top:1px}
+.quote{text-align:center;padding:4px 0 0}
+.quote p{font-family:var(--serif);font-size:20px;font-style:italic;line-height:1.45;color:var(--ink2)}
+.quote .ml{display:block;margin-top:10px}
+
+/* ---------- drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(15,15,15,.42);backdrop-filter:blur(2px);z-index:60;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(620px,100vw);z-index:70;background:var(--paper);box-shadow:var(--shadow);transform:translateX(103%);transition:transform .45s cubic-bezier(.32,.72,.24,1);display:flex;flex-direction:column;border-left:1px solid var(--ink)}
+.drawer.on{transform:translateX(0)}
+.dr-head{padding:16px 26px 12px;border-bottom:1px solid var(--ink)}
+.dr-head-top{display:flex;align-items:center;gap:12px}
+.dr-head-top h2{font-family:var(--serif);font-size:19px;letter-spacing:.16em;font-weight:500;white-space:nowrap}
+.dr-head-top .ml{margin-left:auto;letter-spacing:.28em;text-align:right}
+.dr-close{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--gray);font-size:14px;flex:none}
+.dr-close:hover{color:var(--ink)}
+.journey{display:flex;align-items:center;gap:0;margin-top:10px;overflow:hidden}
+.j-step{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.j-step .n{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gray)}
+.j-step .t{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray)}
+.j-step.on .n,.j-step.on .t{color:var(--ink)}
+.j-step.on .n{border-bottom:1px solid var(--blush)}
+.j-sep{flex:1;height:1px;background:var(--rule);margin:0 8px;min-width:10px}
+.dr-body{flex:1;overflow-y:auto;padding:24px 26px 34px}
+.dr-foot{padding:16px 26px 18px;background:var(--paper);border-top:1px solid var(--ink)}
+.foot-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.foot-total .t-l{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray);margin-bottom:4px}
+.foot-total .t-v{font-family:var(--serif);font-size:32px;line-height:1}
+.foot-total .t-s{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-top:6px}
+.foot-meta{text-align:right;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);line-height:2}
+.dr-foot .btn{width:100%}
+.foot-note{text-align:center;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gray);margin-top:10px}
+.brief h3{font-family:var(--serif);font-size:27px;font-weight:400;line-height:1.2;margin:10px 0 4px}
+.brief h3 em{font-style:italic}
+.brief .sub{font-size:13px;color:var(--gray2);margin-bottom:22px}
+.q-block{border-top:1px solid var(--rule);padding:16px 0 20px}
+.q-head{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.q-head .q{font-family:var(--serif);font-size:18px;font-weight:400}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);background:#fff;padding:12px 17px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink2);transition:all .15s;border-radius:2px}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip.sel{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.brief-hint{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);text-align:center;margin-top:12px}
+.scan-context{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:18px;gap:10px;flex-wrap:wrap}
+.scan-context b{font-family:var(--serif);font-weight:400;font-size:15px}
+.scan-stage{position:relative;border:1px solid var(--rule);background:linear-gradient(165deg,var(--blush-t),#F0DFE2);padding:10px;display:grid;place-items:center;margin-bottom:20px;border-radius:3px}
+.scan-stage .ph-frame{position:relative;width:62%;max-width:270px;margin:20px 0 24px;z-index:1;aspect-ratio:4/5}
+.scan-stage .ph-frame img{width:100%;height:100%;object-fit:cover;border-radius:3px}
+.scan-stage .ph-frame svg{position:absolute;inset:0;margin:auto;width:70%}
+.scanline{position:absolute;left:6%;right:6%;height:70px;top:4%;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(15,15,15,0),rgba(255,255,255,.5) 50%,rgba(15,15,15,0));animation:scan 1.5s ease-in-out infinite;filter:blur(1px)}
+@keyframes scan{0%{transform:translateY(0)}50%{transform:translateY(230%)}100%{transform:translateY(0)}}
+.det-dot{position:absolute;width:13px;height:13px;border-radius:50%;border:2px solid var(--ink);background:var(--paper);z-index:3;opacity:0;transform:scale(.4);transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+.det-dot.on{opacity:1;transform:scale(1)}
+.det-dot .lbl{position:absolute;left:20px;top:-4px;white-space:nowrap;background:var(--ink);color:var(--paper);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;opacity:0;transition:opacity .3s .1s}
+.det-dot.on .lbl{opacity:1}
+.det-dot.right .lbl{left:auto;right:20px}
+.scan-steps{border:1px solid var(--rule);border-radius:3px;padding:18px 20px;background:#fff}
+.scan-steps .s-title{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.step{display:flex;align-items:center;gap:12px;padding:8px 0;font-size:13.5px;color:var(--gray2);opacity:.35;transition:opacity .3s}
+.step.on{opacity:1;color:var(--ink)}
+.step .ico{width:20px;height:20px;border-radius:50%;border:1px solid var(--rule);display:grid;place-items:center;font-size:10px;flex:none;color:transparent;transition:all .3s}
+.step.on .ico{border-color:var(--ink);color:var(--ink)}
+.step.done .ico{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.step .stat{margin-left:auto;font-size:10px;letter-spacing:.1em;color:var(--gray);opacity:0;transition:opacity .3s}
+.step.done .stat{opacity:.9}
+.ready-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px;border-bottom:1px solid var(--ink);padding-bottom:12px;flex-wrap:wrap}
+.ready-head h3{font-family:var(--serif);font-size:30px;font-weight:400}
+.ready-head h3 em{font-style:italic}
+.stats-row{display:flex;gap:0;margin:18px 0 26px;border:1px solid var(--rule);border-radius:3px;background:#fff;flex-wrap:wrap}
+.stat{flex:1;padding:14px 10px 12px;text-align:center;border-left:1px solid var(--rule);min-width:30%}
+.stat:first-child{border-left:none}
+.stat .v{font-family:var(--serif);font-size:23px;line-height:1.1}
+.stat .k{font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gray);margin-top:5px}
+.board{border:1px solid var(--rule);border-radius:3px;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);padding:14px;margin-bottom:26px}
+.board-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.board-head .t{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink)}
+.board-grid{display:grid;grid-template-columns:1fr 110px;gap:10px}
+.b-col{display:flex;flex-direction:column;gap:10px}
+.b-tile{background:#fff;border:1px solid var(--rule);border-radius:2px;position:relative;overflow:hidden}
+.b-shirt{height:168px}.b-mid{height:190px}.b-shoes{height:110px}
+.b-bag{height:168px}.b-acc{height:110px}
+.b-tile .ph-wrap{position:absolute;inset:0}
+.b-tile img{width:100%;height:100%;object-fit:cover}
+.b-tile img.contain{object-fit:contain;padding:9%;box-sizing:border-box}
+.b-tile svg{position:absolute;inset:0;margin:auto;width:74%}
+.b-cap{position:absolute;left:7px;bottom:6px;background:var(--paper);font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:3px 7px;color:var(--ink2);max-width:calc(100% - 14px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-cap b{color:var(--blush-d);font-weight:400}
+.board .figcap{margin-top:10px;display:block}
+.an-card{border:1px solid var(--rule);border-radius:3px;background:#fff;margin-bottom:26px}
+.an-head{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.an-head .t{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink)}
+.an-head .meta{margin-left:auto;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+.an-rows{padding:6px 18px 12px}
+.attr{display:flex;gap:16px;padding:9px 0;border-bottom:1px dashed var(--rule);font-size:13px;align-items:baseline;flex-wrap:wrap}
+.attr:last-child{border-bottom:none}
+.attr .k{width:96px;flex:none;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gray);padding-top:2px}
+.attr .v{font-weight:400;color:var(--ink)}
+.attr .v.n{color:var(--ink2)}
+.attr .you{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blush-d);border:1px solid var(--blush);padding:2px 7px;border-radius:99px}
+.palette{display:flex;gap:5px}
+.pal{width:18px;height:18px;border-radius:50%;border:1px solid var(--rule);position:relative}
+.pal .tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-size:9px;letter-spacing:.08em;padding:3px 7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+.pal:hover .tip{opacity:1}
+.look-metrics{display:flex;gap:10px;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--rule)}
+.lm{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--rule);border-radius:99px;padding:5px 11px}
+.lm b{color:var(--blush-d);font-weight:400}
+.item-card{display:grid;grid-template-columns:104px 1fr;gap:18px;align-items:center;background:#fff;border:1px solid var(--rule);border-radius:3px;padding:14px;cursor:pointer;transition:box-shadow .2s,transform .2s;margin-bottom:12px}
+.item-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.item-card.anchor-card{border-color:var(--ink)}
+.ic-art{width:104px;height:112px;border:1px solid var(--rule);border-radius:2px;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);position:relative;overflow:hidden}
+.ic-art img{width:100%;height:100%;object-fit:cover}
+.ic-art img.contain{object-fit:contain;padding:8%;box-sizing:border-box}
+.ic-art svg{position:absolute;inset:0;margin:auto;width:82%}
+.ic-toprow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ic-no{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--blush-d)}
+.ic-role{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gray)}
+.ic-price{margin-left:auto;font-family:var(--serif);font-size:19px;white-space:nowrap}
+.ic-name{font-family:var(--serif);font-size:19px;font-weight:400;margin:3px 0 4px;line-height:1.25}
+.ic-why{font-size:12.5px;color:var(--gray2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:9px}
+.ic-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ret-chip{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--rule);padding:4px 9px;border-radius:99px;background:var(--paper)}
+.your-pill{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 9px;background:var(--ink);color:var(--paper);border-radius:99px}
+.opt-pill{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 9px;background:var(--blush-t);color:var(--blush-d);border:1px solid var(--blush);border-radius:99px}
+.ic-actions{display:flex;align-items:center;gap:8px;margin-top:11px;flex-wrap:wrap}
+.view-btn{font-size:10px;letter-spacing:.24em;text-transform:uppercase;padding:9px 15px;background:var(--ink);color:var(--paper);border-radius:2px;transition:box-shadow .2s}
+.view-btn:hover{box-shadow:var(--shadow)}
+.view-btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.shuffle{width:30px;height:30px;border:1px solid var(--rule);background:#fff;display:grid;place-items:center;color:var(--gray);transition:all .25s;font-size:13px;border-radius:2px}
+.shuffle:hover{color:var(--ink);border-color:var(--ink);transform:rotate(180deg)}
+.shuffling .ic-art{animation:spinIn .45s ease}
+@keyframes spinIn{0%{opacity:0}100%{opacity:1}}
+.budget-line{display:flex;align-items:center;gap:12px;border:1px dashed var(--blush);background:var(--blush-t);border-radius:3px;padding:11px 15px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin:4px 0 14px;flex-wrap:wrap}
+.budget-line .ok{color:var(--ok);font-family:var(--serif);font-style:italic;font-size:13px;text-transform:none;letter-spacing:0;margin-left:auto;white-space:nowrap}
+.style-note{border-top:1px solid var(--rule);margin-top:16px;padding:16px 6px 2px;text-align:center}
+.style-note p{font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink2);line-height:1.5}
+.style-note .ml{display:block;margin-top:10px}
+.restyle-link{display:block;text-align:center;margin-top:14px}
+.restyle-link a{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--blush-d);cursor:pointer;text-decoration:underline}
+.reveal{opacity:0;transform:translateY(16px);animation:rise .55s cubic-bezier(.22,.9,.34,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* modal */
+.modal-scrim{position:fixed;inset:0;z-index:90;background:rgba(15,15,15,.5);backdrop-filter:blur(3px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-scrim.on{opacity:1;pointer-events:auto}
+.modal{width:min(840px,100%);max-height:92vh;overflow:auto;background:var(--paper);border:1px solid var(--ink);transform:translateY(18px);transition:transform .3s cubic-bezier(.22,.9,.34,1);position:relative;border-radius:3px}
+.modal-scrim.on .modal{transform:none}
+.modal-grid{display:grid;grid-template-columns:340px 1fr}
+.mo-left{position:relative;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);display:grid;place-items:center;min-height:420px;border-right:1px solid var(--rule);overflow:hidden}
+.mo-left .ph-frame{position:absolute;inset:0}
+.mo-left .ph-frame img{width:100%;height:100%;object-fit:cover}
+.mo-left .ph-frame svg{position:absolute;inset:0;margin:auto;width:56%}
+.mo-no{position:absolute;top:16px;left:16px;background:var(--paper);font-size:9px;letter-spacing:.28em;text-transform:uppercase;padding:6px 11px;z-index:2}
+.mo-ret{position:absolute;bottom:14px;left:16px;background:var(--paper);padding:5px 10px;z-index:2}
+.mo-right{padding:32px 34px 34px}
+.mo-name{font-family:var(--serif);font-size:30px;font-weight:400;line-height:1.15;margin:6px 0 10px}
+.mo-price{font-family:var(--serif);font-size:25px;margin:14px 0 2px}
+.mo-price small{font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-left:10px}
+.mo-sec{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);margin:20px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.why-list{display:flex;flex-direction:column;gap:9px}
+.why-list li{list-style:none;display:flex;gap:10px;font-size:13.5px;color:var(--ink2)}
+.why-list li:before{content:"—";color:var(--blush);flex:none}
+.why-list li span{flex:1}
+.mo-sizes{display:flex;gap:7px;flex-wrap:wrap}
+.mo-btns{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin-top:24px}
+.mo-note{margin-top:15px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);border-top:1px solid var(--rule);padding-top:12px;line-height:2}
+.mo-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:var(--paper);display:grid;place-items:center;color:var(--gray);z-index:2}
+
+/* try-on */
+.tryon-scrim{position:fixed;inset:0;z-index:100;background:rgba(15,15,15,.55);backdrop-filter:blur(3px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.tryon-scrim.on{opacity:1;pointer-events:auto}
+.tryon{width:min(860px,100%);max-height:92vh;overflow:auto;background:var(--paper);border:1px solid var(--ink);border-radius:3px;position:relative;transform:translateY(18px);transition:transform .3s cubic-bezier(.22,.9,.34,1)}
+.tryon-scrim.on .tryon{transform:none}
+.tryon-in{padding:32px 36px 36px}
+.tryon h2{font-family:var(--serif);font-size:30px;font-weight:400;margin:8px 0 6px}
+.tryon h2 em{font-style:italic}
+.tryon .lede{font-size:13.5px;color:var(--ink2);max-width:56ch}
+.dropzone{margin:24px 0 8px;border:1px dashed var(--gray);border-radius:3px;background:var(--blush-t);padding:44px 24px;text-align:center;cursor:pointer;transition:border-color .2s;display:block}
+.dropzone:hover{border-color:var(--ink)}
+.dropzone .big{font-family:var(--serif);font-style:italic;font-size:20px;margin-bottom:6px}
+.dropzone .ml{display:block}
+.tryon-alt{text-align:center;margin-top:8px}
+.tryon-alt a{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--blush-d);cursor:pointer;text-decoration:underline}
+.privacy{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-top:18px;border-top:1px solid var(--rule);padding-top:12px;text-align:center}
+.tryon-stage{position:relative;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);display:grid;place-items:center;min-height:420px}
+.tryon-stage .user-ph{max-height:520px;max-width:100%;object-fit:contain}
+.tryon-steps{margin-top:18px}
+.tryon-result{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.to-photo{position:relative;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);min-height:440px;display:grid;place-items:center}
+.to-photo img.user{max-height:520px;max-width:100%;object-fit:contain}
+.to-photo .overlay-shirt{position:absolute;left:50%;top:24%;width:52%;transform:translateX(-50%);opacity:.96;mix-blend-mode:multiply;border-radius:4px}
+.to-photo .overlay-shirt img{width:100%;display:block;object-fit:contain;filter:brightness(1.14) contrast(1.06)}
+.to-photo .ribbon{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--paper);font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;padding:5px 10px;z-index:2}
+.to-photo figcaption{position:absolute;bottom:0;left:0;right:0;background:rgba(252,251,249,.92);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);padding:7px 10px;text-align:center}
+.to-piece{display:flex;flex-direction:column;gap:14px}
+.to-piece .tile{border:1px solid var(--rule);border-radius:3px;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);position:relative;height:230px;overflow:hidden}
+.to-piece .tile img{width:100%;height:100%;object-fit:cover}
+.to-piece .tile figcaption{position:absolute;left:8px;bottom:7px;background:var(--paper);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;padding:3px 8px}
+.to-note{font-size:13px;color:var(--ink2)}
+.to-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+
+/* wishlist */
+.wish-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,100vw);z-index:80;background:var(--paper);box-shadow:var(--shadow);transform:translateX(103%);transition:transform .4s cubic-bezier(.32,.72,.24,1);display:flex;flex-direction:column;border-left:1px solid var(--ink)}
+.wish-panel.on{transform:translateX(0)}
+.wp-head{padding:16px 26px;border-bottom:1px solid var(--ink);display:flex;align-items:center;gap:12px}
+.wp-head h2{font-family:var(--serif);font-size:19px;letter-spacing:.16em;font-weight:500}
+.wp-head .ml{margin-left:auto}
+.wp-body{flex:1;overflow-y:auto;padding:20px 26px}
+.wp-empty{text-align:center;padding:60px 10px;color:var(--gray)}
+.wp-empty .big{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink2);margin-bottom:8px}
+.wl-item{display:grid;grid-template-columns:76px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:center}
+.wl-thumb{width:76px;height:84px;border:1px solid var(--rule);border-radius:2px;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);position:relative;overflow:hidden;cursor:pointer}
+.wl-thumb img{width:100%;height:100%;object-fit:cover}
+.wl-thumb img.contain{object-fit:contain;padding:8%;box-sizing:border-box}
+.wl-thumb svg{position:absolute;inset:0;margin:auto;width:76%}
+.wl-brand{font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gray)}
+.wl-name{font-family:var(--serif);font-size:16px;margin:2px 0 1px}
+.wl-price{font-family:var(--serif);font-size:14px}
+.wl-actions{display:flex;gap:8px;margin-top:7px;flex-wrap:wrap}
+.wl-btn{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
+.wl-btn:hover{border-color:var(--ink);color:var(--ink)}
+.wl-btn.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.wl-btn.rm{border:none;color:var(--gray);text-decoration:underline;padding:6px 2px}
+.wp-foot{padding:14px 26px;border-top:1px solid var(--ink);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);text-align:center}
+
+/* toast / guide */
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,90px);z-index:200;background:var(--ink);color:var(--paper);padding:14px 22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:transform .4s cubic-bezier(.22,.9,.34,1);max-width:90vw;display:flex;align-items:center;gap:12px}
+.toast.on{transform:translate(-50%,0)}
+.toast .t-ic{width:20px;height:20px;border-radius:50%;background:var(--blush);color:var(--ink);display:grid;place-items:center;font-size:10px;flex:none}
+.guide-list{counter-reset:g;display:flex;flex-direction:column;gap:13px;margin:20px 0 6px}
+.guide-list li{list-style:none;display:flex;gap:14px;font-size:13.5px;color:var(--ink2);counter-increment:g}
+.guide-list li:before{content:counter(g,upper-roman);font-family:var(--serif);font-style:italic;flex:none;width:30px;color:var(--blush-d);padding-top:1px}
+.guide-list b{color:var(--ink);font-weight:400}
+
+@media (max-width:1180px){.brow{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:980px){
+  .pdp-grid{grid-template-columns:1fr;gap:26px}
+  .gallery{position:static}
+  .fn-grid{grid-template-columns:1fr 1fr}
+  .modal-grid{grid-template-columns:1fr}
+  .mo-left{min-height:300px}
+  .mast-links{display:none}
+  .mast-grid{grid-template-columns:auto 1fr auto}
+  .j-step .t{display:none}
+  .dr-body{padding:20px 18px 30px}
+  .dr-head{padding:14px 18px 12px}
+  .dr-foot{padding:14px 18px}
+  .pdp-wrap,.chapters,.section,.mb-band,.bsection{padding-left:18px;padding-right:18px}
+  .mast-in,.services{padding-left:18px;padding-right:18px}
+  .services{grid-template-columns:1fr 1fr;gap:16px 0}
+  .svc:nth-child(odd){border-left:none;padding-left:0}
+  .mb-card{grid-template-columns:1fr;padding:30px 26px}
+  .tryon-result{grid-template-columns:1fr}
+  .to-photo{min-height:360px}
+}
+@media (max-width:640px){
+  .brow{grid-template-columns:repeat(2,1fr);gap:12px}
+  .pdp-info h1{font-size:31px}
+  .price{font-size:26px}
+  .ic-toprow{flex-wrap:wrap}
+  .ic-price{margin-left:0;width:100%}
+  .ic-actions{flex-wrap:wrap}
+  .ai-flag{display:none}
+  .dr-head-top h2{font-size:15px;letter-spacing:.1em}
+  .logo small,.logo-sim{display:none}
+  .demo-fab{left:14px;bottom:14px}
+  .mo-right{padding:24px 20px 28px}
+  .mo-btns{grid-template-columns:1fr}
+  .foot-row{flex-direction:column;align-items:flex-start;gap:8px}
+  .foot-meta{text-align:left}
+  .ready-head{flex-direction:column;align-items:flex-start;gap:2px}
+  .board-grid{grid-template-columns:1fr 88px}
+  .tryon-in{padding:24px 20px 28px}
+  .wordmark .wm{font-size:24px}
+  .hero{height:70vh}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001s!important;transition-duration:.001s!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HOME ==================== -->
+<div id="home" class="on">
+  <div class="announce">The MatchBuy edit is live — real pieces from real houses, matched by AI</div>
+  <div class="masthead">
+    <div class="mast-in">
+      <div class="mast-grid">
+        <nav class="mast-links">
+          <span data-action="go-edit">The Edit</span>
+          <span data-action="go-houses">The Houses</span>
+          <span data-action="go-ai">AI Stylist</span>
+          <span data-action="open-wl">Wishlist</span>
+        </nav>
+        <div class="wordmark" data-action="go-home">
+          <div class="wm">STYLEHUB</div>
+          <div class="wm-sub">× MatchBuy AI</div>
+        </div>
+        <div class="mast-right">
+          <button class="hicon" data-action="open-wl" title="Wishlist">♡<span class="hcount hidden" id="wishCount">0</span></button>
+          <button class="hicon" data-action="noop" title="Cart">🛍<span class="hcount hidden" id="cartBadgeH">0</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <img src="../assets/maxmara.jpg" alt="StyleHub campaign — camel wool coat" style="object-position:50% 30%">
+    <div class="veil"></div>
+    <div class="hero-copy">
+      <h1>Find the match.<br><em>Complete the look.</em><br>Buy it.</h1>
+      <span class="ml">AI outfit matching shopping assistant</span>
+      <div class="hero-ctas">
+        <span class="hbtn solid" data-action="go-edit">Discover the edit</span>
+        <span class="hbtn line" data-action="go-ai">Meet MatchBuy AI</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog-data" aria-label="Product data notice"><span class="data-meta">Catalog notes</span><strong>57 real catalog entries from your original project.</strong> Names and images come from the existing brand catalog. Prices are RMB reference values, not live retailer prices; current stock has not been checked. Most links open a product page, while some shoe links open a brand collection or homepage. Always confirm details with the retailer before buying.</section>
+
+  <div id="brandSections"></div>
+
+  <section class="houses" id="houses">
+    <div class="houses-in">
+      <h3>The Houses</h3>
+      <span class="ml">Retailer links open the product page or brand collection listed in the catalog</span>
+      <div class="house-row" id="houseRow"></div>
+    </div>
+  </section>
+
+  <section class="mb-band" id="ai">
+    <div class="mb-card">
+      <div>
+        <span class="ml blush">✨ MatchBuy AI · the stylist layer</span>
+        <h3>“Not a wardrobe app — it works on the product page and <em>ends in a purchase.”</em></h3>
+        <p>Pick any piece from any house. The matching algorithm reads its colour, silhouette, material and style, asks how you want to feel, then scores every compatible piece in the edit — so “cute”, “elegant” and “sexy” each build a genuinely different look. No cart, no checkout: Buy Now takes you straight to the piece on the house’s own website.</p>
+        <button class="btn btn-primary" data-action="go-edit" style="width:auto"><span class="b-title">Start with any piece</span><span class="b-sub">fn-01 · ai outfit matching</span></button>
+      </div>
+      <div class="mb-steps">
+        <div class="mb-step"><span class="rn">i</span><div><h5>Select</h5><p>Pick a piece and tell the AI your occasion and mood.</p></div></div>
+        <div class="mb-step"><span class="rn">ii</span><div><h5>Analyse</h5><p>Five attributes are read from the item.</p></div></div>
+        <div class="mb-step"><span class="rn">iii</span><div><h5>Match</h5><p>Every compatible piece is scored — mood, occasion, colour.</p></div></div>
+        <div class="mb-step"><span class="rn">iv</span><div><h5>Shop</h5><p>Buy each piece directly on the house’s website.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="svc"><b>Direct Shopping</b>Buy Now opens the piece on the brand’s site</div>
+    <div class="svc"><b>Match Index</b>Every look scored before you commit</div>
+    <div class="svc"><b>Cross-House</b>Top · bottom · shoes · bag · jewelry from different stores</div>
+    <div class="svc"><b>Try-On</b>AI preview from one full-body photo</div>
+  </section>
+
+  <footer class="home-foot">
+    <div class="home-foot-in">
+      <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the houses’ real websites · prices indicative</span>
+      <span class="ml"><a data-action="open-guide" style="cursor:pointer;text-decoration:underline">Demo guide</a> · © MMXXVI</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== PRODUCT PAGE ==================== -->
+<div id="pdp">
+  <header class="masthead">
+    <div class="mast-in">
+      <div class="mast-grid">
+        <nav class="mast-links">
+          <span data-action="go-home">← Home</span>
+          <span data-action="open-wl">Wishlist</span>
+        </nav>
+        <div class="wordmark" data-action="go-home">
+          <div class="wm">STYLEHUB</div>
+          <div class="wm-sub">× MatchBuy AI</div>
+        </div>
+        <div class="mast-right">
+          <button class="hicon" data-action="noop" title="Wishlist">♡</button>
+          <button class="hicon" data-action="open-wl" title="Wishlist">♡<span class="hcount hidden" id="wishCountPDP">0</span></button>
+          <button class="hicon" data-action="noop" title="Cart">🛍<span class="hcount hidden" id="cartBadge">0</span></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pdp-wrap">
+    <div class="pdp-crumbs">
+      <span class="back-link" data-action="go-home">← Back to the edit</span>
+      <span class="ml">Product handbook · <b>Vol. I</b></span>
+    </div>
+    <div class="pdp-grid">
+      <div class="gallery">
+        <div class="hero" id="heroArt"></div>
+        <div class="gal-meta"><span class="figcap" id="figcap">Fig. 01 — the piece, straight from the house.</span><span class="ml">No. 01</span></div>
+      </div>
+      <div class="pdp-info" id="pdpInfo"></div>
+    </div>
+  </main>
+
+  <section class="chapters">
+    <div class="chapter">
+      <div class="chap-head"><span class="rn">Chapter II</span><h3>Core functions</h3><span class="ml">Ref. FN-01 → FN-07</span></div>
+      <div class="fn-grid">
+        <div class="fn"><span class="no">FN-01</span><div><h5>AI Outfit Matching</h5><p>Finds pieces that complement the item you chose.</p></div></div>
+        <div class="fn"><span class="no">FN-02</span><div><h5>Style Recognition</h5><p>Reads colour, silhouette, material, style, occasion.</p></div></div>
+        <div class="fn"><span class="no">FN-03</span><div><h5>Complete Look Generation</h5><p>Builds several products into one wearable outfit.</p></div></div>
+        <div class="fn"><span class="no">FN-04</span><div><h5>Cross-House Discovery</h5><p>Scores every compatible piece across the houses.</p></div></div>
+        <div class="fn"><span class="no">FN-05</span><div><h5>Budget Matching</h5><p>Keeps every combination inside your spending range.</p></div></div>
+        <div class="fn"><span class="no">FN-06</span><div><h5>Direct Shopping</h5><p>Buy Now opens the piece on the house’s own website.</p></div></div>
+        <div class="fn"><span class="no">FN-07</span><div><h5>AI Try-On</h5><p>Imagine the piece on you, from one full-body photo.</p></div></div>
+      </div>
+    </div>
+    <div class="chapter quote">
+      <p>“Not a wardrobe app — it works on the product page and <em>ends in a purchase.”</em></p>
+      <span class="ml">Positioning statement · MatchBuy AI</span>
+    </div>
+  </section>
+
+  <footer class="masthead">
+    <div class="mast-in" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center">
+      <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the houses’ real websites · prices indicative</span>
+      <span class="ml"><a data-action="open-guide" style="cursor:pointer;text-decoration:underline">Demo guide</a> · © MMXXVI</span>
+    </div>
+  </footer>
+</div>
+
+<!-- drawer -->
+<div class="scrim" id="drawerScrim" data-action="close-drawer"></div>
+<aside class="drawer" id="drawer" aria-label="MatchBuy AI assistant">
+  <div class="dr-head">
+    <div class="dr-head-top">
+      <h2>MATCHBUY AI</h2>
+      <span class="ml">AI outfit matching<br>shopping assistant</span>
+      <button class="dr-close" data-action="close-drawer" title="Close">✕</button>
+    </div>
+    <div class="journey" id="journey"></div>
+  </div>
+  <div class="dr-body" id="drBody"></div>
+  <div class="dr-foot" id="drFoot" style="display:none"></div>
+</aside>
+
+<!-- item details -->
+<div class="modal-scrim" id="modalScrim">
+  <div class="modal" id="modal"></div>
+</div>
+
+<!-- try-on -->
+<div class="tryon-scrim" id="tryonScrim">
+  <div class="tryon" id="tryon"></div>
+</div>
+
+<!-- wishlist -->
+<div class="scrim" id="wlScrim" data-action="close-wl"></div>
+<aside class="wish-panel" id="wishPanel" aria-label="Wishlist">
+  <div class="wp-head"><h2>WISHLIST</h2><span class="ml" id="wlCountLbl"></span><button class="dr-close" data-action="close-wl" title="Close">✕</button></div>
+  <div class="wp-body" id="wlBody"></div>
+  <div class="wp-foot">Saved on this device · tap ♡ on any piece to add</div>
+</aside>
+
+<!-- toast / guide -->
+<div class="toast" id="toast"><span class="t-ic">✓</span><span id="toastMsg"></span></div>
+<button class="demo-fab" data-action="open-guide" title="Demo guide">?</button>
+<div class="modal-scrim" id="guideScrim">
+  <div class="modal" style="width:min(560px,100%);padding:32px 34px">
+    <button class="mo-close" data-action="close-guide">✕</button>
+    <span class="ml">Demo guide</span>
+    <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;margin-top:8px">StyleHub × MatchBuy AI <em>in six steps.</em></h2>
+    <ol class="guide-list">
+      <li><span><b>Home.</b> Five real pieces from each house — Urban Revivo, Zara, Forever 21, Max Mara, 73Hours, Nike, Adidas, JW PEI, Songmont, DeMellier and Swarovski — every card links to the product’s own page.</span></li>
+      <li><span><b>Pick a piece.</b> Click any card: the AI asks your <b>occasion</b> and your <b>feeling</b> — cute, elegant, sexy or minimal.</span></li>
+      <li><span><b>The matching algorithm</b> scores every compatible piece on mood, occasion, colour harmony and house — so <b>cute, elegant and sexy each build a different look</b>.</span></li>
+      <li><span><b>The assembled board</b> shows top + bottom + shoes + bag + jewelry as one picture. Shuffle ⟳ re-scores a slot.</span></li>
+      <li><span><b>Buy Now opens the piece directly on the house’s real website</b> — StyleHub never handles payment.</span></li>
+      <li><span><b>Wishlist.</b> Tap ♡ anywhere, review from the masthead, keep it on this device.</span></li>
+    </ol>
+    <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);border-top:1px solid var(--rule);padding-top:12px;margin-top:12px">
+      Matching is a transparent scoring algorithm · all data simulated · Esc closes any overlay
+    </div>
+  </div>
+</div>
+
 <script>
-const P=[
-{id:'zara3',b:'ZARA',n:'Metallic-Effect Crinkle Dress',c:'Clothing',p:'¥749',i:'zara3.jpg',u:'https://www.zara.cn/cn/en/long-metallic-effect-crinkle-dress-p04786718.html',t:['occasion','dress','evening']},
-{id:'ur1',b:'URBAN REVIVO',n:'Peplum Off-Shoulder Cotton Shirt',c:'Clothing',p:'¥439',i:'ur1.jpg',u:'https://global.urbanrevivo.com/products/button-front-peplum-off-shoulder-sleeveless-cotton-shirt-uwg860127',t:['top','cotton','casual']},
-{id:'ur6',b:'URBAN REVIVO',n:'Fishtail Ruched Midi Skirt',c:'Clothing',p:'¥519',i:'ur6.jpg',u:'https://global.urbanrevivo.com/products/ruffle-midi-fishtail-skirt-uwj540010',t:['skirt','occasion','midi']},
-{id:'f21a',b:'FOREVER 21',n:'Button-Front Peplum Top',c:'Clothing',p:'¥259',i:'f21a.jpg',u:'https://www.forever21.com/products/01409860',t:['top','casual','peplum']},
-{id:'f21b',b:'FOREVER 21',n:'Polka-Dot Lace-Trim Cami',c:'Clothing',p:'¥109',i:'f21b.jpg',u:'https://www.forever21.com/products/01409904',t:['top','cami','casual']},
-{id:'jp1',b:'JW PEI',n:'Hana Medium Tote · Claret',c:'Bags',p:'¥1,019',i:'jwp1.jpg',u:'https://www.jwpei.com/products/hana-medium-tote-bag-claret',t:['bag','evening','color']},
-{id:'jp2',b:'JW PEI',n:'Noor Top Handle · Elephant Grey',c:'Bags',p:'¥719',i:'jwpei2.jpg',u:'https://www.jwpei.com/products/noor-top-handle-bag-elephant-gray',t:['bag','neutral','everyday']},
-{id:'jp4',b:'JW PEI',n:'Cleo Box Bag · Black Croc',c:'Bags',p:'¥789',i:'jwp4.jpg',u:'https://www.jwpei.com/products/cleo-box-bag-black-croc',t:['bag','evening','black']},
-{id:'sw1',b:'SWAROVSKI',n:'Classica Round Pendant',c:'Jewelry',p:'¥2,000',i:'swa1.jpg',u:'https://www.swarovski.com/en-GB/p-M5534320/Classica-round-pendant/',t:['jewelry','occasion','classic']},
-{id:'sw5',b:'SWAROVSKI',n:'Symbolica Necklace · Stars',c:'Jewelry',p:'¥697',i:'swa5.jpg',u:'https://www.swarovski.com/en-GB/p-M5652850/Symbolica-necklace-Stars/',t:['jewelry','casual','stars']},
-{id:'dm1',b:'DEMELLIER',n:'The Small Hudson · Dark Green',c:'Bags',p:'¥3,890',i:'demellier1.jpg',u:'https://demellierlondon.com/products/the-small-hudson-dark-green-small-grain',t:['bag','occasion','color']},
-{id:'dm2',b:'DEMELLIER',n:'The Brooklyn · Warm Brown',c:'Bags',p:'¥5,690',i:'demellier2.jpg',u:'https://demellierlondon.com/products/the-brooklyn-warm-brown-small-grain',t:['bag','neutral','everyday']}
-];const img=x=>'https://clarbel21.github.io/AIID-Product-Idea/assets/'+x;let anchor=P[0],filter='all',kind='Any';
-function render(){let q=document.querySelector('#search').value.toLowerCase();document.querySelector('#grid').innerHTML=P.map(p=>'<article class="card" data-c="'+p.c+'" data-q="'+(p.b+' '+p.n).toLowerCase()+'"><div class="photo"><img loading="lazy" src="'+img(p.i)+'" alt="'+p.n+'"><span class="badge">'+p.c+'</span></div><div class="body"><div class="retailer">'+p.b+'</div><div class="name">'+p.n+'</div><div class="price">'+p.p+' <small>reference · verify with retailer</small></div><div class="actions"><button data-id="'+p.id+'">Match this</button><a target="_blank" rel="noopener" href="'+p.u+'">View retailer ↗</a></div></div></article>').join('');document.querySelectorAll('.card').forEach(e=>e.classList.toggle('hidden',!(filter==='all'||e.dataset.c===filter)||!e.dataset.q.includes(q)));document.querySelector('#selected').innerHTML='<img src="'+img(anchor.i)+'" alt=""><div><strong>'+anchor.n+'</strong><span>'+anchor.b+' · '+anchor.p+' reference</span></div>'}
-function matches(){let list=P.filter(p=>p.id!==anchor.id&&(kind==='Any'||kind===p.c)).map(p=>({p,s:p.t.filter(t=>anchor.t.includes(t)).length})).sort((a,b)=>b.s-a.s).slice(0,3);document.querySelector('#results').innerHTML='<div class="eyebrow">A few ideas to complete it</div>'+list.map(({p,s})=>'<div class="item"><img src="'+img(p.i)+'" alt=""><div><strong>'+p.n+'</strong><small>'+p.b+' · '+(s?'Style details in common':'A balancing category')+'</small></div><a target="_blank" rel="noopener" href="'+p.u+'">Shop ↗</a></div>').join('')}
-document.querySelector('#grid').addEventListener('click',e=>{let b=e.target.closest('button[data-id]');if(b){anchor=P.find(p=>p.id===b.dataset.id);render()}});document.querySelectorAll('.pill').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;render()});document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{document.querySelectorAll('.choice').forEach(x=>x.classList.remove('active'));b.classList.add('active');kind=b.dataset.kind});document.querySelector('#search').oninput=render;document.querySelector('#matchBtn').onclick=matches;render();
-</script></body></html>
+/* ============================================================
+   StyleHub × MatchBuy AI — v6
+   Matching = transparent scoring algorithm over a simulated
+   catalogue of real branded products. Buy Now deep-links to
+   the product page on each house’s real website — no payment.
+   ============================================================ */
+
+/* ---------- SVG fallback illustrations ---------- */
+function hex2rgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function shade(hex,amt){let[r,g,b]=hex2rgb(hex);const t=amt<0?0:255,p=Math.abs(amt);r=Math.round((t-r)*p+r);g=Math.round((t-g)*p+g);b=Math.round((t-b)*p+b);return`#${[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('')}`;}
+function artWrap(inner){return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;}
+function artShirt(c,dk){const d=dk||shade(c,-0.24);
+  return artWrap(`<path d="M78 40 L60 50 L38 80 L54 96 L66 84 L66 146 Q66 154 74 154 L126 154 Q134 154 134 146 L134 84 L146 96 L162 80 L140 50 L122 40 Q111 52 100 52 Q89 52 78 40 Z" fill="${c}" stroke="${shade(c,-.34)}" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M80 48 L100 60 Q100 74 88 74 L72 58 Z" fill="${shade(c,-.06)}" stroke="${shade(c,-.3)}" stroke-width="1"/>
+  <path d="M120 48 L100 60 Q100 74 112 74 L128 58 Z" fill="${shade(c,-.06)}" stroke="${shade(c,-.3)}" stroke-width="1"/>`);}
+function artTrousers(c,dk){const d=dk||shade(c,-0.16);
+  return artWrap(`<path d="M71 53 L64 162 L95 162 L100 96 L105 162 L136 162 L129 53 Z" fill="${c}" stroke="${shade(c,-.35)}" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M70 40 L130 40 L129.5 54 L70.5 54 Z" fill="${d}" stroke="${shade(c,-.35)}" stroke-width="1.2"/>`);}
+function artWideLeg(c,dk){const d=dk||shade(c,-0.18);
+  return artWrap(`<path d="M70 54 L59 166 L96 166 L100 98 L104 166 H141 L130 54 Z" fill="${c}" stroke="${shade(c,-.38)}" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M69 40 L131 40 L130.5 55 L69.5 55 Z" fill="${d}" stroke="${shade(c,-.38)}" stroke-width="1.2"/>`);}
+function artSneaker(c,dk){const d=dk||shade(c,-0.1);
+  return artWrap(`<path d="M40 134 C40 106 52 93 72 95 C88 97 98 112 116 120 C138 128 158 130 168 134 L166 138 L42 138 Z" fill="${c}" stroke="${shade(c,-.35)}" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M28 142 Q26 154 44 156 L160 156 Q178 154 176 142 L174 133 L32 133 Z" fill="#FFFFFF" stroke="#C9C9C0" stroke-width="1.4"/>
+  <path d="M72 130 Q112 122 152 130" stroke="${d}" stroke-width="3" fill="none" opacity=".85" stroke-linecap="round"/>`);}
+function artHeel(c,dk){const d=dk||shade(c,-0.2);
+  return artWrap(`<path d="M34 140 C58 106 90 100 112 112 C132 122 150 128 158 132 L154 142 L42 142 Z" fill="${c}" stroke="${shade(c,-.35)}" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M140 142 L154 142 L148 172 L141 172 Z" fill="${d}" stroke="${shade(c,-.4)}" stroke-width="1.1"/>
+  <path d="M148 138 C132 122 116 117 104 119" fill="none" stroke="${d}" stroke-width="3.4" stroke-linecap="round"/>`);}
+function artShoulderBag(c,dk){const d=dk||shade(c,-0.2), met='#C0C5CC';
+  return artWrap(`<path d="M64 88 C70 40 130 40 136 88" fill="none" stroke="${met}" stroke-width="3" stroke-dasharray="1 5" stroke-linecap="round"/>
+  <path d="M58 88 L142 88 Q148 88 147.5 96 L146 144 Q100 154 54 144 L52.5 96 Q52 88 58 88 Z" fill="${c}" stroke="${shade(c,-.35)}" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M56 88 L144 88 L144 112 Q100 123 56 112 Z" fill="${d}" stroke="${shade(c,-.35)}" stroke-width="1.2"/>
+  <circle cx="100" cy="119" r="5" fill="none" stroke="${met}" stroke-width="2.4"/>`);}
+function artSilverSet(c,dk){const sil=dk||'#B9BEC6', hi='#E6EAEF';
+  return artWrap(`<path d="M46 40 Q100 116 154 40" fill="none" stroke="${sil}" stroke-width="2.6"/>
+  <circle cx="100" cy="106" r="7" fill="none" stroke="${sil}" stroke-width="2.4"/>
+  <circle cx="70" cy="146" r="21" fill="none" stroke="${sil}" stroke-width="5.5"/>
+  <circle cx="130" cy="146" r="21" fill="none" stroke="${sil}" stroke-width="5.5"/>
+  <path d="M58 134 A21 21 0 0 1 70 125" stroke="${hi}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M118 134 A21 21 0 0 1 130 125" stroke="${hi}" stroke-width="2.6" fill="none" stroke-linecap="round"/>`);}
+function artNecklace(c,dk){const gold=dk||'#C9A227';
+  return artWrap(`<path d="M48 52 Q100 140 152 52" fill="none" stroke="${gold}" stroke-width="2.6"/>
+  <line x1="100" y1="99" x2="100" y2="108" stroke="${gold}" stroke-width="2"/>
+  <circle cx="100" cy="118" r="10" fill="#F6F1E7" stroke="#D9CDB8" stroke-width="1.4"/>
+  <circle cx="96" cy="114" r="2.6" fill="#FFFFFF"/>`);}
+const ART = {shirt:artShirt, trousers:artTrousers, wideleg:artWideLeg, sneaker:artSneaker, heel:artHeel, shoulder:artShoulderBag, silver:artSilverSet, necklace:artNecklace};
+function artFor(item){ const fn=ART[item.art]||ART.shirt; return fn(item.color||'#F6F5F0', item.dark); }
+function media(item, contain){
+  const imgStyle = contain
+    ? 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:9%;box-sizing:border-box;'
+    : 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+  const svg = artFor(item).replace('<svg ', `<svg style="position:absolute;inset:0;margin:auto;${contain?'width:82%;':''}" `);
+  if(!item.img) return svg;
+  return svg + `<img src="${item.img}" alt="${item.name||''}" style="${imgStyle}" onerror="this.remove()">`;
+}
+
+/* ---------- brands: real houses, real links ---------- */
+const BRANDS = {
+  'POMELO':{url:'https://www.pomelofashion.com/'},
+  'NIKE':{url:'https://www.nike.com/'},
+  'ADIDAS':{url:'https://www.adidas.com/'},
+  '73HOURS':{url:'http://www.73hours.com.cn/'},
+  'JW PEI':{url:'https://www.jwpei.com/'},
+  'SONGMONT':{url:'https://songmontofficial.com/'},
+  'SWAROVSKI':{url:'https://www.swarovski.com/'},
+  'URBAN REVIVO':{url:'https://global.urbanrevivo.com/'},
+  'ZARA':{url:'https://www.zara.cn/cn/en/'},
+  'FOREVER 21':{url:'https://www.forever21.com/'},
+  'DEMELLIER':{url:'https://demellierlondon.com/'},
+};
+
+/* ---------- catalogue: 5 real products per house ----------
+   img = real product photo (stored locally) · url = the product’s
+   own page on the house’s real website · tone/moods/occs/styles
+   feed the matching algorithm. */
+function retailerDestination(item){
+  const url=item.url||BRANDS[item.brand]?.url||'';
+  const broad=/nike\.com\/w\//i.test(url)||/adidas\.com\/us\/(samba|gazelle)/i.test(url)||/73hours\.com\.cn\/?$/i.test(url);
+  return broad?{label:'Browse '+item.brand.toLowerCase(),detail:'This catalog entry links to the retailer’s collection or homepage, not a confirmed exact SKU. Search the brand page for '+item.name+' and check its current price and stock.'}:{label:'View '+item.name+' at '+item.brand.toLowerCase(),detail:'This link points to the catalog’s retailer product page; current price and stock still need retailer confirmation.'};
+}
+
+const CATALOGUE = [
+  /* URBAN REVIVO — real products, real product pages */
+  {id:'ur1', brand:'URBAN REVIVO', name:'Peplum Off-Shoulder Cotton Shirt', price:439, img:'../assets/ur1.jpg', cat:'top', tone:'light', moods:['elegant','sexy'], occs:['date','office'], styles:['romantic'], url:'https://global.urbanrevivo.com/products/button-front-peplum-off-shoulder-sleeveless-cotton-shirt-uwg860127', why:'Off-shoulder peplum — structured at the waist, soft everywhere else.'},
+  {id:'ur2', brand:'URBAN REVIVO', name:'Oversized Wrap-Front Cotton Shirt', price:439, img:'../assets/ur2.jpg', cat:'top', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://global.urbanrevivo.com/products/oversized-wrap-front-thin-stretch-cotton-shirt-uwj260107', why:'An oversized wrap in thin stretch cotton — relaxed but deliberate.'},
+  {id:'ur3', brand:'URBAN REVIVO', name:'Nipped-Waist Pleated Shirt', price:369, img:'../assets/ur3.jpg', cat:'top', tone:'light', moods:['minimal','elegant'], occs:['office'], styles:['classic'], url:'https://global.urbanrevivo.com/products/tailored-pleated-shirts-uwm260016', why:'Pleats nip the waist — tailoring without stiffness.'},
+  {id:'ur4', brand:'URBAN REVIVO', name:'Cutout Mock-Neck Blouse', price:369, img:'../assets/ur4.jpg', cat:'top', tone:'light', moods:['sexy','elegant'], occs:['date','party'], styles:['romantic'], url:'https://global.urbanrevivo.com/products/cutout-fitted-mock-neck-sleeveless-cotton-blouse-uyv260074', why:'The cutout does the talking — fitted, cool, confident.'},
+  {id:'ur5', brand:'URBAN REVIVO', name:'Striped V-Neck Cotton Shirt', price:369, img:'../assets/ur5.jpg', cat:'top', tone:'light', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://global.urbanrevivo.com/products/textured-striped-v-neck-short-sleeve-cotton-shirt-uyv260075', why:'Textured stripes for easy days — the wearable one.'},
+  {id:'ur6', brand:'URBAN REVIVO', name:'Fishtail Ruched Midi Skirt', price:519, img:'../assets/ur6.jpg', cat:'bottom', tone:'light', moods:['elegant','sexy'], occs:['date','party'], styles:['romantic'], url:'https://global.urbanrevivo.com/products/ruffle-midi-fishtail-skirt-uwj540010', why:'A ruched fishtail hem — movement built into the silhouette.'},
+  {id:'ur7', brand:'URBAN REVIVO', name:'Pinstripe Wrap Midi Skirt', price:519, img:'../assets/ur7.jpg', cat:'bottom', tone:'dark', moods:['minimal','elegant'], occs:['office'], styles:['classic'], url:'https://global.urbanrevivo.com/products/pinstripe-weave-high-waist-buttoned-wrap-overlay-draped-panel-asymmetric-hemline-skirt-uwj560048', why:'Pinstripe tailoring with a draped wrap — office-sharp.'},
+  {id:'ur8', brand:'URBAN REVIVO', name:'Washed Denim Midi Skirt', price:369, img:'../assets/ur8.jpg', cat:'bottom', tone:'cool', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://global.urbanrevivo.com/products/midi-denim-skirt-uwm840026', why:'Raw-edge washed denim — the casual counterweight.'},
+  /* FOREVER 21 — real products */
+  {id:'f21a', brand:'FOREVER 21', name:'Button-Front Peplum Top', price:259, img:'../assets/f21a.jpg', cat:'top', tone:'light', moods:['cute','elegant'], occs:['date','office'], styles:['romantic'], url:'https://www.forever21.com/products/01409860', why:'A peplum waist with button front — sweet and structured.'},
+  {id:'f21b', brand:'FOREVER 21', name:'Polka-Dot Lace-Trim Cami', price:109, img:'../assets/f21b.jpg', cat:'top', tone:'light', moods:['cute','sexy'], occs:['date','everyday'], styles:['romantic'], url:'https://www.forever21.com/products/01409904', why:'Polka dots and lace trim — playful with an edge.'},
+  {id:'f21c', brand:'FOREVER 21', name:'Floral Crop Top & Maxi Skirt Set', price:119, img:'../assets/f21c.jpg', cat:'dress', tone:'light', moods:['cute'], occs:['date','everyday'], styles:['romantic'], url:'https://www.forever21.com/products/01409718', why:'A matching set — the whole mood in one purchase.'},
+  {id:'f21d', brand:'FOREVER 21', name:'Off-Shoulder Fleece Sweatshirt', price:149, img:'../assets/f21d.jpg', cat:'top', tone:'light', moods:['cute'], occs:['everyday'], styles:['sporty'], url:'https://www.forever21.com/products/01409735', why:'Off-shoulder fleece — the cosy weekend piece.'},
+  {id:'f21e', brand:'FOREVER 21', name:'Faux-Suede Belted Micro Shorts', price:299, img:'../assets/f21e.jpg', cat:'bottom', tone:'warm', moods:['sexy'], occs:['date','party'], styles:['romantic'], url:'https://www.forever21.com/collections/womens-shorts/products/01409573', why:'Suede with a belted waist — the going-out short.'},
+  {id:'f21f', brand:'FOREVER 21', name:'Rhinestone-Fringe Leather Shorts', price:259, img:'../assets/f21f.jpg', cat:'bottom', tone:'dark', moods:['sexy'], occs:['party'], styles:['bold'], url:'https://www.forever21.com/collections/womens-shorts/products/01371141', why:'Rhinestone fringe on faux leather — maximum party.'},
+  /* ZARA — real products */
+  {id:'zara1', brand:'ZARA', name:'Soft Double-Breasted Jacket', price:429, img:'../assets/zara1.jpg', cat:'outerwear', tone:'light', moods:['elegant','minimal'], occs:['office','everyday'], styles:['classic'], url:'https://www.zara.cn/cn/en/soft-double-breasted-jacket-p06318329.html', why:'Soft tailoring, double-breasted — the layer that pulls it together.'},
+  {id:'zara2', brand:'ZARA', name:'High-Neck Belted Trench Coat', price:649, img:'../assets/zara2.jpg', cat:'outerwear', tone:'warm', moods:['elegant'], occs:['office','everyday'], styles:['classic'], url:'https://www.zara.cn/cn/en/high-neck-belted-trench-coat-p08073252.html', why:'High neck, belted waist — the trench does the entering-room work.'},
+  {id:'zara3', brand:'ZARA', name:'Metallic-Effect Crinkle Dress', price:749, img:'../assets/zara3.jpg', cat:'dress', tone:'cool', moods:['sexy','elegant'], occs:['party','date'], styles:['bold'], url:'https://www.zara.cn/cn/en/long-metallic-effect-crinkle-dress-p04786718.html', why:'Long, metallic, crinkled — the whole evening in one piece.'},
+  {id:'zara4', brand:'ZARA', name:'ZW Collection Hooded Parka', price:649, img:'../assets/zara4.jpg', cat:'outerwear', tone:'dark', moods:['minimal','cute'], occs:['everyday'], styles:['casual'], url:'https://www.zara.cn/cn/en/zw-collection-hooded-pocket-parka-p06539240.html', why:'ZW utility parka — the everyday layer with pockets for everything.'},
+  {id:'zara5', brand:'ZARA', name:'Split Suede Heeled Ankle Boots', price:649, img:'../assets/zara5.jpg', cat:'shoes', tone:'warm', moods:['elegant','sexy'], occs:['date','office','party'], styles:['classic'], url:'https://www.zara.cn/cn/en/split-suede-heeled-anble-boot-p12106810.html', why:'Split suede and a heel — boots that work from desk to dinner.'},
+  /* NIKE — real products */
+  {id:'nk1', brand:'NIKE', name:"Air Force 1 '07 · White", price:799, img:'../assets/nike.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.nike.com/w/air-force-1-shoes', why:'The white court icon — it finishes everything from poplin to denim.'},
+  {id:'nk2', brand:'NIKE', name:'Air Max SC · White', price:749, img:'../assets/airmax.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty'], url:'https://www.nike.com/w/air-max-shoes', why:'Visible Air cushioning — a lighter, sportier step for daytime looks.'},
+  {id:'nk3', brand:'NIKE', name:'Dunk Low · Panda', price:849, img:'../assets/nike-dunk-panda.png', cat:'shoes', tone:'dark', moods:['minimal','sexy'], occs:['everyday','party'], styles:['sporty','casual'], url:'https://www.nike.com/w/dunk-shoes', why:'Black-on-white Dunks — the streetwear anchor of any casual look.'},
+  {id:'nk4', brand:'NIKE', name:'Dunk Low · Championship Red', price:849, img:'../assets/nike-dunk-red.jpg', cat:'shoes', tone:'warm', moods:['cute','sexy'], occs:['party','everyday'], styles:['sporty'], url:'https://www.nike.com/w/dunk-shoes', why:'A red pop at the feet — the only accent a neutral look needs.'},
+  {id:'nk5', brand:'NIKE', name:"Blazer Mid '77 · White", price:899, img:'../assets/blazer.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['everyday','date'], styles:['sporty','casual'], url:'https://www.nike.com/w/blazer-shoes', why:'A high-top with vintage proportions — adds structure to soft pieces.'},
+  /* ADIDAS — real products */
+  {id:'ad1', brand:'ADIDAS', name:'Samba OG · White', price:699, img:'../assets/adidas.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'The terrace classic — gum sole, three stripes, forever.'},
+  {id:'ad2', brand:'ADIDAS', name:'Samba OG · Taupe', price:749, img:'../assets/adidas-taupe.jpg', cat:'shoes', tone:'warm', moods:['cute','elegant'], occs:['everyday','date'], styles:['casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'Taupe suede warms up denim and grey tailoring alike.'},
+  {id:'ad3', brand:'ADIDAS', name:'Gazelle · Cream & Green', price:799, img:'../assets/gazelle.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['everyday','date'], styles:['casual'], url:'https://www.adidas.com/us/gazelle-shoes', why:'Cream suede with green stripes — a softer, fresher classic.'},
+  {id:'ad4', brand:'ADIDAS', name:'Leather Sneakers · Brown', price:899, img:'../assets/adidas-brown.jpg', cat:'shoes', tone:'warm', moods:['elegant','sexy'], occs:['date','office'], styles:['classic'], url:'https://www.adidas.com/us/samba-shoes', why:'Brown leather with cream stripes — warm, grown-up, versatile.'},
+  {id:'ad5', brand:'ADIDAS', name:'Samba OG · Cream Pair', price:699, img:'../assets/adidas-cream.jpg', cat:'shoes', tone:'light', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'The pair view of a forever classic — easy, worn-in, universal.'},
+  /* 73HOURS — real products */
+  {id:'sh1', brand:'73HOURS', name:'Black Kitten-Heel Mule', price:890, img:'../assets/73h-mule.jpg', cat:'shoes', tone:'dark', moods:['elegant','sexy'], occs:['date','party','office'], styles:['classic'], url:'http://www.73hours.com.cn/', why:'A beaded kitten mule — the 73Hours take on evening ease.'},
+  {id:'sh2', brand:'73HOURS', name:'White Strappy Sandals', price:990, img:'../assets/73h-white.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['date','party'], styles:['romantic'], url:'http://www.73hours.com.cn/', why:'White strappy heels — light, leg-lengthening, occasion-proof.'},
+  {id:'sh3', brand:'73HOURS', name:'Cream Bow Kitten Sandals', price:890, img:'../assets/73h-bow.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['date'], styles:['romantic'], url:'http://www.73hours.com.cn/', why:'Bow-tied kitten heels — softness you can walk in for hours.'},
+  {id:'sh4', brand:'73HOURS', name:'Pointed-Toe Pumps', price:1190, img:'../assets/73h-pumps.jpg', cat:'shoes', tone:'dark', moods:['sexy','elegant'], occs:['party','date'], styles:['classic'], url:'http://www.73hours.com.cn/', why:'A black stiletto with red-lip energy — the party full stop.'},
+  {id:'sh5', brand:'73HOURS', name:'Lace Kitten Heel · Nude', price:890, img:'../assets/73h-lace.jpg', cat:'shoes', tone:'cool', moods:['elegant','minimal'], occs:['office','date'], styles:['classic'], url:'http://www.73hours.com.cn/', why:'Pointed toes in muted tones — the office-to-dinner workhorse.'},
+  /* JW PEI — live catalogue data */
+  {id:'jp1', brand:'JW PEI', name:'Hana Medium Tote · Claret', price:1019, img:'../assets/jwp1.jpg', cat:'bag', tone:'warm', moods:['cute','elegant'], occs:['office','date'], styles:['minimal'], url:'https://www.jwpei.com/products/hana-medium-tote-bag-claret', why:'Claret grained leather with gold feet — a quiet statement for work and after.'},
+  {id:'jp2', brand:'JW PEI', name:'Noor Top Handle · Elephant Grey', price:719, img:'../assets/jwpei2.jpg', cat:'bag', tone:'cool', moods:['minimal','sexy'], occs:['everyday','office'], styles:['minimal'], url:'https://www.jwpei.com/products/noor-top-handle-bag-elephant-gray', why:'Sculpted grey top handle — the quiet one that sharpens neutrals.'},
+  {id:'jp3', brand:'JW PEI', name:'Hana Mini Tote · Navy', price:719, img:'../assets/jwp3.jpg', cat:'bag', tone:'cool', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://www.jwpei.com/products/hana-mini-tote-bag-navy-blue', why:'A neat navy mini — hands-free structure for every day.'},
+  {id:'jp4', brand:'JW PEI', name:'Cleo Box Bag · Black Croc', price:789, img:'../assets/jwp4.jpg', cat:'bag', tone:'dark', moods:['elegant','sexy'], occs:['date','party'], styles:['classic'], url:'https://www.jwpei.com/products/cleo-box-shape-top-handle-bag-black-croc', why:'Black croc-emboss box bag — the evening anchor of the edit.'},
+  {id:'jp5', brand:'JW PEI', name:'Hana Medium Tote · Navy', price:1019, img:'../assets/jwp5.jpg', cat:'bag', tone:'cool', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://www.jwpei.com/products/hana-medium-tote-bag-navy-blue', why:'The navy Hana — soft structure for errand days and brunch.'},
+  /* SONGMONT — real products */
+  {id:'sg1', brand:'SONGMONT', name:'Woven Leather Tote', price:2290, img:'../assets/songmont-tote.jpg', cat:'bag', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['classic'], url:'https://songmontofficial.com/collections/all', why:'Hand-woven leather with a beaded tassel — craft you can carry.'},
+  {id:'sg2', brand:'SONGMONT', name:'Luna Crescent Bag · Cream', price:2390, img:'../assets/songmont-luna.jpg', cat:'bag', tone:'light', moods:['cute','elegant'], occs:['date','party'], styles:['romantic'], url:'https://songmontofficial.com/collections/all', why:'The signature crescent — four ways to wear, endless charm.'},
+  {id:'sg3', brand:'SONGMONT', name:'Luna Crescent Bag · Tan', price:2390, img:'../assets/songmont-tan.jpg', cat:'bag', tone:'warm', moods:['elegant','sexy'], occs:['date','party'], styles:['classic'], url:'https://songmontofficial.com/collections/all', why:'Tan full-grain leather — the warm take on the crescent.'},
+  {id:'sg4', brand:'SONGMONT', name:'Buckle Handbag · Black', price:1990, img:'../assets/songmont-black.jpg', cat:'bag', tone:'dark', moods:['minimal','sexy'], occs:['office','party'], styles:['minimal'], url:'https://songmontofficial.com/collections/all', why:'Black leather, gold buckles — structure with an edge.'},
+  {id:'sg5', brand:'SONGMONT', name:'Drawstring Bucket Bag · Burgundy', price:1690, img:'../assets/songmont-burgundy.jpg', cat:'bag', tone:'warm', moods:['cute','sexy'], occs:['date'], styles:['romantic'], url:'https://songmontofficial.com/collections/all', why:'Burgundy drawstring — a rich jewel tone for evenings.'},
+  /* DEMELLIER — real products */
+  {id:'dm1', brand:'DEMELLIER', name:'The Small Hudson · Dark Green', price:3890, img:'../assets/demellier1.jpg', cat:'bag', tone:'dark', moods:['elegant','minimal'], occs:['office','everyday'], styles:['classic'], url:'https://demellierlondon.com/products/the-small-hudson-dark-green-small-grain', why:'Dark green small-grain leather — refined, compact, London-made.'},
+  {id:'dm2', brand:'DEMELLIER', name:'The Brooklyn · Warm Brown', price:5690, img:'../assets/demellier2.jpg', cat:'bag', tone:'warm', moods:['elegant'], occs:['office','date'], styles:['classic'], url:'https://demellierlondon.com/products/the-brooklyn-warm-brown-small-grain', why:'Warm brown grain — quiet luxury with real presence.'},
+  {id:'dm3', brand:'DEMELLIER', name:'The Midi Stockholm · Midnight', price:4290, img:'../assets/demellier3.jpg', cat:'bag', tone:'dark', moods:['minimal','elegant'], occs:['office','party'], styles:['minimal'], url:'https://demellierlondon.com/products/the-midi-stockholm-midnight-blue-fine-grain', why:'Midnight fine grain — the minimalist top handle.'},
+  {id:'dm4', brand:'DEMELLIER', name:'The Florence Crossbody · Bordeaux', price:4590, img:'../assets/demellier4.jpg', cat:'bag', tone:'warm', moods:['sexy','cute'], occs:['date','party'], styles:['romantic'], url:'https://demellierlondon.com/products/the-florence-crossbody-bordeaux-fine-grain', why:'Bordeaux crossbody — a jewel tone that carries the evening.'},
+  {id:'dm5', brand:'DEMELLIER', name:'The Large Siena Bucket · Hazel', price:4390, img:'../assets/demellier5.jpg', cat:'bag', tone:'warm', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://demellierlondon.com/products/the-large-siena-bucket-hazel-suede', why:'Hazel suede bucket — softness for every day.'},
+  /* SWAROVSKI — real products */
+  {id:'sw1', brand:'SWAROVSKI', name:'Classica Round Pendant', price:2000, img:'../assets/swa1.jpg', cat:'accessory', tone:'cool', moods:['minimal','elegant'], occs:['office','date','party'], styles:['classic'], url:'https://www.swarovski.com.cn/zh-CN/p-M5740343/Swarovski-Classica-%E9%93%BE%E5%9D%A0-%E5%9C%86%E5%BD%A2%E5%88%87%E5%89%B2-%E7%8E%AF%E5%BD%A2-%E7%99%BD%E8%89%B2-925-%E9%93%B6?variantID=5740343', why:'The Classica round pendant in 925 silver — precise, quiet sparkle.'},
+  {id:'sw2', brand:'SWAROVSKI', name:'Mesmera Necklace', price:3500, img:'../assets/swa2.jpg', cat:'accessory', tone:'cool', moods:['elegant','sexy'], occs:['date','party'], styles:['romantic'], url:'https://www.swarovski.com.cn/zh-CN/p-M5665242/Mesmera-%E9%A1%B9%E9%93%BE-%E6%B7%B7%E5%90%88%E5%88%87%E5%89%B2-%E7%99%BD%E8%89%B2-%E9%95%80%E9%93%91?variantID=5665242', why:'Mixed-cut crystal in rhodium — the evening centrepiece.'},
+  {id:'sw3', brand:'SWAROVSKI', name:'Gema Necklace · Blue', price:2700, img:'../assets/swa3.jpg', cat:'accessory', tone:'cool', moods:['cute','minimal'], occs:['everyday','date'], styles:['minimal'], url:'https://www.swarovski.com.cn/zh-CN/p-M5666007/Gema-%E9%A1%B9%E9%93%BE-%E6%B7%B7%E5%90%88%E5%88%87%E5%89%B2-%E8%93%9D%E8%89%B2-%E9%95%80%E9%93%91?variantID=5666007', why:'A blue mixed-cut pendant — soft, cool, modern.'},
+  {id:'sw4', brand:'SWAROVSKI', name:'Matrix Y-Necklace · White', price:4800, img:'../assets/swa4.jpg', cat:'accessory', tone:'cool', moods:['minimal','elegant'], occs:['office','party'], styles:['classic'], url:'https://www.swarovski.com.cn/zh-CN/p-M5692533/Matrix-Y%E5%BD%A2%E9%A1%B9%E9%93%BE-%E6%B7%B7%E5%90%88%E5%88%87%E5%89%B2-%E7%99%BD%E8%89%B2-%E9%95%80%E9%93%91?variantID=5692533', why:'The Y-line in white crystal — lengthens everything.'},
+  {id:'sw5', brand:'SWAROVSKI', name:'Symbolica Necklace · Stars', price:697, img:'../assets/swa5.jpg', cat:'accessory', tone:'warm', moods:['cute'], occs:['everyday','date'], styles:['romantic'], url:'https://www.swarovski.com.cn/zh-CN/p-M5511404/Symbolica-%E9%93%BE%E5%9D%A0-%E6%98%9F%E6%98%9F-%E7%99%BD%E8%89%B2-%E7%8E%AB%E7%91%B0%E9%87%91%E8%89%B2%E9%A5%B0%E9%9D%A2?variantID=5494352', why:'Rose-gold stars — the smallest possible mood lift.'},
+  {id:'sw6', brand:'SWAROVSKI', name:'Swan Earrings · White', price:840, img:'../assets/swa6.jpg', cat:'accessory', tone:'cool', moods:['cute','elegant'], occs:['date','office'], styles:['classic'], url:'https://www.swarovski.com.cn/zh-CN/p-M5647873/Swan-%E8%80%B3%E9%92%89-%E5%A4%A9%E9%B9%85-%E7%99%BD%E8%89%B2-%E9%95%80%E9%93%91?variantID=5647873', why:'The house swan in crystal — signature at the jaw.'},
+  {id:'sw7', brand:'SWAROVSKI', name:'Swan Bracelet · Pink', price:1300, img:'../assets/swa7.jpg', cat:'accessory', tone:'warm', moods:['cute','sexy'], occs:['date','party'], styles:['romantic'], url:'https://www.swarovski.com.cn/zh-CN/p-M5485876/Swan-%E6%89%8B%E9%93%BE-%E5%A4%A9%E9%B9%85-%E7%B2%89%E7%BA%A2%E8%89%B2-%E7%8E%AB%E7%91%B0%E9%87%91%E8%89%B2%E9%A5%B0%E9%9D%A2?variantID=5472271', why:'A pink rose-gold swan at the wrist — soft drama.'},
+  {id:'sw8', brand:'SWAROVSKI', name:'Una Angelic Bracelet', price:627, img:'../assets/swa8.jpg', cat:'accessory', tone:'cool', moods:['minimal','sexy'], occs:['everyday','party'], styles:['minimal'], url:'https://www.swarovski.com.cn/zh-CN/p-5567934/Una-Angelic-%E6%89%8B%E9%93%BE-%E6%B7%B7%E5%90%88%E5%BC%8F%E5%9C%86%E5%BD%A2%E5%88%87%E5%89%B2-%E7%99%BD%E8%89%B2-%E9%95%80%E9%93%91', why:'Mixed-cut Angels on a rhodium chain — understated shine.'},
+];;
+
+/* ---------- state ---------- */
+const state = {
+  view:'home', productId:'ur1', phase:'idle',
+  colorIdx:0, sizePDP:'M', sizeModal:null, modalSlot:null,
+  altIdx:{}, look:null, timers:[],
+  journeyStep:1, occasion:null, mood:null, budget:null, brandFilter:'any', slots:['bottom','shoes','bag','accessory'], budget:null, slots:['bottom','shoes','bag','accessory'], budget:null, slots:['bottom','shoes','bag','accessory'],
+  cart:0, tryonPhoto:null,
+  wishlist:[],
+};
+
+const $ = s => document.querySelector(s);
+const money = n => '¥' + n.toLocaleString('en-US');
+const byId = id => CATALOGUE.find(c=>c.id===id);
+const product = () => byId(state.productId);
+const BRAND_ORDER = ['URBAN REVIVO','ZARA','FOREVER 21','73HOURS','NIKE','ADIDAS','JW PEI','SONGMONT','DEMELLIER','SWAROVSKI'];
+
+function getSelf(){
+  const p=product(), c=(p.colors||[{name:p.colors?.[0]?.name||'As shown', img:p.img}])[state.colorIdx]||p.colors[0];
+  const name = p.colors && p.colors.length>1 ? (c.name+' '+p.name) : p.name;
+  return {id:p.id, anchor:true, brand:p.brand, name, price:p.price, ret:p.brand, cat:p.cat,
+          art:artForCat(p.cat), color:'#F6F5F0', img:c.img||p.img, tint:c.tint||null,
+          colorName:c.name, sizes:p.sizes||sizesFor(p.cat),
+          why:'This is the piece you selected — MatchBuy AI scores the whole edit against it.'};
+}
+function artForCat(cat){return {top:'shirt', outerwear:'coat', bottom:'wideleg', shoes:'sneaker', bag:'shoulder', accessory:'silver'}[cat]||'shirt';}
+const DEF_SIZES={top:['XS','S','M','L','XL'],outerwear:['XS','S','M','L','XL'],bottom:['36','38','40','42'],dress:['XS','S','M','L'],shoes:['36','37','38','39','40'],bag:['One size'],accessory:['One size']};
+function sizesFor(cat){return DEF_SIZES[cat]||['S','M','L'];}
+function occLabel(){const o=OCCASIONS.find(o=>o.id===state.occasion);return o?o.en:'';}
+function budgetEntry(){return BUDGETS.find(b=>b.id===state.budget)||null;}
+function budgetMaxNum(){const b=budgetEntry();return (b&&isFinite(b.max))?b.max:Infinity;}
+function budgetLabel(){const b=budgetEntry();return b?b.en:'No limit';}
+function moodLabel(){const m=MOODS.find(m=>m.id===state.mood);return m?m.en:'';}
+
+/* ---------- ✦ the matching algorithm ----------
+   Transparent scoring over the whole edit:
+   mood fit + occasion fit + colour-harmony + cross-house
+   diversity − price drift, then the best piece per slot. */
+const OCCASIONS=[{id:'everyday',en:'Everyday'},{id:'office',en:'Office'},{id:'date',en:'Date night'},{id:'party',en:'Party'}];
+const MOODS=[{id:'minimal',en:'Minimal'},{id:'cute',en:'Cute'},{id:'elegant',en:'Elegant'},{id:'sexy',en:'Sexy'}];
+const SLOT_META={bottom:{en:'Bottoms'},shoes:{en:'Shoes'},bag:{en:'Bag'},accessory:{en:'Jewelry'},top:{en:'Top'},outerwear:{en:'Outerwear'},dress:{en:'Dress'}};
+const BUDGETS=[{id:'b2000',en:'Under ¥2,000',min:0,max:2000},{id:'b3000',en:'¥2,000–3,000',min:2000,max:3000},{id:'b4000',en:'¥3,000–4,000',min:3000,max:4000},{id:'any',en:'No limit',min:0,max:Infinity}];
+const SLOTS_FOR={
+  top:['bottom','shoes','bag','accessory'],
+  outerwear:['top','bottom','shoes','accessory'],
+  bottom:['top','shoes','bag','accessory'],
+  shoes:['top','bottom','bag','accessory'],
+  bag:['top','bottom','shoes','accessory'],
+  accessory:['top','bottom','shoes','bag'],
+  dress:['shoes','bag','accessory'],
+};
+function toneScore(a,b){
+  const N={light:1,dark:1,warm:0,cool:0}; // neutrals pair with everything
+  if(N[a]&&N[b]) return 8;
+  if(a===b) return 12;
+  if((a==='warm'&&b==='cool')||(a==='cool'&&b==='warm')) return 4;
+  return 10;
+}
+function styleFamily(s){return {minimal:'quiet',classic:'quiet',elegant:'refined',sexy:'expressive',romantic:'expressive',cute:'playful',sporty:'sport',casual:'sport',bold:'expressive'}[s]||s;}
+function colourHarmony(a,b){
+  const neutral={light:1,dark:1}, base={light:0,dark:1,warm:2,cool:3};
+  if(neutral[a]&&neutral[b]) return 88;
+  if(a===b) return 82;
+  if((a==='warm'&&b==='cool')||(a==='cool'&&b==='warm')) return 55;
+  return 78;
+}
+function silBalance(a,b){
+  const soft=['flowy','oversized','relaxed'], structured=['cropped','fitted','structured','heeled'];
+  const fa=soft.includes(a)?'soft':(structured.includes(a)?'struct':'mid');
+  const fb=soft.includes(b)?'soft':(structured.includes(b)?'struct':'mid');
+  if(fa!==fb) return 96; // balance contrast
+  if(fa==='mid'&&fb==='mid') return 78;
+  return 72;
+}
+function scoreDimensions(a, c, slot){
+  const target = styleFamily(state.mood==='minimal'?'minimal':state.mood==='elegant'?'elegant':state.mood==='cute'?'romantic':state.mood==='sexy'?'expressive':'casual');
+  const cStyle = styleFamily(c.style || 'minimal');
+  let style = (cStyle===target) ? 96 : 74;
+  const colour = colourHarmony(a.colourFamily||'light', c.colourFamily||'light');
+  const silhouette = silBalance(a.silhouette||'fitted', c.silhouette||'relaxed');
+  let occasion = 60;
+  if(c.occs && c.occs.includes(state.occasion)) occasion = 96;
+  else if((c.occs||[]).some(o => (OCCASIONS.find(x=>x.id===state.occasion)||{adj:[]}).adj && false)) occasion = 75;
+  const bEntry = budgetEntry();
+  const bMax = (bEntry && isFinite(bEntry.max)) ? bEntry.max : Infinity;
+  let budget = isFinite(bMax) ? (c.price<=bMax ? Math.max(55, 100 - Math.round(35*(c.price/bMax))) : 35) : 85;
+  const dims = {style: Math.min(99,style+2), colour: Math.min(99,colour+2), silhouette: Math.min(99,silhouette+2), occasion: Math.min(99,occasion+2), budget: Math.min(99,budget)};
+  const total = Math.round(dims.style*0.30 + dims.colour*0.25 + dims.silhouette*0.20 + dims.occasion*0.15 + dims.budget*0.10);
+  return {...dims, total};
+}
+function matchOutfit(){
+  const self = getSelf();
+  const bEntry = budgetEntry();
+  const bMax = (bEntry && isFinite(bEntry.max)) ? bEntry.max : Infinity;
+  const needed = (SLOTS_FOR[self.cat] || []).filter(s => state.slots.includes(s));
+  const chosen = [];
+  const used = [self.brand];
+  let spent = self.price;
+  for (const slot of needed) {
+    let best = null, bestS = -1, bestDims = null;
+    for (const c of CATALOGUE) {
+      if (c.id === self.id || c.cat !== slot || chosen.includes(c)) continue;
+      if (state.brandFilter === 'same' && c.brand !== self.brand) continue;
+      const d = scoreDimensions(self, c);
+      let s = d.total;
+      if (!used.includes(c.brand)) s += 6;
+      if (isFinite(bMax) && spent + c.price > bMax) s -= 40;      // budget steering
+      s += (c.id.length % 5);
+      if (s > bestS) { bestS = s; best = c; }
+    }
+    if (!best) continue;
+    chosen.push(best); used.push(best.brand); spent += best.price;
+  }
+  state.lastSpend = spent;
+  const look = [{ slot: 'self', item: self, score: 100, dims: null }, ...chosen.map(c => ({ slot: c.cat, item: c, score: Math.min(99, Math.round(60 + 0.4 * scoreDimensions(self, c).total + 0)) }))];
+  state.look = look;
+  return look;
+}
+
+function matchReason(slot,item){
+  const occ=occLabel().toLowerCase(), mood=moodLabel().toLowerCase();
+  const T={
+    bottom:{minimal:'Grounds the look with clean, quiet volume.',cute:'Keeps the silhouette playful but put-together.',elegant:'Lengthens the line with tailored ease.',sexy:'Skims the body and lets the top do the talking.'},
+    shoes:{minimal:'Clean lines underfoot — nothing competing.',cute:'A softer step that keeps the mood light.',elegant:'Polished footwear that reads intentional.',sexy:'Adds the after-dark confidence from the ground up.'},
+    bag:{minimal:'Structured and quiet — carries without shouting.',cute:'A compact carry with a friendly curve.',elegant:'Top-handle polish for the finishing touch.',sexy:'Sleek against the body — hands stay free, look stays sharp.'},
+    top:{minimal:'The quiet base this look is built on.',cute:'Softens the palette with an easy knit.',elegant:'A fluid layer that drapes just right.',sexy:'Fitted close to the body for contrast.'},
+    accessory:{minimal:'One precise sparkle — nothing extra.',cute:'A playful charm at the neckline.',elegant:'Polished metal, worn like punctuation.',sexy:'Warm metal at the jaw — quiet confidence.'},
+    outerwear:{minimal:'The outer layer that pulls it together.',cute:'Rounds off the look with soft volume.',elegant:'The coat does the entering-room work.',sexy:'Thrown over the shoulders — undone on purpose.'},
+  };
+  const base=(T[slot]&&T[slot][mood])||'Completes the look for '+occ+'.';
+  return `${base} Scored for ${occ} · ${mood}.`;
+}
+
+/* ---------- journey / toast ---------- */
+const JOURNEY=[['i','Product'],['ii','Brief'],['iii','Analysis'],['iv','The look'],['v','Details'],['vi','Buy now']];
+function setJourney(n){state.journeyStep=n;$('#journey').innerHTML=JOURNEY.map((j,i)=>`<span class="j-step ${i+1<=n?'on':''}"><span class="n">${j[0]}</span><span class="t">${j[1]}</span></span>${i<JOURNEY.length-1?'<span class="j-sep"></span>':''}`).join('');}
+let toastTimer=null;
+function toast(msg){$('#toastMsg').textContent=msg;const t=$('#toast');t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),2600);}
+
+/* ---------- router ---------- */
+function showHome(){state.view='home';closeDrawer();closeModal();$('#pdp').classList.remove('on');$('#home').classList.add('on');window.scrollTo({top:0});}
+function openProduct(id,autoMatch){
+  state.productId=id;state.colorIdx=0;state.sizePDP='M';
+  state.phase='idle';state.occasion=null;state.mood=null;state.budget=null;state.slots=(SLOTS_FOR[product().cat]||[]).slice();state.altIdx={};state.picked={};state.look=null;
+  renderPDP();
+  $('#home').classList.remove('on');$('#pdp').classList.add('on');state.view='pdp';
+  setJourney(1);window.scrollTo({top:0});
+  if(autoMatch) setTimeout(openDrawer,350);
+}
+
+/* ---------- home ---------- */
+function renderHome(){
+  $('#brandSections').innerHTML = BRAND_ORDER.map(b=>{
+    const items=CATALOGUE.filter(c=>c.brand===b);
+    if(!items.length) return '';
+    return `<section class="bsection" id="b-${b.replace(/[^A-Z]/g,'')}">
+      <div class="bhead"><h2>${b}</h2><span class="ml">${items.length} pieces in the edit · open a product detail page</span></div>
+      <div class="brow">${items.map(c=>{
+        const w=state.wishlist.some(x=>x.productId===c.id);
+        const host=(BRANDS[c.brand].url||'').replace(/https:\/\/(www\.)?/,'').replace(/\/$/,'');
+        return `<div class="cat-card" data-action="open-product" data-id="${c.id}" role="button" tabindex="0">
+          <div class="cat-photo"><div class="ph">${media(c,false)}</div>
+            <button class="wish ${w?'on':''}" data-action="wish" data-id="${c.id}" title="Wishlist">${w?'♥':'♡'}</button>
+            <span class="match-cta">✨ Match this piece</span></div>
+          <div class="cat-brand">${c.brand}</div><div class="cat-name">${c.name}</div>
+          <div class="cat-price">${money(c.price)}</div>
+          <div class="cat-url">${host} ↗</div></div>`;}).join('')}
+    </div></section>`;
+  }).join('');
+  $('#houseRow').innerHTML=Object.entries(BRANDS).map(([b,cfg])=>cfg.url?`<a class="house" href="${cfg.url}" target="_blank" rel="noopener">${b} <i>↗</i></a>`:`<span class="house">${b}</span>`).join('');
+  renderWishCount();
+}
+
+/* ---------- PDP ---------- */
+function renderPDP(){
+  const p=product(), self=getSelf();
+  $('#heroArt').innerHTML=`
+    <span class="hero-badge">✨ MatchBuy AI</span>
+    <button class="hero-fav ${isWished()?'on':''}" data-action="wish" data-id="${p.id}" title="Wishlist">${isWished()?'♥':'♡'}</button>
+    <div class="ph-frame">${media(self,false)}</div>`;
+  const sizes=(p.sizes||sizesFor(p.cat));
+  const showSizes=!((p.cat==='accessory'||p.cat==='bag')||(sizes.length===1&&sizes[0]==='One size'));
+  if(!showSizes) state.sizePDP=sizes[0]||'One size';
+  const sizesHTML=showSizes?`
+    <div class="opt-label">Size <span class="val">Size guide</span></div>
+    <div class="sizes">${sizes.map(s=>`<button class="size-chip ${s===state.sizePDP?'sel':''}" data-action="size" data-s="${s}">${s}</button>`).join('')}</div>`:'';
+  const destination=retailerDestination(p);
+  const st=Number.isFinite(p.rating)?Math.round(p.rating):null;
+  $('#pdpInfo').innerHTML=`
+    <div class="brand-row">
+      <span class="ml ink">${p.brand}</span>
+      ${BRANDS[p.brand].url?`<a class="brand-visit" href="${BRANDS[p.brand].url}" target="_blank" rel="noopener">Visit ${p.brand.toLowerCase()} ↗</a>`:''}
+      <span class="ml">In the StyleHub edit</span>
+    </div>
+    <h1>${p.name}</h1>
+    <div class="ml">${st ? '★'.repeat(st)+' '+p.rating+' · retailer-supplied rating' : 'catalog reference · current price and stock not verified'}</div>
+    <div class="price-line"><span class="price">${money(p.price)}</span></div>
+    <div class="tax-note">Sold by ${p.brand} · ${destination.detail} StyleHub never handles payment</div>
+    ${p.colors&&p.colors.length>1?`
+    <div class="opt-label">Colour <span class="val" id="colorName">${p.colors[state.colorIdx].name}</span></div>
+    <div class="swatches">${p.colors.map((c,i)=>`<button class="swatch ${i===state.colorIdx?'sel':''}" data-action="color" data-i="${i}" title="${c.name}"><img src="${c.img}" alt="${c.name}" onerror="this.remove()"></button>`).join('')}</div>`:
+    `<div class="opt-label">Colour <span class="val">${(p.colors&&p.colors[0].name)||'As shown'}</span></div>`}
+    ${sizesHTML}
+    <div class="cta-stack">
+      <div style="position:relative">
+        <button class="btn btn-primary" data-action="open-match" id="matchBtn">
+          <span class="b-title">✨ Match My Outfit</span>
+          <span class="b-sub">AI complete-the-look · FN-01</span>
+        </button>
+        <div class="mb-tip" id="mbTip" style="display:${state.phase==='idle'?'block':'none'}">The innovation — try it</div>
+        <span class="pulse-dot" id="mbPulse" style="display:${state.phase==='idle'?'block':'none'}"></span>
+      </div>
+      <a class="btn btn-primary" href="${p.url}" target="_blank" rel="noopener"><span class="b-title">🛍 ${destination.label} ↗</span><span class="b-sub">retailer confirms current price &amp; stock</span></a>
+      <button class="btn btn-ghost" data-action="open-tryon"><span class="b-title">✨ AI Try-On — see it on you · FN-07</span></button>
+      <div class="mb-note">✨ powered by <b>MatchBuy AI</b> — “I like this item. What should I buy to complete the outfit?”</div>
+    </div>
+    <p class="desc">${p.desc||'From the houses of the StyleHub edit — matched by MatchBuy AI.'}</p>
+    <div class="trust-row">
+      <span>Direct to ${p.brand.toLowerCase()}</span><span>↩ Returns &amp; shipping per the house’s own policy</span><span>🔒 Payment on their site</span>
+      ${BRANDS[p.brand].url?`<a class="brand-visit" href="${BRANDS[p.brand].url}" target="_blank" rel="noopener">Visit ${p.brand.toLowerCase()} ↗</a>`:''}
+    </div>`;
+}
+function switchColor(i){
+  state.colorIdx=i;state.picked={};
+  renderPDP();
+  if(state.phase==='done') renderResults();
+  toast(`Colour: ${product().colors[i].name}`);
+}
+function isWished(){return state.wishlist.some(w=>w.productId===state.productId);}
+function toggleWish(pid){
+  const idx=state.wishlist.findIndex(w=>w.productId===pid);
+  const p=byId(pid);
+  if(idx>=0){state.wishlist.splice(idx,1);toast('Removed from wishlist');}
+  else{
+    const c=p.colors?(p.colors[Math.min(state.colorIdx,p.colors.length-1)]):null;
+    state.wishlist.push({productId:pid,brand:p.brand,name:(p.colors&&p.colors.length>1)?(c.name+' '+p.name):p.name,price:p.price,img:(c&&c.img)||p.img,art:p.cat==='top'?'shirt':artForCat(p.cat),color:c?c.hex:'#F6F5F0'});
+    toast(`Saved to wishlist — ${p.name}`);
+  }
+  saveWish();renderHome();renderPDP();renderWishPanel();renderWishCount();
+}
+function renderWishCount(){
+  ['wishCount','wishCountPDP'].forEach(id=>{
+    const b=document.getElementById(id);if(!b)return;
+    b.textContent=state.wishlist.length;
+    b.classList.toggle('hidden',state.wishlist.length===0);
+  });
+}
+
+/* ---------- wishlist ---------- */
+function saveWish(){try{localStorage.setItem('mb-wishlist',JSON.stringify(state.wishlist));}catch(e){}}
+function loadWish(){try{const w=JSON.parse(localStorage.getItem('mb-wishlist')||'[]');if(Array.isArray(w))state.wishlist=w.filter(x=>CATALOGUE.some(c=>c.id===x.productId));}catch(e){}}
+function openWl(){renderWishPanel();$('#wlScrim').classList.add('on');$('#wishPanel').classList.add('on');document.body.classList.add('locked');}
+function closeWl(){$('#wlScrim').classList.remove('on');$('#wishPanel').classList.remove('on');if(state.view!=='pdp')document.body.classList.remove('locked');}
+function renderWishPanel(){
+  $('#wlCountLbl').textContent=state.wishlist.length+(state.wishlist.length===1?' piece saved':' pieces saved');
+  $('#wlBody').innerHTML = state.wishlist.length? state.wishlist.map(w=>`
+    <div class="wl-item">
+      <div class="wl-thumb" data-action="wl-open" data-id="${w.productId}">${media(w,true)}</div>
+      <div><div class="wl-brand">${w.brand}</div><div class="wl-name">${w.name}</div><div class="wl-price">${money(w.price)}</div>
+        <div class="wl-actions"><button class="wl-btn dark" data-action="wl-open" data-id="${w.productId}">View & match</button>
+        <button class="wl-btn rm" data-action="wl-remove" data-id="${w.productId}">Remove</button></div></div>
+    </div>`).join('')
+    : `<div class="wp-empty"><div class="big">Your wishlist is empty.</div><span class="ml">Tap ♡ on any piece in the edit to save it here</span></div>`;
+}
+
+/* ---------- drawer ---------- */
+function clearTimers(){state.timers.forEach(clearTimeout);state.timers=[];}
+function openDrawer(){
+  $('#drawer').classList.add('on');$('#drawerScrim').classList.add('on');document.body.classList.add('locked');hideTip();
+  if(state.occasion&&state.mood) startScan(); else renderBrief();
+}
+function closeDrawer(){
+  clearTimers();$('#drawer').classList.remove('on');$('#drawerScrim').classList.remove('on');document.body.classList.remove('locked');
+  if(state.phase==='scanning')state.phase='idle';
+}
+function hideTip(){const t=$('#mbTip'),p=$('#mbPulse');if(t)t.style.display='none';if(p)p.style.display='none';}
+function renderBrief(){
+  state.phase='brief';setJourney(2);$('#drFoot').style.display='none';
+  const self=getSelf();
+  $('#drBody').innerHTML=`
+    <div class="brief">
+      <span class="ml">Screen ii — style brief</span>
+      <h3>Two questions, then I build <em>the look.</em></h3>
+      <div class="sub">Styling the ${self.name.toLowerCase()} · ${money(self.price)} — every piece in the edit gets scored against your answers.</div>
+      <div class="q-block"><div class="q-head"><span class="q">What’s the occasion?</span></div>
+        <div class="chips">${OCCASIONS.map(o=>`<button class="chip ${state.occasion===o.id?'sel':''}" data-action="pick-occ" data-id="${o.id}">${o.en}</button>`).join('')}</div></div>
+      <div class="q-block"><div class="q-head"><span class="q">How do you want to feel?</span></div>
+        <div class="chips">${MOODS.map(m=>`<button class="chip ${state.mood===m.id?'sel':''}" data-action="pick-mood" data-id="${m.id}">${m.en}</button>`).join('')}</div></div>
+      <div class="q-block"><div class="q-head"><span class="q">Which pieces should I complete?</span></div>
+        <div class="chips">${(SLOTS_FOR[getSelf().cat]||[]).filter(s=>s!=='self').map(s=>`<button class="chip ${state.slots.includes(s)?'sel':''}" data-action="pick-slot" data-id="${s}">${SLOT_META[s].en}</button>`).join('')}
+        <button class="chip" data-action="all-slots" style="${state.slots.length===4?'display:none':''}">Select all</button></div>
+      <div class="q-block"><div class="q-head"><span class="q">What’s your budget?</span></div>
+        <div class="chips">${BUDGETS.map(b=>`<button class="chip ${state.budget===b.id?'sel':''}" data-action="pick-budget" data-id="${b.id}">${b.en}</button>`).join('')}
+        <div style="font-size:11px;color:var(--gray2);margin-top:8px">FN-05 · Budget matching — pieces that break your range get scored down.</div></div>
+      <button class="btn btn-primary" data-action="build-look" id="buildBtn" style="${state.occasion&&state.mood&&state.budget&&state.slots.length?'':'opacity:.35;pointer-events:none'}">
+        <span class="b-title">✨ Build my look</span><span class="b-sub">score the whole edit · FN-01</span></button>
+      <div class="brief-hint">${state.occasion&&state.mood&&state.budget&&state.slots.length?`Scoring ${CATALOGUE.length-1} pieces across ${Object.keys(BRANDS).length} houses for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:'pick one from each — the algorithm will do the rest'}</div>
+    </div>`;
+}
+function pickBrief(kind,id){if(kind==='budget')state.budget=id;else if(kind==='occ')state.occasion=id;else state.mood=id;state.picked={};state.altIdx={};state.look=null;renderBrief();}
+
+/* ---------- scan ---------- */
+function startScan(){
+  clearTimers();state.phase='scanning';state.look=matchOutfit();
+  setJourney(3);$('#drFoot').style.display='none';
+  const self=getSelf();
+  const steps=[
+    ['Reading colour…','0.2s'],['Reading silhouette…','0.3s'],['Reading material…','0.4s'],
+    ['Reading style & occasion…','0.5s'],
+    [`Scoring ${CATALOGUE.length-1} pieces across houses…`,'0.8s'],
+  ];
+  $('#drBody').innerHTML=`
+    <div class="scan-context"><span class="ml">Screen iii — AI analysis</span><b>${self.name} · for ${occLabel()} · ${moodLabel()}</b></div>
+    <div class="scan-stage"><div class="scanline"></div>
+      ${(product().callouts||[]).map((c,i)=>`<span class="det-dot ${c.side==='left'?'right':''}" id="dot${i}" style="left:${c.x}%;top:${c.y}%"><span class="lbl">${c.l}</span></span>`).join('')}
+      <div class="ph-frame">${media(self,true)}</div></div>
+    <div class="scan-steps"><div class="s-title">MatchBuy matching algorithm · FN-02 + FN-04</div>
+      ${steps.map((s,i)=>`<div class="step" id="step${i}"><span class="ico">✓</span>${s[0]}<span class="stat">${s[1]}</span></div>`).join('')}</div>
+    <div style="text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-top:14px">Every compatible piece in the edit gets a score — highest wins each slot</div>`;
+  const T=520;
+  steps.forEach((_,i)=>{
+    state.timers.push(setTimeout(()=>{const st=$('#step'+i);if(st)st.classList.add('on');},200+i*T));
+    state.timers.push(setTimeout(()=>{const st=$('#step'+i);if(st){st.classList.remove('on');st.classList.add('done');}const d=$('#dot'+i);if(d)d.classList.add('on');},480+i*T));
+  });
+  state.timers.push(setTimeout(renderResults,480+steps.length*T+420));
+}
+
+/* ---------- results ---------- */
+function renderResults(){
+  state.phase='done';setJourney(4);
+  const self=getSelf(),a=product().analysis||{colour:{label:self.colorName||'As shown',palette:[['Base','#F6F5F0'],['Grey','#D9D9D4'],['Silver','#B9BEC6'],['Slate','#5A6472'],['Ink','#1C1E22']]},silhouette:'House cut',material:'House fabric'};
+  const avg=Math.round(state.look.slice(1).reduce((s,x)=>s+(x.score||90),0)/Math.max(1,state.look.length-1));
+  const analysisHTML=`
+    <div class="an-card reveal" style="animation-delay:.05s">
+      <div class="an-head"><span class="t">Match analysis · five catalog attributes</span><span class="meta">tag-based scoring · instant</span></div>
+      <div class="an-rows">
+        <div class="attr"><span class="k">Colour</span><span class="v n">${self.colorName||a.colour.label}</span><span class="you">your pick</span><span class="palette">${a.colour.palette.map(x=>`<span class="pal" style="background:${x[1]}"><span class="tip">${x[0]}</span></span>`).join('')}</span></div>
+        <div class="attr"><span class="k">Silhouette</span><span class="v n">${a.silhouette}</span></div>
+        <div class="attr"><span class="k">Material</span><span class="v n">${a.material}</span></div>
+        <div class="attr"><span class="k">Style</span><span class="v n">${moodLabel()}</span><span class="you">you</span></div>
+        <div class="attr"><span class="k">Occasion</span><span class="v n">${occLabel()}</span><span class="you">you</span></div>
+      </div>
+      <div class="look-metrics">
+        <span class="lm">Palette · <b>Neutral</b></span><span class="lm">Silhouette · <b>Balanced</b></span><span class="lm">Mood · <b>${moodLabel()}</b></span>
+      </div>
+    </div>`;
+  const boardHTML=`
+    <div class="board reveal" style="animation-delay:.04s">
+      <div class="board-head"><span class="t">The look, assembled</span><span class="ml">for ${occLabel()} · ${moodLabel()}</span></div>
+      <div class="board-grid">
+        <div class="b-col">${[0,1,2].map(i=>{const s=state.look[i];if(!s)return'';return `<div class="b-tile ${i===0?'b-shirt':'b-mid'}"><div class="ph-wrap">${media(s.item,false)}</div><span class="b-cap"><b>${String(i+1).padStart(2,'0')}</b> ${s.item.name}</span></div>`;}).join('')}</div>
+        <div class="b-col">${[3,4].map(i=>{const s=state.look[i];if(!s)return'';return `<div class="b-tile ${i===3?'b-bag':'b-acc'}"><div class="ph-wrap">${media(s.item,true)}</div><span class="b-cap"><b>${String(i+1).padStart(2,'0')}</b> ${s.item.optional?'optional':(s.item.cat==='bag'?'bag':(s.item.cat==='shoes'?'shoes':moodLabel().toLowerCase()))}</span></div>`;}).join('')}</div>
+      </div>
+      <span class="figcap">Fig. — the complete look: one selected piece + ${state.look.length-1} matched pieces, scored across the houses.</span>
+    </div>`;
+  const cardsHTML=state.look.map((e,si)=>{
+    const slot=e.slot,item=e.item,isAnchor=!!item.anchor;
+    return `
+    <div class="item-card ${isAnchor?'anchor-card':''} reveal" style="animation-delay:${.08+si*.07}s" id="card-${slot}" data-action="${isAnchor?'goto-page':'open-item'}" data-slot="${slot}" role="button" tabindex="0">
+      <div class="ic-art">${media(item,true)}</div>
+      <div class="ic-main">
+        <div class="ic-toprow">
+          <span class="ic-no">${isAnchor?'Selected':'No. '+String(si).padStart(2,'0')}</span>
+          <span class="ic-role">${SLOT_ROLE[slot]||''}${(!isAnchor&&(slot==='shoes'||slot==='accessory'))?` · for ${slot==='shoes'?occLabel().toLowerCase():moodLabel().toLowerCase()}`:''}</span>
+          <span class="ic-price">${money(item.price)}</span>
+        </div>
+        <div class="ic-name">${item.name}</div>
+        <div class="ic-why">${matchReason(slot,item)}</div>
+        <div class="ic-meta"><span class="ret-chip">${item.brand}</span>${isAnchor?'<span class="your-pill">Your item</span>':`<span class="match-pill" style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;border:1px solid var(--rule);padding:4px 9px;border-radius:99px;color:var(--ink2)">Matched · ${e.score}</span>`}</div>
+        <div class="ic-actions">
+          ${isAnchor?`<button class="view-btn ghost" data-action="goto-page">View on page ↑</button>`:`<button class="view-btn" data-action="open-item" data-slot="${slot}">View Product</button>`}
+          ${(slot==='bottom'||slot==='bag')?`<button class="shuffle" data-action="shuffle" data-slot="${slot}" title="Re-score this slot">⟳</button>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  const total=lookTotal(),budget=Math.max(500,Math.ceil((total+1)/100)*100);
+  $('#drBody').innerHTML=`
+    <div class="ready-head reveal" style="animation-delay:.02s">
+      <h3>Your outfit is <em>ready.</em></h3>
+      <span class="ml">For ${occLabel()} · ${moodLabel()}</span>
+    </div>
+    <div class="stats-row reveal" style="animation-delay:.04s">
+      <div class="stat"><div class="v">1 → ${state.look.length-1}</div><div class="k">Item to outfit</div></div>
+      <div class="stat"><div class="v">${money(total)}</div><div class="k">Complete outfit</div></div>
+      <div class="stat"><div class="v">${Math.min(97,avg)}%</div><div class="k">Match index</div></div>
+    </div>
+    ${boardHTML}${analysisHTML}${cardsHTML}
+    <div class="reveal" style="animation-delay:.45s;display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px">
+      ${['any','same','budget'].map(f=>`<button class="lm ${state.brandFilter===f?'lm-on':''}" data-action="brand-filter" data-f="${f}" style="cursor:pointer;${state.brandFilter===f?'border-color:var(--blush-d);color:var(--blush-d)':''}">${f==='any'?'ANY BRAND':f==='same'?'SAME BRAND':'UNDER BUDGET'}</button>`).join('')}
+    </div>
+    <div class="budget-line reveal" style="animation-delay:.5s"><span>FN-05 · Budget matching — “${budgetLabel()}”</span><span class="ok">${total<=budgetMaxNum()?`total ${money(total)} ✓`:`over by ${money(total-budgetMaxNum())} — try ⟳`}</span></div>
+    <div class="restyle-link reveal"><a data-action="restyle">↺ Change occasion or mood</a></div>`;
+  renderFoot();
+}
+const SLOT_ROLE={self:'',top:'Top',bottom:'Bottoms',shoes:'Footwear',bag:'Bag',accessory:'Jewelry'};
+function renderFoot(){
+  $('#drFoot').style.display='block';
+  $('#drFoot').innerHTML=`
+    <div class="foot-row">
+      <div class="foot-total"><div class="t-l">Complete look · ${state.look.length-1} matched pieces</div>
+        <div class="t-v">${money(lookTotal())}</div>
+        <div class="t-s">Indicative prices · each piece bought on its house’s site</div></div>
+      <div class="foot-meta">${storesCount()} houses · match index ${Math.min(97,Math.round(state.look.slice(1).reduce((s,x)=>s+(x.score||90),0)/Math.max(1,state.look.length-1)))}%<br>${occLabel()} · ${moodLabel()}</div>
+    </div>
+    <div class="foot-note" style="margin-top:12px">🛍 Buy Now opens each piece on the house’s real website — StyleHub never handles payment</div>`;
+  $('#drFoot').querySelector('.foot-note').style.border='none';
+  $('#drFoot').querySelector('.foot-note').style.fontSize='10.5px';
+}
+function lookTotal(){return state.look.filter(x=>!x.item.optional).reduce((s,x)=>s+x.item.price,0);}
+function storesCount(){return new Set(state.look.map(x=>x.item.brand)).size;}
+
+/* ---------- shuffle / page ---------- */
+function shuffleSlot(slot){
+  const alts=CATALOGUE.filter(c=>c.cat===slot&&c.id!==state.look.find(x=>x.slot===slot).item.id);
+  if(!alts.length)return;
+  const cur=state.look.find(x=>x.slot===slot).item;
+  const i=alts.indexOf(byId(cur.id));
+  const next=alts[(i+1+alts.length)%alts.length];
+  const e=state.look.find(x=>x.slot===slot);e.item=next;
+  const card=$('#card-'+slot);if(card)card.classList.add('shuffling');
+  setTimeout(()=>renderResults(),240);
+}
+function goToPage(){closeDrawer();window.scrollTo({top:0});const h=$('#heroArt');h.classList.remove('flash');void h.offsetWidth;h.classList.add('flash');}
+
+/* ---------- item details ---------- */
+function openItemModal(slot){
+  const e=state.look.find(x=>x.slot===slot);const item=e.item;const destination=retailerDestination(item);
+  state.modalSlot=slot;setJourney(5);
+  $('#modal').innerHTML=`
+    <button class="mo-close" data-action="close-modal">✕</button>
+    <div class="modal-grid">
+      <div class="mo-left"><div class="ph-frame">${media(item,false)}</div>
+        <span class="mo-no">No. ${String(state.look.indexOf(e)).padStart(2,'0')} — item details</span>
+        <span class="mo-ret ret-chip">${item.brand}</span></div>
+      <div class="mo-right">
+        <span class="ml">${item.brand} · screen v — item details</span>
+        <h2 class="mo-name">${item.name}</h2>
+        <div class="mo-price">${money(item.price)} <small>indicative · sold by ${item.brand}</small></div>
+        <div class="mo-sec">Why the algorithm matched it</div>
+        <ul class="why-list">
+          <li><span>${matchReason(slot,item)}</span></li>
+          <li><span>Picked for <b style="font-weight:400;font-style:italic">${occLabel()}</b> · feeling <b style="font-weight:400;font-style:italic">${moodLabel()}</b> — slot score ${e.score}, cross-house pick from ${item.brand}.</span></li>
+        </ul>
+        <div class="mo-btns">
+          <a class="btn btn-primary" href="${item.url||BRANDS[item.brand].url}" target="_blank" rel="noopener"><span class="b-title">🛍 ${destination.label} ↗</span><span class="b-sub">retailer confirms current price &amp; stock</span></a>
+          <a class="btn btn-ghost" href="${BRANDS[item.brand].url}" target="_blank" rel="noopener"><span class="b-title">Visit ${item.brand.toLowerCase()} ↗</span></a>
+        </div>
+        <div class="mo-note">${destination.detail} StyleHub never sees your payment.</div>
+      </div>
+    </div>`;
+  $('#modalScrim').classList.add('on');
+}
+function closeModal(){$('#modalScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
+
+/* ---------- try-on ---------- */
+const SAMPLE_FIGURE=`<svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="326" rx="46" ry="7" fill="#000" opacity="0.05"/><circle cx="100" cy="38" r="20" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L88 196 L82 312 L94 312 L100 210 L106 312 L118 312 L112 196 L110 170 C119 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L112 170 C121 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#DFC6B2"/></svg>`;
+function openTryon(){state.tryonPhoto=null;setJourney(5);renderTryonUpload();$('#tryonScrim').classList.add('on');}
+function closeTryon(){$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
+function renderTryonUpload(){
+  const self=getSelf();
+  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
+    <div class="tryon-in">
+      <span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated preview</span></span>
+      <h2>See the ${self.name.toLowerCase()} <em>on you.</em></h2>
+      <p class="lede">Choose a photo to preview the concept. This prototype creates a local composite; it does not run a live AI try-on model or upload your photo.</p>
+      <label class="dropzone" for="tryonFile"><div class="big">Choose a full-body photo</div><span class="ml">JPG / PNG · works offline · never leaves your device</span></label>
+      <input type="file" id="tryonFile" accept="image/*" style="display:none">
+      <div class="tryon-alt"><a data-action="tryon-sample">No photo handy? Use the sample figure →</a></div>
+      <div class="privacy">🔒 Simulated for the concept prototype · a production build would use a generative try-on model</div>
+    </div>`;
+  $('#tryonFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{state.tryonPhoto=ev.target.result;runTryon();};rd.readAsDataURL(f);});
+}
+function runTryon(){
+  const self=getSelf();const src=state.tryonPhoto;
+  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
+    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · rendering…</span><h2>Dressing <em>you</em>…</h2>
+    <div class="tryon-stage"><div class="scanline"></div>${src?`<img class="user-ph" src="${src}" alt="your photo">`:SAMPLE_FIGURE}</div>
+    <div class="scan-steps tryon-steps"><div class="s-title">MatchBuy AI Vision · simulated pipeline</div>
+    ${['Detecting body landmarks…','Fitting the piece…','Rendering the preview…'].map((s,i)=>`<div class="step" id="tstep${i}"><span class="ico">✓</span>${s}</div>`).join('')}</div></div>`;
+  [0,1,2].forEach(i=>{setTimeout(()=>{const s=$('#tstep'+i);if(s)s.classList.add('on');},250+i*650);setTimeout(()=>{const s=$('#tstep'+i);if(s){s.classList.remove('on');s.classList.add('done');}},700+i*650);});
+  setTimeout(renderTryonResult,2500);
+}
+function renderTryonResult(){
+  const self=getSelf();
+  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
+    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated result</span></span>
+    <h2>The piece, <em>imagined on you.</em></h2>
+    <div class="tryon-result">
+      <figure class="to-photo"><span class="ribbon">AI imagined · simulated</span>${state.tryonPhoto?`<img class="user" src="${state.tryonPhoto}" alt="your photo">`:SAMPLE_FIGURE}
+        <span class="overlay-shirt"><img src="${self.img}" alt="" onerror="this.remove()"></span>
+        <figcaption>${self.name.toLowerCase()}${(state.occasion&&state.mood)?` · for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:''}</figcaption></figure>
+      <div class="to-piece">
+        <figure class="tile"><img src="${self.img}" alt=""><figcaption>The piece · ${money(self.price)}</figcaption></figure>
+        <p class="to-note">In production, a generative try-on model would re-draw the garment onto <b>your</b> photo — body-aware fit, fabric drape and lighting. This concept build composites a preview locally so you can feel the flow.</p>
+        <div class="to-btns"><button class="btn btn-ghost" data-action="tryon-again"><span class="b-title">↺ Another photo</span></button>
+        <a class="btn btn-primary" href="${self.url||BRANDS[self.brand].url}" target="_blank" rel="noopener"><span class="b-title">Buy on ${self.brand.toLowerCase()} ↗</span></a></div>
+        <div class="privacy">🔒 Your photo never leaves this page · nothing is uploaded</div>
+      </div></div>`;
+}
+
+/* ---------- cart ---------- */
+function addToCart(n,label){state.cart+=n;['cartBadge','cartBadgeH'].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.textContent=state.cart;b.classList.remove('hidden');b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),300);});toast(label);}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-action]');
+  if(!el)return;
+  const a=el.dataset.action;
+  switch(a){
+    case 'go-home': showHome(); break;
+    case 'go-edit': document.querySelector('#home').classList.contains('on')?$('#edit').scrollIntoView({behavior:'smooth'}):(showHome(),setTimeout(()=>$('#edit').scrollIntoView({behavior:'smooth'}),80)); break;
+    case 'go-houses': showHome(); setTimeout(()=>$('#houses').scrollIntoView({behavior:'smooth'}),80); break;
+    case 'go-ai': showHome(); setTimeout(()=>$('#ai').scrollIntoView({behavior:'smooth'}),80); break;
+    case 'open-product': openProduct(el.dataset.id); break;
+    case 'color': switchColor(+el.dataset.i); break;
+    case 'size': {state.sizePDP=el.dataset.s;document.querySelectorAll('.pdp-info .size-chip').forEach(c=>c.classList.toggle('sel',c.dataset.s===state.sizePDP));break;}
+    case 'wish': toggleWish(el.dataset.id); break;
+    case 'open-wl': openWl(); break;
+    case 'close-wl': closeWl(); break;
+    case 'wl-remove': toggleWish(el.dataset.id); break;
+    case 'wl-open': {closeWl();openProduct(el.dataset.id);} break;
+    case 'add-anchor': {const s=getSelf();addToCart(1,`${s.name} saved — buying happens on ${s.brand.toLowerCase()}`);} break;
+    case 'open-match': openDrawer(); break;
+    case 'close-drawer': closeDrawer(); break;
+    case 'pick-occ': pickBrief('occ',el.dataset.id); break;
+    case 'pick-mood': pickBrief('mood',el.dataset.id); break;
+    case 'pick-budget': pickBrief('budget',el.dataset.id); break;
+    case 'brand-filter': state.brandFilter = el.dataset.f; renderResults(); break;
+    case 'pick-slot': {
+      const s=el.dataset.id, i=state.slots.indexOf(s);
+      if(i>=0 && state.slots.length>1) state.slots.splice(i,1);
+      else if(i<0) state.slots.push(s);
+      renderBrief(); break;
+    }
+    case 'all-slots': state.slots=['bottom','shoes','bag','accessory']; renderBrief(); break;
+    case 'build-look': startScan(); break;
+    case 'restyle': renderBrief(); break;
+    case 'shuffle': shuffleSlot(el.dataset.slot); break;
+    case 'open-item': openItemModal(el.dataset.slot); break;
+    case 'goto-page': goToPage(); break;
+    case 'visit': {const b=BRANDS[el.dataset.brand];if(b&&b.url)window.open(b.url,'_blank','noopener');} break;
+    case 'close-modal': closeModal(); break;
+    case 'm-size': {state.sizeModal=el.dataset.s;document.querySelectorAll('.mo-sizes .size-chip').forEach(c=>c.classList.toggle('sel',c.dataset.s===state.sizeModal));break;}
+    case 'shop-look': toast('Buy Now on each card opens the piece on its house’s real website'); break;
+    case 'open-tryon': openTryon(); break;
+    case 'close-tryon': closeTryon(); break;
+    case 'tryon-sample': {state.tryonPhoto=null;runTryon();} break;
+    case 'tryon-again': renderTryonUpload(); break;
+    case 'open-guide': $('#guideScrim').classList.add('on'); break;
+    case 'close-guide': $('#guideScrim').classList.remove('on'); break;
+    case 'noop': toast('Cart lives on each house’s own website — StyleHub never holds payment'); break;
+  }
+});
+$('#modalScrim').addEventListener('click',e=>{if(e.target.id==='modalScrim')closeModal();});
+$('#tryonScrim').addEventListener('click',e=>{if(e.target.id==='tryonScrim')closeTryon();});
+$('#guideScrim').addEventListener('click',e=>{if(e.target.id==='guideScrim')$('#guideScrim').classList.remove('on');});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  if($('#guideScrim').classList.contains('on')){$('#guideScrim').classList.remove('on');return;}
+  if($('#tryonScrim').classList.contains('on')){closeTryon();return;}
+  if($('#wlScrim')&&$('#wlScrim').classList.contains('on')){closeWl();return;}
+  if($('#modalScrim').classList.contains('on')){closeModal();return;}
+  if($('#drawer').classList.contains('on'))closeDrawer();
+});
+
+/* ---------- init ---------- */
+loadWish();renderHome();setJourney(1);
+</script>
+</body>
+</html>
