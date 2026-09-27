@@ -13,3 +13,8 @@ Open `index.html` in a browser to explore the simulated retailer product page an
 5. Scroll to **Where we’re going** for the future extension journey.
 
 Product data, analysis and recommendations are predefined for this prototype. Retailer pages are represented with external links; there are no shopping APIs, real AI, or checkout integrations.
+
+## Browser extension prototype
+
+The separate [`extension`](extension/README.md) folder contains an installable Chrome extension and a local Node service. It can read product details after you click the extension button, request AI analysis and shopping results when API keys are configured, and link to retailer offers. See its setup guide for the local service and extension installation steps.
+
