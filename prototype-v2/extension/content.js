@@ -118,7 +118,7 @@
       const why = document.createElement("p"); why.className = "why"; why.textContent = item.reason || "Selected to complement this product’s style.";
       copy.append(source, title, price, why); main.append(image, copy); card.append(main);
       if (item.url) {
-        const link = document.createElement("a"); link.href = item.url; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = `View at ${item.retailer || "retailer"} ↗`; card.append(link);
+        const link = document.createElement("a"); link.href = item.url; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = item.linkType === "shopping" ? "See offers on Google Shopping ↗" : `View at ${item.retailer || "retailer"} ↗`; card.append(link);
       }
       result.append(card);
     }
