@@ -764,15 +764,15 @@ const CATALOGUE = [
   {id:'zara5', brand:'ZARA', name:'Split Suede Heeled Ankle Boots', price:649, img:'assets/zara5.jpg', cat:'shoes', tone:'warm', moods:['elegant','sexy'], occs:['date','office','party'], styles:['classic'], url:'https://www.zara.cn/cn/en/split-suede-heeled-anble-boot-p12106810.html', why:'Split suede and a heel — boots that work from desk to dinner.'},
   /* NIKE — real products */
   {id:'nk1', brand:'NIKE', name:"Air Force 1 '07 · White", price:799, img:'assets/nike.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.nike.com/w/air-force-1-shoes', why:'The white court icon — it finishes everything from poplin to denim.'},
-  {id:'nk2', brand:'NIKE', name:"Air Force 1 '07 LX · Pony Hair", price:949, img:'assets/nike-pony.jpg', cat:'shoes', tone:'light', moods:['sexy','elegant'], occs:['date','party'], styles:['sporty'], url:'https://www.nike.com/w/air-force-1-shoes', why:'A texture twist on the icon — sneaker comfort, evening attitude.'},
+  {id:'nk2', brand:'NIKE', name:'Air Max SC · White', price:749, img:'assets/airmax.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty'], url:'https://www.nike.com/w/air-max-shoes', why:'Visible Air cushioning — a lighter, sportier step for daytime looks.'},
   {id:'nk3', brand:'NIKE', name:'Dunk Low · Panda', price:849, img:'assets/nike-dunk-panda.png', cat:'shoes', tone:'dark', moods:['minimal','sexy'], occs:['everyday','party'], styles:['sporty','casual'], url:'https://www.nike.com/w/dunk-shoes', why:'Black-on-white Dunks — the streetwear anchor of any casual look.'},
   {id:'nk4', brand:'NIKE', name:'Dunk Low · Championship Red', price:849, img:'assets/nike-dunk-red.jpg', cat:'shoes', tone:'warm', moods:['cute','sexy'], occs:['party','everyday'], styles:['sporty'], url:'https://www.nike.com/w/dunk-shoes', why:'A red pop at the feet — the only accent a neutral look needs.'},
-  {id:'nk5', brand:'NIKE', name:"Air Force 1 '07 LV8 · White", price:849, img:'assets/nike-af1-studio.png', cat:'shoes', tone:'light', moods:['minimal','elegant'], occs:['office','everyday'], styles:['minimal'], url:'https://www.nike.com/w/air-force-1-shoes', why:'Clean leather, padded collar — white sneakers that go with literally everything.'},
+  {id:'nk5', brand:'NIKE', name:"Blazer Mid '77 · White", price:899, img:'assets/blazer.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['everyday','date'], styles:['sporty','casual'], url:'https://www.nike.com/w/blazer-shoes', why:'A high-top with vintage proportions — adds structure to soft pieces.'},
   /* ADIDAS — real products */
   {id:'ad1', brand:'ADIDAS', name:'Samba OG · White', price:699, img:'assets/adidas.jpg', cat:'shoes', tone:'light', moods:['minimal','cute'], occs:['everyday','office'], styles:['sporty','casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'The terrace classic — gum sole, three stripes, forever.'},
   {id:'ad2', brand:'ADIDAS', name:'Samba OG · Taupe', price:749, img:'assets/adidas-taupe.jpg', cat:'shoes', tone:'warm', moods:['cute','elegant'], occs:['everyday','date'], styles:['casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'Taupe suede warms up denim and grey tailoring alike.'},
-  {id:'ad3', brand:'ADIDAS', name:'Samba OG · White & Black', price:699, img:'assets/adidas-white.jpg', cat:'shoes', tone:'dark', moods:['minimal','sexy'], occs:['everyday','party'], styles:['sporty'], url:'https://www.adidas.com/us/samba-og-shoes', why:'High-contrast Samba — a streetwear anchor for black-heavy looks.'},
-  {id:'ad4', brand:'ADIDAS', name:'Samba OG · Cream', price:699, img:'assets/adidas-cream.jpg', cat:'shoes', tone:'light', moods:['elegant','minimal'], occs:['office','date'], styles:['minimal'], url:'https://www.adidas.com/us/samba-og-shoes', why:'Cream-on-cream — the quietest way to wear a sneaker.'},
+  {id:'ad3', brand:'ADIDAS', name:'Gazelle · Cream & Green', price:799, img:'assets/gazelle.jpg', cat:'shoes', tone:'light', moods:['cute','elegant'], occs:['everyday','date'], styles:['casual'], url:'https://www.adidas.com/us/gazelle-shoes', why:'Cream suede with green stripes — a softer, fresher classic.'},
+  {id:'ad4', brand:'ADIDAS', name:'Leather Sneakers · Brown', price:899, img:'assets/adidas-brown.jpg', cat:'shoes', tone:'warm', moods:['elegant','sexy'], occs:['date','office'], styles:['classic'], url:'https://www.adidas.com/us/samba-shoes', why:'Brown leather with cream stripes — warm, grown-up, versatile.'},
   {id:'ad5', brand:'ADIDAS', name:'Samba OG · Cream Pair', price:699, img:'assets/adidas-cream.jpg', cat:'shoes', tone:'light', moods:['cute','minimal'], occs:['everyday'], styles:['casual'], url:'https://www.adidas.com/us/samba-og-shoes', why:'The pair view of a forever classic — easy, worn-in, universal.'},
   /* 73HOURS — real products */
   {id:'sh1', brand:'73HOURS', name:'Black Kitten-Heel Mule', price:890, img:'assets/73h-mule.jpg', cat:'shoes', tone:'dark', moods:['elegant','sexy'], occs:['date','party','office'], styles:['classic'], url:'http://www.73hours.com.cn/', why:'A beaded kitten mule — the 73Hours take on evening ease.'},
@@ -814,7 +814,7 @@ const state = {
   view:'home', productId:'ur1', phase:'idle',
   colorIdx:0, sizePDP:'M', sizeModal:null, modalSlot:null,
   altIdx:{}, look:null, timers:[],
-  journeyStep:1, occasion:null, mood:null, budget:null, budget:null,
+  journeyStep:1, occasion:null, mood:null, budget:null, slots:['bottom','shoes','bag','accessory'],
   cart:0, tryonPhoto:null,
   wishlist:[],
 };
@@ -870,7 +870,7 @@ function matchOutfit(){
   const bMax=budgetMaxNum();
   const used=[self.brand];
   const chosen=[];
-  for(const slot of (SLOTS_FOR[self.cat]||['bottom','shoes','bag','accessory'])){
+  for(const slot of (SLOTS_FOR[self.cat]||[]).filter(s=>state.slots.includes(s))){
     let best=null,bestS=-1;
     for(const c of CATALOGUE){
       if(c.id===self.id || c.cat!==slot || chosen.includes(c)) continue;
@@ -1060,12 +1060,15 @@ function renderBrief(){
         <div class="chips">${OCCASIONS.map(o=>`<button class="chip ${state.occasion===o.id?'sel':''}" data-action="pick-occ" data-id="${o.id}">${o.en}</button>`).join('')}</div></div>
       <div class="q-block"><div class="q-head"><span class="q">How do you want to feel?</span></div>
         <div class="chips">${MOODS.map(m=>`<button class="chip ${state.mood===m.id?'sel':''}" data-action="pick-mood" data-id="${m.id}">${m.en}</button>`).join('')}</div></div>
+      <div class="q-block"><div class="q-head"><span class="q">Which pieces should I complete?</span></div>
+        <div class="chips">${['bottom','shoes','bag','accessory'].map(s=>`<button class="chip ${state.slots.includes(s)?'sel':''}" data-action="pick-slot" data-id="${s}">${SLOT_META[s].en}</button>`).join('')}
+        <button class="chip" data-action="all-slots" style="${state.slots.length===4?'display:none':''}">Select all</button></div>
       <div class="q-block"><div class="q-head"><span class="q">What’s your budget?</span></div>
         <div class="chips">${BUDGETS.map(b=>`<button class="chip ${state.budget===b.id?'sel':''}" data-action="pick-budget" data-id="${b.id}">${b.en}</button>`).join('')}
         <div style="font-size:11px;color:var(--gray2);margin-top:8px">FN-05 · Budget matching — pieces that break your range get scored down.</div></div>
-      <button class="btn btn-primary" data-action="build-look" id="buildBtn" style="${state.occasion&&state.mood&&state.budget?'':'opacity:.35;pointer-events:none'}">
+      <button class="btn btn-primary" data-action="build-look" id="buildBtn" style="${state.occasion&&state.mood&&state.budget&&state.slots.length?'':'opacity:.35;pointer-events:none'}">
         <span class="b-title">✨ Build my look</span><span class="b-sub">score the whole edit · FN-01</span></button>
-      <div class="brief-hint">${state.occasion&&state.mood&&state.budget?`Scoring ${CATALOGUE.length-1} pieces across ${Object.keys(BRANDS).length} houses for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:'pick one from each — the algorithm will do the rest'}</div>
+      <div class="brief-hint">${state.occasion&&state.mood&&state.budget&&state.slots.length?`Scoring ${CATALOGUE.length-1} pieces across ${Object.keys(BRANDS).length} houses for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:'pick one from each — the algorithm will do the rest'}</div>
     </div>`;
 }
 function pickBrief(kind,id){if(kind==='budget')state.budget=id;else if(kind==='occ')state.occasion=id;else state.mood=id;state.picked={};state.altIdx={};state.look=null;renderBrief();}
@@ -1294,6 +1297,15 @@ document.addEventListener('click',e=>{
     case 'pick-occ': pickBrief('occ',el.dataset.id); break;
     case 'pick-mood': pickBrief('mood',el.dataset.id); break;
     case 'pick-budget': pickBrief('budget',el.dataset.id); break;
+    case 'pick-slot': {
+      const s = el.dataset.id;
+      const i = state.slots.indexOf(s);
+      if (i >= 0 && state.slots.length > 1) state.slots.splice(i, 1);
+      else if (i < 0) state.slots.push(s);
+      renderBrief();
+      break;
+    }
+    case 'all-slots': state.slots = ['bottom','shoes','bag','accessory']; renderBrief(); break;
     case 'build-look': startScan(); break;
     case 'restyle': renderBrief(); break;
     case 'shuffle': shuffleSlot(el.dataset.slot); break;
