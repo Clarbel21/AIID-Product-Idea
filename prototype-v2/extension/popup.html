@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MatchBuy AI</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#27251f;background:#faf9f7}*{box-sizing:border-box}body{width:320px;margin:0;padding:18px}.brand{display:flex;align-items:center;gap:10px}.mark{width:34px;height:34px;border-radius:10px;background:#f5e9ea;color:#a86e76;display:grid;place-items:center;font-size:18px}.brand b{font:600 15px Georgia,serif}.brand small{display:block;color:#777;font-size:10px;margin-top:2px}.title{font:20px/1.25 Georgia,serif;margin:19px 0 6px}.desc{font-size:11px;color:#6f6d66;line-height:1.5;margin:0 0 14px}.page{padding:10px;background:white;border:1px solid #e8e6e0;border-radius:8px;font-size:11px;line-height:1.45;overflow-wrap:anywhere}.page small{display:block;color:#777;font-size:9px;margin-bottom:3px}.button{width:100%;border:0;border-radius:7px;background:#292823;color:white;height:42px;margin-top:12px;font-weight:700;letter-spacing:.07em;cursor:pointer}.button:disabled{opacity:.55;cursor:wait}.status{font-size:10px;color:#6e6c66;line-height:1.5;margin:12px 0 0}.status b{color:#47755f}.setup{border-top:1px solid #e8e6e0;margin-top:14px;padding-top:11px;font-size:9px;color:#777;line-height:1.55}.setup a{color:#805057}
+  </style>
+</head>
+<body>
+  <div class="brand"><div class="mark">✦</div><div><b>MatchBuy AI</b><small>Your shopping sidekick</small></div></div>
+  <h1 class="title">Find what goes with it.</h1>
+  <p class="desc">Open the assistant on this page when you’re looking at a clothing or accessory product.</p>
+  <div class="page"><small>THIS PAGE</small><span id="page-title">Checking the active tab…</span></div>
+  <button class="button" id="activate">Show MatchBuy on this page</button>
+  <p class="status" id="status">Checking local service…</p>
+  <div class="setup">This prototype reads product details only after you click the button. Product details and the selected product image URL are sent to your local service when you request a match.</div>
+  <script src="popup.js"></script>
+</body>
+</html>
+
