@@ -42,9 +42,9 @@ async function readJson(req) {
 
 function safeProduct(input) {
   const str = (value, max) => typeof value === "string" ? value.trim().slice(0, max) : "";
-  const imageUrl = str(input.imageUrl, 2000);
+  const rawImageUrl = str(input.imageUrl, 2000);
+  const imageUrl = /^https:\/\//i.test(rawImageUrl) ? rawImageUrl : "";
   const pageUrl = str(input.pageUrl, 2000);
-  if (imageUrl && !/^https:\/\//i.test(imageUrl)) throw new Error("Product image must use HTTPS.");
   if (!/^https?:\/\//i.test(pageUrl)) throw new Error("Product page URL is invalid.");
   return {
     title: str(input.title, 240) || "Product from a shopping page",
