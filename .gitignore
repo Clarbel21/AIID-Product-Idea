@@ -1,1 +1,6 @@
 assets/originals/
+
+.env
+.env.*
+!.env.example
+.vercel
