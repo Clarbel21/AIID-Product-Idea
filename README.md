@@ -12,8 +12,7 @@ A Dior-inspired storefront for **StyleHub × MatchBuy AI** with a catalogue of *
 
 - **Live online:** https://clarbel21.github.io/AIID-Product-Idea/ (GitHub Pages — auto-deploys on every push; note github.io can be intermittent from mainland China)
 - **Offline catalogue:** double-click `index.html` (catalogue and local photos work offline).
-- **Try-On:** open `Start StyleHub Demo.bat`; it starts a private local web server and opens the page. Keep its window open. Try-On also needs an internet connection to load MediaPipe from its CDN.
-- **Local server (manual):** `node serve-demo.cjs`, or `python serve.py`
+- **Local server (manual):** `python serve.py`
 
 Fonts load from Google Fonts when online; graceful fallback offline.
 
@@ -21,7 +20,7 @@ Fonts load from Google Fonts when online; graceful fallback offline.
 
 | File | Purpose |
 |---|---|
-| `index.html` | Entire prototype: home, per-house catalogue, product pages, matching algorithm, try-on, wishlist |
+| `index.html` | Entire prototype: home, per-house catalogue, product pages, matching algorithm, wishlist |
 | `assets/` | Real product photography downloaded from the houses (50+ shots) + generated colourways + campaign image |
 | `reference/` | The source handbook + extracted text |
 
@@ -87,7 +86,6 @@ Because mood mismatch is *penalised*, each feeling builds a genuinely different 
 4. **Change the mood to Elegant** — the picks change; the algorithm decides.
 5. **Item details → Buy Now on {house} ↗** — direct to the real product page.
 6. **Wishlist** — ♡ pieces → panel → reload → still saved.
-7. **Try-On** — the natural AI try-on uses a consent-based FASHN integration; see `TRYON_SETUP.md`. It requires Vercel hosting, a private FASHN key, and credits.
 
 ## v2 branch (`v2-trust-feedback`) — trustworthy data, onboarding, feedback
 
@@ -107,20 +105,4 @@ Built on branch `v2-trust-feedback`; `main` remains untouched as the previous pr
 **What still needs a real backend / retailer integration:** verified live prices & stock (retailer feed/API), server-side feedback collection and analysis (none exists — feedback is device-local by design), and real shopper feedback data.
 
 
-## 8. Natural AI Try-On setup (v6.2)
-
-The old browser-only pose/segmentation composite has been removed because it could not realistically fit garments onto a person. The new interface submits the selected garment image and uploaded photo to FASHN Try-On Max only after the user checks the consent notice and starts generation. The photo is compressed in the browser, sent as base64 through the private API route, and is not stored by MatchBuy.
-
-**Important:** GitHub Pages only serves static files; it cannot run the new `/api/tryon` server route. The current GitHub Pages URL will show that the secure service is not connected until this repo is deployed to a backend host such as Vercel. See [TRYON_SETUP.md](TRYON_SETUP.md) for the setup steps. FASHN requires an API key and paid credits; the Try-On Max `balanced` + `1k` + one-image settings use 2 credits per generation. No API key is included in this repository.
-
-FASHN's documentation says base64 inputs are used to process a request and the temporary processing copy is deleted after processing completes (with a one-day cleanup fallback). Request metadata is retained, and base64 output is available for 60 minutes. Read [FASHN data retention and privacy](https://docs.fashn.ai/api-overview/data-retention-privacy). The generated image is a visual approximation and does not guarantee exact fit, color, or size.
-
-### Private server environment variables
-
-Set these in the Vercel project settings, never in the public HTML or GitHub repository:
-
-- `FASHN_API_KEY`: the FASHN developer API key.
-- `MATCHBUY_TRYON_ACCESS_CODE`: a long random code shared only with approved demo users.
-- `MATCHBUY_ALLOWED_ORIGINS`: the exact deployed website origin, for example `https://your-project.vercel.app`.
-
-A sample template is in `.env.example`. The endpoint validates the access code, restricts product images to the approved site origin, sends no request images to MatchBuy storage, and polls FASHN without exposing the provider key to the browser.
+Note: the AI Try-On experiment (browser composite and the FASHN serverless integration) was removed from the prototype after review; the feature is documented as future work, not current functionality.

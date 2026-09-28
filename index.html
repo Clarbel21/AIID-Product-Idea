@@ -347,8 +347,6 @@ img,svg{display:block}
 .why-list li:before{content:"—";color:var(--blush);flex:none}
 .why-list li span{flex:1}
 .mo-sizes{display:flex;gap:7px;flex-wrap:wrap}
-.btn-tryon{background:var(--blush-d);border-color:var(--blush-d);color:var(--paper)}
-.btn-tryon:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .fb-block{border-top:1px solid var(--rule);margin-top:12px;padding-top:10px;font-size:11px;color:var(--ink2);line-height:1.7}
 .fb-reasons,.fb-consent{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
 .fb-slot{margin-top:6px}
@@ -356,27 +354,6 @@ img,svg{display:block}
 .mo-note{margin-top:15px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);border-top:1px solid var(--rule);padding-top:12px;line-height:2}
 .mo-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:var(--paper);display:grid;place-items:center;color:var(--gray);z-index:2}
 
-/* try-on */
-.tryon-scrim{position:fixed;inset:0;z-index:100;background:rgba(15,15,15,.55);backdrop-filter:blur(3px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
-.tryon-scrim.on{opacity:1;pointer-events:auto}
-.tryon{width:min(860px,100%);max-height:92vh;overflow:auto;background:var(--paper);border:1px solid var(--ink);border-radius:3px;position:relative;transform:translateY(18px);transition:transform .3s cubic-bezier(.22,.9,.34,1)}
-.tryon-scrim.on .tryon{transform:none}
-.tryon-in{padding:32px 36px 36px}
-.tryon h2{font-family:var(--serif);font-size:30px;font-weight:400;margin:8px 0 6px}
-.tryon h2 em{font-style:italic}
-.tryon .lede{font-size:13.5px;color:var(--ink2);max-width:56ch}
-.dropzone{margin:24px 0 8px;border:1px dashed var(--gray);border-radius:3px;background:var(--blush-t);padding:44px 24px;text-align:center;cursor:pointer;transition:border-color .2s;display:block}
-.dropzone:hover{border-color:var(--ink)}
-.dropzone .big{font-family:var(--serif);font-style:italic;font-size:20px;margin-bottom:6px}
-.dropzone .ml{display:block}
-.tryon-alt{text-align:center;margin-top:8px}
-.tryon-alt a{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--blush-d);cursor:pointer;text-decoration:underline}
-.privacy{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-top:18px;border-top:1px solid var(--rule);padding-top:12px;text-align:center}
-.tryon-stage{position:relative;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);display:grid;place-items:center;min-height:420px}
-.tryon-stage .user-ph{max-height:520px;max-width:100%;object-fit:contain}
-.tryon-steps{margin-top:18px}
-.tryon-result{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
-.tryon-upload-preview{max-width:180px;max-height:220px;object-fit:contain;display:block;margin:14px auto;border:1px solid var(--rule);border-radius:4px}.tryon-access{width:100%;padding:12px;border:1px solid var(--rule);background:#fff;margin:12px 0;font:inherit}.tryon-consent{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.55;padding:12px;background:#F8F6F2;margin:14px 0}.tryon-consent input{margin-top:3px;flex:0 0 auto}.tryon-consent a{color:var(--ink);text-decoration:underline}
 .to-photo{position:relative;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);min-height:440px;display:grid;place-items:center}
 .to-photo img.user{max-height:520px;max-width:100%;object-fit:contain}
 .to-photo .overlay-shirt{position:absolute;left:50%;top:24%;width:52%;transform:translateX(-50%);opacity:.96;mix-blend-mode:multiply;border-radius:4px}
@@ -441,7 +418,6 @@ img,svg{display:block}
   .services{grid-template-columns:1fr 1fr;gap:16px 0}
   .svc:nth-child(odd){border-left:none;padding-left:0}
   .mb-card{grid-template-columns:1fr;padding:30px 26px}
-  .tryon-result{grid-template-columns:1fr}
   .to-photo{min-height:360px}
 }
 @media (max-width:640px){
@@ -461,7 +437,6 @@ img,svg{display:block}
   .foot-meta{text-align:left}
   .ready-head{flex-direction:column;align-items:flex-start;gap:2px}
   .board-grid{grid-template-columns:1fr 88px}
-  .tryon-in{padding:24px 20px 28px}
   .wordmark .wm{font-size:24px}
   .hero{height:70vh}
 }
@@ -543,7 +518,6 @@ img,svg{display:block}
     <div class="svc"><b>Direct Shopping</b>Buy Now opens the piece on the brand’s site</div>
     <div class="svc"><b>Match Index</b>Every look scored before you commit</div>
     <div class="svc"><b>Cross-House</b>Top · bottom · shoes · bag · jewelry from different stores</div>
-    <div class="svc"><b>Try-On</b>AI preview from one full-body photo</div>
   </section>
 
   <footer class="home-foot">
@@ -617,9 +591,6 @@ img,svg{display:block}
   <div class="modal" id="modal"></div>
 </div>
 
-<!-- try-on -->
-<div class="tryon-scrim" id="tryonScrim">
-  <div class="tryon" id="tryon"></div>
 </div>
 
 <!-- wishlist -->
@@ -884,7 +855,7 @@ const state = {
   colorIdx:0, sizePDP:'M', sizeModal:null, modalSlot:null,
   altIdx:{}, look:null, timers:[],
   journeyStep:1, occasion:null, mood:null, budget:null, slots:['bottom','shoes','bag','accessory'],
-  cart:0, tryonPhoto:null,
+  cart:0,
   wishlist:[],
 };
 
@@ -1088,15 +1059,7 @@ function renderPDP(){
         <span class="pulse-dot" id="mbPulse" style="display:${state.phase==='idle'?'block':'none'}"></span>
       </div>
       <a class="btn btn-primary" href="${p.url}" target="_blank" rel="noopener"><span class="b-title">${p.src.type==='exact'?'🛍 Buy on '+p.brand.toLowerCase()+' ↗':'🛍 Browse '+p.brand.toLowerCase()+' ↗'}</span><span class="b-sub">${p.src.type==='exact'?'opens this exact piece · no payment here · FN-06':'retailer page — find this item there · no payment here'}</span></a>
-      <div style="position:relative">
-        <button class="btn btn-tryon" data-action="open-tryon">
-          <span class="b-title">✨ AI Try-On — see this on you · FN-07</span>
-          <span class="b-sub">upload once, preview the whole look</span>
-        </button>
-        <span class="mb-tip" style="display:block">NEW — try it!</span>
-        <span class="pulse-dot" style="display:block"></span>
-      </div>
-      <div class="mb-note">✨ powered by <b>MatchBuy AI</b> — “I like this item. What should I buy to complete the outfit?”</div>
+            <div class="mb-note">✨ powered by <b>MatchBuy AI</b> — “I like this item. What should I buy to complete the outfit?”</div>
     </div>
     <p class="desc">${p.desc||'From the houses of the StyleHub edit — matched by MatchBuy AI.'}</p>
     <div class="trust-row">
@@ -1413,233 +1376,7 @@ function openItemModal(slot){
 }
 function closeModal(){$('#modalScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
 
-/* ---------- try-on ---------- */
-const SAMPLE_FIGURE=`<svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="326" rx="46" ry="7" fill="#000" opacity="0.05"/><circle cx="100" cy="38" r="20" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L88 196 L82 312 L94 312 L100 210 L106 312 L118 312 L112 196 L110 170 C119 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L112 170 C121 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#DFC6B2"/></svg>`;
-function openTryon(){state.tryonPhoto=null;state.tryonOutput=null;setJourney(5);renderTryonUpload();$('#tryonScrim').classList.add('on');}
-function closeTryon(){state.tryonPhoto=null;state.tryonOutput=null;$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
-function renderTryonUpload(){
-  const self=getSelf();
-  const fileWarning = location.protocol === 'file:'
-    ? '<div class="privacy" style="border:1px solid var(--blush-d);padding:12px;margin:14px 0;color:var(--ink)">For Try-On, first open <b>Start StyleHub Demo.bat</b> in this project folder, then use the page it opens. Browsers block the pose-detection module when this page is opened directly as a file.</div>'
-    : '';
-  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in">
-      <span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated preview</span></span>
-      <h2>See the ${self.name.toLowerCase()} <em>on you.</em></h2>
-      <p class="lede">Upload one full-body photo and MatchBuy AI Vision will imagine the piece on you. Everything stays on this page — nothing is uploaded anywhere.</p>
-      <label class="dropzone" for="tryonFile"><div class="big">Choose a full-body photo</div><span class="ml">JPG / PNG · works offline · never leaves your device</span></label>
-      <input type="file" id="tryonFile" accept="image/*" style="display:none">
-      <div class="tryon-alt"><a data-action="tryon-sample">No photo handy? Use the sample figure →</a></div>
-      ${fileWarning}
-      <div class="privacy">🔒 Simulated for the concept prototype · a production build would use a generative try-on model</div>
-    </div>`;
-  $('#tryonFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{state.tryonPhoto=ev.target.result;runTryon();};rd.readAsDataURL(f);});
-}
-async function compressTryonPhoto(file){
-  if(!/^image\/(jpeg|png|webp)$/i.test(file.type))throw new Error('Unsupported image type');
-  const bitmap=await createImageBitmap(file);
-  const scale=Math.min(1,1296/Math.max(bitmap.width,bitmap.height));
-  const canvas=document.createElement('canvas');
-  canvas.width=Math.max(1,Math.round(bitmap.width*scale));
-  canvas.height=Math.max(1,Math.round(bitmap.height*scale));
-  canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
-  bitmap.close&&bitmap.close();
-  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Could not compress image')),'image/jpeg',0.84));
-  if(blob.size>2.5*1024*1024)throw new Error('Image is too large after compression');
-  return await new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=()=>resolve(reader.result);
-    reader.onerror=()=>reject(new Error('Could not read image'));
-    reader.readAsDataURL(blob);
-  });
-}
-let _mpCache = null;
-async function mpTasks(){
-  if (_mpCache) return _mpCache;
-  const vision = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14');
-  const files = await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
-  const pose = await vision.PoseLandmarker.createFromOptions(files, { baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task' }, runningMode: 'IMAGE', numPoses: 1 });
-  const seg = await vision.ImageSegmenter.createFromOptions(files, { baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_multiclass_256x256/float32/latest/selfie_multiclass_256x256.tflite' }, runningMode: 'IMAGE', outputCategoryMask: true, outputConfidenceMasks: false });
-  _mpCache = { pose, seg };
-  return _mpCache;
-}
-function loadImg(src){ return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
-// multiclass classes: 0 bg · 1 hair · 2 body-skin · 3 face-skin · 4 clothes · 5 accessories
-function masksFrom(seg, img){
-  const res = seg.segment(img);
-  const cm = res.categoryMask; if (!cm) { if (res.close) res.close(); return null; }
-  const arr = cm.getAsUint8Array(); const mw = cm.width, mh = cm.height;
-  const mk = (accept) => {
-    const c = document.createElement('canvas'); c.width = mw; c.height = mh;
-    const x = c.getContext('2d'); const id = x.createImageData(mw, mh);
-    for (let i = 0; i < arr.length; i++){
-      const v = accept(arr[i]) ? 255 : 0;
-      id.data[i*4] = 255; id.data[i*4+1] = 255; id.data[i*4+2] = 255; id.data[i*4+3] = v;
-    }
-    x.putImageData(id, 0, 0);
-    const soft = document.createElement('canvas'); soft.width = mw; soft.height = mh;
-    const sx = soft.getContext('2d'); sx.filter = 'blur(2px)'; sx.drawImage(c, 0, 0);
-    return soft;
-  };
-  const out = { clothes: mk(c => c === 4), person: mk(c => c >= 1), mw, mh };
-  if (res.close) res.close();
-  return out;
-}
-function bboxOf(canvas){
-  const x = canvas.getContext('2d'); const d = x.getImageData(0, 0, canvas.width, canvas.height).data;
-  let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
-  for (let y = 0; y < canvas.height; y++) for (let xx = 0; xx < canvas.width; xx++){
-    if (d[(y * canvas.width + xx) * 4 + 3] > 40){ if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (y < y0) y0 = y; if (y > y1) y1 = y; }
-  }
-  if (x1 < 0) return null;
-  return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
-}
-async function garmentCutout(img, seg, pid, cat){
-  // If the photo shows a model, segment on the full original frame (framing matters for the model);
-  // for clean studio/product shots, plain background removal is the most reliable cut.
-  let source = img, fromOriginal = false;
-  try {
-    const pre = masksFrom(seg, img);
-    if (pre){
-      const tot = pre.mw * pre.mh;
-      const px = pre.person.getContext('2d').getImageData(0, 0, pre.mw, pre.mh).data;
-      let person = 0;
-      for (let i = 3; i < px.length; i += 4) if (px[i] > 110) person++;
-      if (person / tot > 0.30 && pid){
-        const o = await loadImg('/assets/originals/' + pid + '.jpg').catch(() => null);
-        if (o){ source = o; fromOriginal = true; }
-      }
-    }
-  } catch(e) {}
-  const m = masksFrom(seg, source);
-  if (m){
-    const c = document.createElement('canvas'); c.width = source.naturalWidth; c.height = source.naturalHeight;
-    const x = c.getContext('2d'); x.drawImage(source, 0, 0, c.width, c.height);
-    x.globalCompositeOperation = 'destination-in';
-    x.drawImage(m.clothes, 0, 0, c.width, c.height);
-    let bb = bboxOf(c);
-    // For full-model bottom shots, remove the upper clothing while preserving
-    // the selected skirt/trouser area below it.
-    if (cat === 'bottom' && bb && bb.y < c.height * 0.08){
-      x.clearRect(0, 0, c.width, Math.min(c.height, Math.round(bb.y + bb.h * 0.23)));
-      bb = bboxOf(c);
-    }
-    if (bb && (bb.w * bb.h) > 0.02 * c.width * c.height) return c;
-  }
-  // fallback: studio-background removal by corner colour
-  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
-  const x = c.getContext('2d'); x.drawImage(img, 0, 0, c.width, c.height);
-  const d = x.getImageData(0, 0, c.width, c.height), dd = d.data, cw = c.width, ch = c.height;
-  const corners = [[2,2],[cw-3,2],[2,ch-3],[cw-3,ch-3]].map(([px,py]) => { const i = (py*cw+px)*4; return [dd[i], dd[i+1], dd[i+2]]; });
-  for (let i = 0; i < dd.length; i += 4){
-    const r = dd[i], g = dd[i+1], b = dd[i+2];
-    if (corners.some(p => Math.abs(r-p[0]) + Math.abs(g-p[1]) + Math.abs(b-p[2]) < 92)) dd[i+3] = 0;
-  }
-}
-function setStatus(t){ const el = document.getElementById('tryonStatus'); if (el) el.textContent = t; }
-async function tryonComposite(canvas, photoSrc, garmentSrc, cat, productId){
-  const img = await loadImg(photoSrc), gimg = await loadImg(garmentSrc);
-  const W = 720, H = Math.round(W * img.naturalHeight / img.naturalWidth);
-  canvas.width = W; canvas.height = H;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0, W, H);
-  let pose, seg;
-  try { ({ pose, seg } = await mpTasks()); }
-  catch(e){ setStatus('first load failed — retrying… (' + String(e).slice(0, 90) + ')'); ({ pose, seg } = await mpTasks()); }
-  setStatus('reading your pose…');
-  const pres = pose.detect(canvas);
-  const lm = pres && pres.landmarks && pres.landmarks[0];
-  if (!lm) return 'no-pose';
-  const X = n => lm[n].x * W, Y = n => lm[n].y * H;
-  setStatus('finding the clothes in your photo…');
-  const mm = masksFrom(seg, img);                       // user's photo: where are MY clothes?
-  if (!mm) return 'no-mask';
-  setStatus('cutting the piece out of its photo…');
-  const cut = await garmentCutout(gimg, seg, productId, cat); // product photo: only the piece
-  if (!cut) return 'no-cut';
-  const cutBox = bboxOf(cut); if (!cutBox) return 'no-cut';
-  // Placement comes from POSE landmarks (shoulders / hips / knees / ankles) —
-  // they never misfire the way a low-res clothes mask can.
-  const shW = Math.abs(X(12) - X(11)), shY = Math.min(Y(11), Y(12));
-  const midX = (X(11) + X(12) + X(23) + X(24)) / 4;
-  const torso = Math.max((Y(23) + Y(24)) / 2 - shY, 20);
-  const hipY = (Y(23) + Y(24)) / 2, hipW = Math.abs(X(24) - X(23));
-  const kneeY = (Y(25) + Y(26)) / 2, ankY = (Y(27) + Y(28)) / 2;
-  let tw, th, tx, ty;
-  if (cat === 'shoes'){
-    tw = Math.abs(X(27) - X(28)) * 2.4 + shW * 0.5; th = tw * 0.62;
-    tx = (X(27) + X(28)) / 2 - tw / 2; ty = ankY - th * 0.6;
-  } else if (cat === 'bottom'){
-    tw = Math.max(hipW * 1.7, shW * 1.15); th = (kneeY - hipY) * 1.85;
-    tx = midX - tw / 2; ty = hipY - torso * 0.08;
-  } else if (cat === 'dress'){
-    tw = shW * 1.3; th = (kneeY - shY) * 1.25;
-    tx = midX - tw / 2; ty = shY - torso * 0.12;
-  } else if (cat === 'outerwear'){
-    tw = shW * 1.45; th = torso * 1.75;
-    tx = midX - tw / 2; ty = shY - torso * 0.1;
-  } else {
-    tw = shW * 1.28; th = torso * 1.32;
-    tx = midX - tw / 2; ty = shY - torso * 0.12;
-  }
-  const fit = Math.min(tw / cutBox.w, th / cutBox.h);
-  tw = cutBox.w * fit; th = cutBox.h * fit;
-  const layer = document.createElement('canvas'); layer.width = W; layer.height = H;
-  const lx = layer.getContext('2d');
-  lx.filter = 'blur(1.6px)';
-  lx.drawImage(cut, cutBox.x, cutBox.y, cutBox.w, cutBox.h, tx, ty, tw, th);
-  lx.filter = 'none';
-  // the piece shows only on the person — nothing pastes onto the background
-  lx.globalCompositeOperation = 'destination-in';
-  lx.filter = 'blur(2.5px)';
-  lx.drawImage(mm.person, 0, 0, W, H);
-  lx.filter = 'none';
-  lx.globalCompositeOperation = 'source-over';
-  ctx.drawImage(layer, 0, 0);
-  return 'ok';
-}
-function runTryon(){ setJourney(5); renderTryonResult(); $('#tryonScrim').classList.add('on'); }
-function renderTryonResult(){
-  const self = getSelf();
-  $('#tryon').innerHTML = `<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated composite</span></span>
-    <h2>The piece, <em>cut out &amp; placed on you.</em></h2>
-    <div class="tryon-result">
-      <figure class="to-photo"><span class="ribbon">AI imagined · simulated</span>
-        <canvas id="tryonCanvas" style="width:100%;display:block;background:#F6F5F0"></canvas>
-        <div class="ml" id="tryonStatus" style="padding:10px 12px">cutting out the piece · reading your pose…</div>
-        <figcaption>${self.name.toLowerCase()}${(state.occasion&&state.mood)?` · for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:''}</figcaption></figure>
-      <div class="to-piece">
-        <figure class="tile"><img src="${self.img}" alt=""><figcaption>The piece · ${money(self.price)}</figcaption></figure>
-        <p class="to-note">This build runs a <b>local pose + segmentation composite</b>: the piece is cut out of its photo and placed onto your body — sized from your shoulders, hips and knees. No generative model and no upload: everything runs in this page.</p>
-        <div class="to-btns"><button class="btn btn-ghost" data-action="tryon-again"><span class="b-title">↺ Another photo</span></button>
-        <a class="btn btn-primary" href="${self.url||BRANDS[self.brand].url}" target="_blank" rel="noopener"><span class="b-title">Buy on ${self.brand.toLowerCase()} ↗</span></a></div>
-        <div class="privacy">🔒 Your photo never leaves this page · nothing is uploaded</div>
-      </div></div>`;
-  const cat = self.cat;
-  const canvas = $('#tryonCanvas');
-  if (!(state.tryonPhoto) || ['bag','accessory'].includes(cat)){
-    const status = $('#tryonStatus');
-    if (status) status.textContent = cat === 'bag' || cat === 'accessory'
-      ? 'Try-on works on clothing & shoes — bags and jewellery are shown on the product page.'
-      : 'No photo yet — upload a full-body photo to see the try-on.';
-    return;
-  }
-  tryonComposite(canvas, state.tryonPhoto, self.img, cat === 'top' || cat === 'outerwear' || cat === 'bottom' || cat === 'dress' || cat === 'shoes' ? cat : 'top', self.id)
-    .then(r => {
-      const st = $('#tryonStatus'); if (!st) return;
-      if (r === 'no-pose') st.textContent = 'Couldn\'t find a body pose in this photo — try a full-body shot with the whole person visible.';
-      else if (r === 'ok') st.textContent = 'Composite complete — the piece is cut out and placed on your body (simulated).';
-      else st.textContent = 'Try-on preview unavailable.';
-    })
-    .catch(e => {
-      const st = $('#tryonStatus'); if (!st) return;
-      st.textContent = location.protocol === 'file:'
-        ? 'This page was opened as a file. Close it, open Start StyleHub Demo.bat in the project folder, then try again.'
-        : 'Try-on could not load its pose detector. Check your internet connection and reload the page. (' + String(e).slice(0, 90) + ')';
-    });
-}
-/* ---------- cart ---------- */
+
 function addToCart(n,label){state.cart+=n;['cartBadge','cartBadgeH'].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.textContent=state.cart;b.classList.remove('hidden');b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),300);});toast(label);}
 
 /* ---------- events ---------- */
@@ -1696,17 +1433,12 @@ document.addEventListener('click',e=>{
     case 'close-modal': closeModal(); break;
     case 'm-size': {state.sizeModal=el.dataset.s;document.querySelectorAll('.mo-sizes .size-chip').forEach(c=>c.classList.toggle('sel',c.dataset.s===state.sizeModal));break;}
     case 'shop-look': toast('Buy Now on each card opens the piece on its house’s real website'); break;
-    case 'open-tryon': openTryon(); break;
-    case 'close-tryon': closeTryon(); break;
-    case 'tryon-sample': {state.tryonPhoto=null;runTryon();} break;
-    case 'tryon-again': state.tryonPhoto=null;state.tryonOutput=null;renderTryonUpload();break;
     case 'open-guide': $('#guideScrim').classList.add('on'); break;
     case 'close-guide': $('#guideScrim').classList.remove('on'); break;
     case 'noop': toast('Cart lives on each house’s own website — StyleHub never holds payment'); break;
   }
 });
 $('#modalScrim').addEventListener('click',e=>{if(e.target.id==='modalScrim')closeModal();});
-$('#tryonScrim').addEventListener('click',e=>{if(e.target.id==='tryonScrim')closeTryon();});
 $('#guideScrim').addEventListener('click',e=>{if(e.target.id==='guideScrim')$('#guideScrim').classList.remove('on');});
 document.addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ') && e.target && e.target.getAttribute && e.target.getAttribute('role')==='button'){
@@ -1714,7 +1446,6 @@ document.addEventListener('keydown',e=>{
   }
   if(e.key!=='Escape')return;
   if($('#guideScrim').classList.contains('on')){$('#guideScrim').classList.remove('on');return;}
-  if($('#tryonScrim').classList.contains('on')){closeTryon();return;}
   if($('#wlScrim')&&$('#wlScrim').classList.contains('on')){closeWl();return;}
   if($('#modalScrim').classList.contains('on')){closeModal();return;}
   if($('#drawer').classList.contains('on'))closeDrawer();
