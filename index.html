@@ -347,6 +347,9 @@ img,svg{display:block}
 .why-list li:before{content:"—";color:var(--blush);flex:none}
 .why-list li span{flex:1}
 .mo-sizes{display:flex;gap:7px;flex-wrap:wrap}
+.fb-block{border-top:1px solid var(--rule);margin-top:12px;padding-top:10px;font-size:11px;color:var(--ink2);line-height:1.7}
+.fb-reasons,.fb-consent{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.fb-slot{margin-top:6px}
 .mo-btns{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin-top:24px}
 .mo-note{margin-top:15px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);border-top:1px solid var(--rule);padding-top:12px;line-height:2}
 .mo-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:var(--paper);display:grid;place-items:center;color:var(--gray);z-index:2}
@@ -499,6 +502,10 @@ img,svg{display:block}
         <span class="hbtn solid" data-action="go-edit">Discover the edit</span>
         <span class="hbtn line" data-action="go-ai">Meet MatchBuy AI</span>
       </div>
+      <div class="how-strip" style="margin-top:18px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:inherit;opacity:.92">
+        1 · Pick a product &nbsp;→&nbsp; 2 · Occasion &amp; mood &nbsp;→&nbsp; 3 · Budget &nbsp;→&nbsp; MatchBuy assembles the rest of the look
+        &nbsp;<button class="hbtn solid" data-action="demo-match" style="cursor:pointer;font:inherit;letter-spacing:inherit">See an example match →</button>
+      </div>
     </div>
   </section>
 
@@ -538,7 +545,7 @@ img,svg{display:block}
 
   <footer class="home-foot">
     <div class="home-foot-in">
-      <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the houses’ real websites · prices indicative</span>
+      <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the retailers’ real websites · prices are reference conversions · availability not verified</span>
       <span class="ml"><a data-action="open-guide" style="cursor:pointer;text-decoration:underline">Demo guide</a> · © MMXXVI</span>
     </div>
   </footer>
@@ -600,7 +607,7 @@ img,svg{display:block}
 
   <footer class="masthead">
     <div class="mast-in" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center">
-      <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the houses’ real websites · prices indicative</span>
+      <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the retailers’ real websites · prices are reference conversions · availability not verified</span>
       <span class="ml"><a data-action="open-guide" style="cursor:pointer;text-decoration:underline">Demo guide</a> · © MMXXVI</span>
     </div>
   </footer>
@@ -847,6 +854,28 @@ const CATALOGUE = [
   {id:'sw8', brand:'SWAROVSKI', name:'Una Angelic Bracelet', price:627, img:'assets/swa8.jpg', cat:'accessory', tone:'cool', moods:['minimal','sexy'], occs:['everyday','party'], styles:['minimal'], url:'https://www.swarovski.com.cn/zh-CN/p-5567934/Una-Angelic-%E6%89%8B%E9%93%BE-%E6%B7%B7%E5%90%88%E5%BC%8F%E5%9C%86%E5%BD%A2%E5%88%87%E5%89%B2-%E7%99%BD%E8%89%B2-%E9%95%80%E9%93%91', why:'Mixed-cut Angels on a rhodium chain — understated shine.'},
 ];;
 
+/* ---------- Section 1 · data provenance ----------
+   Every product gets a normalized source record so an authorized
+   retailer feed or API can replace the manual capture later:
+     p.src = { retailer, url, type: 'exact'|'browse', checked: ISO|null, via }
+   Prices are REFERENCE conversions captured when the product was added.
+   Stock and size availability are UNKNOWN until a retailer feed confirms them. */
+(function normalizeProvenance(){
+  var TODAY = '2026-09-28';
+  var RECHECKED = /^(ur9|ur1[0-9]|ur2[0-5]|as([1-9]|10)|ck[1-9]|f21[ghi])$/; // groups captured & verified live on 2026-09-28
+  CATALOGUE.forEach(function(p){
+    var exact = /(\/products\/|\/prd\/|\/p-[A-Z0-9]|\/t\/|\.html)/i.test(p.url || '');
+    p.src = {
+      retailer: p.brand,
+      url: p.url || (BRANDS[p.brand] && BRANDS[p.brand].url) || '',
+      type: exact ? 'exact' : 'browse',
+      checked: RECHECKED.test(p.id) ? TODAY : null,
+      via: RECHECKED.test(p.id) ? 'manual capture from retailer product page (verified live ' + TODAY + ')'
+                                : 'manual capture from retailer product page (added earlier; not re-checked)'
+    };
+  });
+})();
+
 /* ---------- state ---------- */
 const state = {
   view:'home', productId:'ur1', phase:'idle',
@@ -1039,9 +1068,10 @@ function renderPDP(){
       <span class="ml">In the StyleHub edit</span>
     </div>
     <h1>${p.name}</h1>
-    <div class="ml">${'★'.repeat(st)} ${p.rating||4.8} · indicative price</div>
-    <div class="price-line"><span class="price">${money(p.price)}</span></div>
-    <div class="tax-note">Sold by ${p.brand} · Buy Now opens it on ${p.brand.toLowerCase()} — StyleHub never handles payment</div>
+    <div class="ml">${'★'.repeat(st)} ${p.rating||4.8} · reference price (not a live quote)</div>
+    <div class="price-line"><span class="price">${money(p.price)}</span><span class="ml" style="margin-left:10px">reference — converted when added; confirm on the retailer’s site</span></div>
+    <div class="tax-note">Sold by ${p.brand} · ${p.src.type==='exact'?'link opens this exact piece on':'link goes to'} ${p.brand.toLowerCase()} — StyleHub never handles payment · stock &amp; size availability <b>not verified</b></div>
+    <div class="ml" style="margin-top:6px">Source: ${p.src.retailer} · ${p.src.type==='exact'?'exact product page':'retailer page (browse)'} · ${p.src.checked?('link checked '+p.src.checked):'not recently checked'} · ${p.src.via}</div>
     ${p.colors&&p.colors.length>1?`
     <div class="opt-label">Colour <span class="val" id="colorName">${p.colors[state.colorIdx].name}</span></div>
     <div class="swatches">${p.colors.map((c,i)=>`<button class="swatch ${i===state.colorIdx?'sel':''}" data-action="color" data-i="${i}" title="${c.name}"><img src="${c.img}" alt="${c.name}" onerror="this.remove()"></button>`).join('')}</div>`:
@@ -1056,7 +1086,7 @@ function renderPDP(){
         <div class="mb-tip" id="mbTip" style="display:${state.phase==='idle'?'block':'none'}">The innovation — try it</div>
         <span class="pulse-dot" id="mbPulse" style="display:${state.phase==='idle'?'block':'none'}"></span>
       </div>
-      <a class="btn btn-primary" href="${p.url}" target="_blank" rel="noopener"><span class="b-title">🛍 Buy on ${p.brand.toLowerCase()} ↗</span><span class="b-sub">direct · no payment here · FN-06</span></a>
+      <a class="btn btn-primary" href="${p.url}" target="_blank" rel="noopener"><span class="b-title">${p.src.type==='exact'?'🛍 Buy on '+p.brand.toLowerCase()+' ↗':'🛍 Browse '+p.brand.toLowerCase()+' ↗'}</span><span class="b-sub">${p.src.type==='exact'?'opens this exact piece · no payment here · FN-06':'retailer page — find this item there · no payment here'}</span></a>
       <button class="btn btn-ghost" data-action="open-tryon"><span class="b-title">✨ AI Try-On — see it on you · FN-07</span></button>
       <div class="mb-note">✨ powered by <b>MatchBuy AI</b> — “I like this item. What should I buy to complete the outfit?”</div>
     </div>
@@ -1090,6 +1120,82 @@ function renderWishCount(){
     b.textContent=state.wishlist.length;
     b.classList.toggle('hidden',state.wishlist.length===0);
   });
+}
+
+/* ---------- Section 3 · feedback (anonymous, device-only) ---------- */
+function fbLoad(){try{return JSON.parse(localStorage.getItem('mb-feedback')||'[]');}catch(e){return [];}}
+function fbSaveAll(list){try{localStorage.setItem('mb-feedback',JSON.stringify(list));}catch(e){}}
+function fbRecord(id, slot, rating, reasons){
+  var c = byId(id) || {};
+  var list = fbLoad();
+  list.unshift({ ts:new Date().toISOString(), itemId:id, brand:c.brand||'', slot:slot,
+                 occasion:state.occasion, mood:state.mood, budget:state.budget,
+                 rating:rating, reasons:reasons||[] });
+  fbSaveAll(list);
+  var blk = $('#fbBlock'); if (blk) blk.innerHTML = fbBlockHTML();
+}
+function fbRate(el){
+  var slot = el.dataset.slot, id = el.dataset.id, r = el.dataset.r;
+  var box = $('#fbslot-' + slot); if (!box) return;
+  if (!state.fbConsent && !state.fbDeclined){
+    box.innerHTML = '<div class="fb-consent"><span>Rate this pick? Feedback is saved <b>only on this device</b>, anonymously — no name, email, or photos — and is never sent anywhere.</span> <button class="chip" data-action="fb-consent" data-v="y">Allow on this device</button><button class="chip" data-action="fb-consent" data-v="n">No thanks</button></div>';
+    box.dataset.pending = id + '|' + slot + '|' + r;
+    return;
+  }
+  if (state.fbDeclined){ box.innerHTML = '<span class="ml">Feedback is off — nothing was saved.</span>'; return; }
+  if (r === 'up'){ fbRecord(id, slot, 'up', []); box.innerHTML = '<span class="ml">Thanks — marked helpful ✓</span>'; }
+  else {
+    box.innerHTML = '<div class="fb-reasons"><span class="ml">Why isn’t it for you? (optional)</span>'
+      + ['Style mismatch','Wrong occasion','Over budget','Unavailable','Incorrect product/link','Other']
+        .map(x=>'<button class="chip" data-action="fb-reason">'+x+'</button>').join('')
+      + '<button class="view-btn ghost" data-action="fb-save" data-id="'+id+'" data-slot="'+slot+'">Save</button></div>';
+  }
+}
+function fbConsent(el){
+  var boxes = document.querySelectorAll('.fb-slot');
+  var v = el.dataset.v === 'y';
+  state.fbConsent = v; state.fbDeclined = !v;
+  try{ localStorage.setItem('mb-fb-consent', v ? 'y' : 'n'); }catch(e){}
+  boxes.forEach(function(b){
+    var p = (b.dataset.pending||'').split('|');
+    b.dataset.pending=''; b.innerHTML = v ? '<span class="ml">Feedback enabled on this device — tap 👍 or 👎 on any pick.</span>' : '<span class="ml">Feedback is off — nothing was saved.</span>';
+  });
+}
+function fbSave(el){
+  var box = $('#fbslot-' + el.dataset.slot); if (!box) return;
+  var reasons = [...box.querySelectorAll('.chip.sel')].map(c=>c.textContent);
+  fbRecord(el.dataset.id, el.dataset.slot, 'down', reasons);
+  box.innerHTML = '<span class="ml">Noted'+(reasons.length?' — '+reasons.join(', '):'')+' ✓ (saved on this device)</span>';
+}
+function fbExport(){
+  var data = fbLoad();
+  var blob = new Blob([JSON.stringify({ prototype:'MatchBuy AI', deviceOnly:true, personalData:false, exportedAt:new Date().toISOString(), count:data.length, records:data }, null, 2)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'matchbuy-feedback.json'; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 800);
+  toast('Feedback exported — ' + data.length + ' anonymous record' + (data.length===1?'':'s'));
+}
+function fbBlockHTML(){
+  var list = fbLoad();
+  var head = '<div class="ml" style="display:block">Feedback stays on this device — anonymous, never sent to a server. Export it any time.</div>';
+  var inner = '<div id="fbBlock" class="fb-block reveal"><b style="letter-spacing:.2em;font-size:9px">RECOMMENDATION FEEDBACK</b>' + head;
+  if (!list.length){ return inner + '<div class="ml">Rate the picks with 👍 Helpful / 👎 Not for me — a quality summary appears here.</div></div>'; }
+  var up = list.filter(x=>x.rating==='up').length, down = list.length - up;
+  var reasons = {}; list.forEach(x=>(x.reasons||[]).forEach(r=>reasons[r]=(reasons[r]||0)+1));
+  var top = Object.entries(reasons).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  var bySlot = {}; list.forEach(x=>{ bySlot[x.slot]=bySlot[x.slot]||{u:0,d:0}; x.rating==='up'?bySlot[x.slot].u++:bySlot[x.slot].d++; });
+  var worst = Object.entries(bySlot).sort((a,b)=>(b[1].d/(b[1].u+b[1].d))-(a[1].d/(a[1].u+a[1].d)))[0];
+  var sug = [];
+  if ((reasons['Style mismatch']||0) >= 2) sug.push('several “style mismatch” marks — consider raising the mood weight (0.22) in scoreDimensions');
+  if ((reasons['Wrong occasion']||0) >= 2) sug.push('several “wrong occasion” marks — consider raising the occasion weight (0.24)');
+  if ((reasons['Over budget']||0) >= 2) sug.push('“over budget” marked more than twice — consider stronger budget steering (currently −40) or asking budget earlier');
+  if ((reasons['Incorrect product/link']||0) >= 1) sug.push('an item was flagged as an incorrect link — check its source URL in the catalogue');
+  if (worst && worst[1].d > worst[1].u) sug.push('“'+worst[0]+'” picks get the most “not for me” — review that slot’s candidate pool');
+  inner += '<div class="ml" style="display:block;margin-top:4px">'+up+' helpful · '+down+' not for me ('+list.length+' total, on this device)</div>';
+  if (top.length) inner += '<div class="ml" style="display:block">Top reasons: '+top.map(t=>t[0]+' ×'+t[1]).join(' · ')+'</div>';
+  if (sug.length) inner += '<div class="ml" style="display:block;margin-top:4px"><b style="letter-spacing:.18em;font-size:9px">RULE-BASED SUGGESTIONS</b> — from your marks; nothing is trained or learned: <ul style="margin:4px 0 0 16px">'+sug.map(s=>'<li>'+s+'</li>').join('')+'</ul></div>';
+  inner += '<button class="view-btn ghost" data-action="fb-export" style="margin-top:8px">⬇ Export anonymous feedback (JSON)</button></div>';
+  return inner;
 }
 
 /* ---------- wishlist ---------- */
@@ -1216,7 +1322,9 @@ function renderResults(){
         <div class="ic-actions">
           ${isAnchor?`<button class="view-btn ghost" data-action="goto-page">View on page ↑</button>`:`<button class="view-btn" data-action="open-item" data-slot="${slot}">View Product</button>`}
           ${(slot==='bottom'||slot==='bag')?`<button class="shuffle" data-action="shuffle" data-slot="${slot}" title="Re-score this slot">⟳</button>`:''}
+          ${isAnchor?'':`<button class="view-btn ghost" data-action="fb-rate" data-r="up" data-id="${item.id}" data-slot="${slot}">👍 Helpful</button><button class="view-btn ghost" data-action="fb-rate" data-r="down" data-id="${item.id}" data-slot="${slot}">👎 Not for me</button>`}
         </div>
+        ${isAnchor?'':'<div class="fb-slot" id="fbslot-'+slot+'"></div>'}
       </div>
     </div>`;
   }).join('');
@@ -1233,6 +1341,7 @@ function renderResults(){
     </div>
     ${boardHTML}${analysisHTML}${cardsHTML}
     <div class="budget-line reveal" style="animation-delay:.5s"><span>FN-05 · Budget matching — “${budgetLabel()}”</span><span class="ok">${total<=budgetMaxNum()?`total ${money(total)} ✓`:`over by ${money(total-budgetMaxNum())} — try ⟳`}</span></div>
+    ${fbBlockHTML()}
     <div class="restyle-link reveal"><a data-action="restyle">↺ Change occasion or mood</a></div>`;
   renderFoot();
 }
@@ -1279,14 +1388,15 @@ function openItemModal(slot){
       <div class="mo-right">
         <span class="ml">${item.brand} · screen v — item details</span>
         <h2 class="mo-name">${item.name}</h2>
-        <div class="mo-price">${money(item.price)} <small>indicative · sold by ${item.brand}</small></div>
+        <div class="mo-price">${money(item.price)} <small>reference price · sold by ${item.brand} · availability not verified</small></div>
+        <div class="mo-note" style="border:none;padding-top:0;margin-top:4px">Source: ${item.src.retailer} · ${item.src.type==='exact'?'exact product page':'retailer page (browse)'} · ${item.src.checked?('link checked '+item.src.checked):'not recently checked'}</div>
         <div class="mo-sec">Why the algorithm matched it</div>
         <ul class="why-list">
           <li><span>${matchReason(slot,item)}</span></li>
           <li><span>Picked for <b style="font-weight:400;font-style:italic">${occLabel()}</b> · feeling <b style="font-weight:400;font-style:italic">${moodLabel()}</b> — slot score ${e.score}, cross-house pick from ${item.brand}.</span></li>
         </ul>
         <div class="mo-btns">
-          <a class="btn btn-primary" href="${item.url||BRANDS[item.brand].url}" target="_blank" rel="noopener"><span class="b-title">🛍 Buy Now on ${item.brand.toLowerCase()} ↗</span><span class="b-sub">direct · no payment here</span></a>
+          <a class="btn btn-primary" href="${item.url||BRANDS[item.brand].url}" target="_blank" rel="noopener"><span class="b-title">${item.src.type==='exact'?'🛍 Buy Now on '+item.brand.toLowerCase()+' ↗':'🛍 Browse '+item.brand.toLowerCase()+' ↗'}</span><span class="b-sub">${item.src.type==='exact'?'direct · no payment here':'find this item on the retailer’s page'}</span></a>
           <a class="btn btn-ghost" href="${BRANDS[item.brand].url}" target="_blank" rel="noopener"><span class="b-title">Visit ${item.brand.toLowerCase()} ↗</span></a>
         </div>
         <div class="mo-note">FN-06 direct shopping — the button opens this exact piece on ${item.brand}’s real website. StyleHub never sees your payment.</div>
@@ -1359,6 +1469,20 @@ document.addEventListener('click',e=>{
     case 'color': switchColor(+el.dataset.i); break;
     case 'size': {state.sizePDP=el.dataset.s;document.querySelectorAll('.pdp-info .size-chip').forEach(c=>c.classList.toggle('sel',c.dataset.s===state.sizePDP));break;}
     case 'wish': toggleWish(el.dataset.id); break;
+    case 'fb-rate': fbRate(el); break;
+    case 'fb-reason': el.classList.toggle('sel'); break;
+    case 'fb-save': fbSave(el); break;
+    case 'fb-consent': fbConsent(el); break;
+    case 'fb-export': fbExport(); break;
+    case 'demo-match': {
+      openProduct('zara1', false);                 // the camel coat as the example anchor
+      state.occasion = 'date'; state.mood = 'elegant'; state.budget = 'b2000';
+      state.slots = (SLOTS_FOR[product().cat] || []).slice();
+      state.picked = {}; state.altIdx = {}; state.look = null; state.phase = 'idle';
+      renderPDP(); openDrawer(); renderBrief();
+      toast('Example: a date-night look around the camel coat — every answer is editable');
+      break;
+    }
     case 'open-wl': openWl(); break;
     case 'close-wl': closeWl(); break;
     case 'wl-remove': toggleWish(el.dataset.id); break;
@@ -1398,6 +1522,9 @@ $('#modalScrim').addEventListener('click',e=>{if(e.target.id==='modalScrim')clos
 $('#tryonScrim').addEventListener('click',e=>{if(e.target.id==='tryonScrim')closeTryon();});
 $('#guideScrim').addEventListener('click',e=>{if(e.target.id==='guideScrim')$('#guideScrim').classList.remove('on');});
 document.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ') && e.target && e.target.getAttribute && e.target.getAttribute('role')==='button'){
+    e.preventDefault(); e.target.click(); return;
+  }
   if(e.key!=='Escape')return;
   if($('#guideScrim').classList.contains('on')){$('#guideScrim').classList.remove('on');return;}
   if($('#tryonScrim').classList.contains('on')){closeTryon();return;}
@@ -1407,6 +1534,8 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ---------- init ---------- */
+try{ state.fbConsent = localStorage.getItem('mb-fb-consent')==='y'; state.fbDeclined = localStorage.getItem('mb-fb-consent')==='n'; }catch(e){}
+state.fbGiven = {};
 loadWish();renderHome();setJourney(1);
 </script>
 </body>

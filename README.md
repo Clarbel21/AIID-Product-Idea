@@ -87,3 +87,19 @@ Because mood mismatch is *penalised*, each feeling builds a genuinely different 
 5. **Item details → Buy Now on {house} ↗** — direct to the real product page.
 6. **Wishlist** — ♡ pieces → panel → reload → still saved.
 7. **Try-On** — upload a body photo → simulated render.
+
+## v2 branch (`v2-trust-feedback`) — trustworthy data, onboarding, feedback
+
+Built on branch `v2-trust-feedback`; `main` remains untouched as the previous prototype.
+
+**Section 1 · Data provenance.** Every product carries a normalized source record (`p.src = {retailer, url, type, checked, via}`):
+- `type: 'exact'` = the link opens that exact product page; `type: 'browse'` = it goes to the retailer's page/collection (button then reads **Browse retailer**). Currently the 5 Songmont entries are `browse` (homepage links); all others are exact product pages.
+- Prices are labelled **reference prices** — currency conversions captured when the product was added, not live quotes. Stock and size availability are labelled **not verified** everywhere.
+- `checked` records when the link was last verified live (the Urban Revivo/ASOS/Charles & Keith/new Forever 21 groups: 2026-09-28; older groups: `null` → shown as "not recently checked").
+- No scraping and no live data are claimed. The normalizer (`normalizeProvenance()` in `index.html`) is the adapter point where an authorized retailer feed or API could populate `price`, `availability` and `checked` later.
+
+**Section 2 · Onboarding.** The hero shows the 3-step flow (pick a product → occasion & mood → budget) with a **See an example match** button that pre-runs a real, editable example (camel coat · date night · elegant · under ¥2,000). The brief responds visibly to every answer; catalogue cards and chips are keyboard-operable (Enter/Space, real buttons); responsive CSS covers ≤640px phones.
+
+**Section 3 · Feedback (anonymous, device-only).** Every recommended item can be marked 👍 Helpful or 👎 Not for me. Negative marks optionally record a reason (style mismatch · wrong occasion · over budget · unavailable · incorrect product/link · other). Before anything is saved, a consent notice explains that feedback is stored only in the browser (localStorage), anonymously, with no names/emails/photos, and is never sent anywhere. The results view shows a live summary (helpful vs not, top reasons, weakest slot) with **rule-based** suggestions for the matching weights — no training or learning is claimed. Feedback can be exported as JSON (`matchbuy-feedback.json`).
+
+**What still needs a real backend / retailer integration:** verified live prices & stock (retailer feed/API), server-side feedback collection and analysis (none exists — feedback is device-local by design), and real shopper feedback data.
