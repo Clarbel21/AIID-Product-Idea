@@ -897,6 +897,7 @@ const SLOTS_FOR={
   accessory:['top','bottom','shoes','bag'],
   dress:['shoes','bag','accessory'],
 };
+const BODY_ORDER={accessory:0,top:1,outerwear:2,bottom:3,bag:4,shoes:5}; // necklace first, then down the body
 function toneScore(a,b){
   const N={light:1,dark:1,warm:0,cool:0}; // neutrals pair with everything
   if(N[a]&&N[b]) return 8;
@@ -960,7 +961,7 @@ function matchOutfit(){
     chosen.push(best); used.push(best.brand); spent += best.price;
   }
   state.lastSpend = spent;
-  const look = [{ slot: 'self', item: self, score: 100, dims: null }, ...chosen.map(c => ({ slot: c.cat, item: c, score: Math.min(99, Math.round(60 + 0.4 * scoreDimensions(self, c).total + 0)) }))];
+  const look = [{ slot: 'self', item: self, score: 100, dims: null }, ...chosen.map(c => ({ slot: c.cat, item: c, score: Math.min(99, Math.round(60 + 0.4 * scoreDimensions(self, c).total + 0)) })).sort((a,b)=>(BODY_ORDER[a.slot]??9)-(BODY_ORDER[b.slot]??9))];
   state.look = look;
   return look;
 }
@@ -1133,7 +1134,7 @@ function renderBrief(){
       <div class="q-block"><div class="q-head"><span class="q">How do you want to feel?</span></div>
         <div class="chips">${MOODS.map(m=>`<button class="chip ${state.mood===m.id?'sel':''}" data-action="pick-mood" data-id="${m.id}">${m.en}</button>`).join('')}</div></div>
       <div class="q-block"><div class="q-head"><span class="q">Which pieces should I complete?</span></div>
-        <div class="chips">${(SLOTS_FOR[getSelf().cat]||[]).filter(s=>s!=='self').map(s=>`<button class="chip ${state.slots.includes(s)?'sel':''}" data-action="pick-slot" data-id="${s}">${SLOT_META[s].en}</button>`).join('')}
+        <div class="chips">${(SLOTS_FOR[getSelf().cat]||[]).filter(s=>s!=='self').slice().sort((a,b)=>(BODY_ORDER[a]??9)-(BODY_ORDER[b]??9)).map(s=>`<button class="chip ${state.slots.includes(s)?'sel':''}" data-action="pick-slot" data-id="${s}">${SLOT_META[s].en}</button>`).join('')}
         <button class="chip" data-action="all-slots" style="${state.slots.length===4?'display:none':''}">Select all</button></div>
       <div class="q-block"><div class="q-head"><span class="q">What’s your budget?</span></div>
         <div class="chips">${BUDGETS.map(b=>`<button class="chip ${state.budget===b.id?'sel':''}" data-action="pick-budget" data-id="${b.id}">${b.en}</button>`).join('')}

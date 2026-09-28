@@ -1,18 +1,1 @@
-# OS junk
-Thumbs.db
-.DS_Store
-desktop.ini
-
-# local-only reference material (the source handbook)
-reference/
-
-# logs / temp
-*.log
-_contact_sheet.jpg
-harvest_*.py
-patch_*.py
-sync_*.py
-sync_*.json
-check_links.py
-final_patch.py
-probe.js
+assets/originals/

@@ -1,0 +1,437 @@
+MatchBuy AI — Product Handbook · Clear Edition
+  
+MatchBuy AI
+  
+  
+Product Handbook · Volume I · MMXXVI
+  
+Find the match.
+Complete the look.
+Buy it.
+  
+AI Outfit Matching Shopping Assistant
+  
+    
+  
+  
+Fig. 01 — One item selected on a product page.
+  
+    
+1 → 4
+Item to outfit
+    
+4
+Pieces per look
+    
+¥496
+Complete outfit
+    
+92%
+Match index
+  
+  
+AI + Innovative Design · Group Product Showcase · All imagery illustrative
+  
+  
+    
+Chapter I — Product Guide
+— 01 —
+Volume I
+  
+  
+MatchBuy AI
+Product Handbook
+Volume I
+  
+    
+I
+    
+How It Works
+Chapter One — The Process
+  
+  
+One item in. A complete look out.
+  
+    
+i
+Select
+Tap “Match My Outfit” on any product page.
+    
+ii
+Analyse
+Five attributes are read from the item.
+    
+iii
+Match
+Compatible pieces are gathered across stores.
+    
+iv
+Shop
+Review the look and buy each piece.
+  
+  
+    
+      
+        
+          
+          
+          
+          
+          
+        
+        
+        
+        
+SELECTED ITEM
+        
+white cropped shirt
+        
+          
+COLOUR
+          
+SILHOUETTE
+          
+MATERIAL
+          
+STYLE
+          
+OCCASION
+        
+      
+    
+    
+Fig. 02 — The AI reads five attributes, nothing more.
+  
+  
+    
+Wide-Leg Trousers
+¥159
+    
+White Sneakers
+¥149
+    
+Shoulder Bag
+¥59
+    
+Silver Accessories
+—
+  
+  
+Fig. 03 — The match output: three additions to one selected item.
+  
+    
+1 → 4
+Item to outfit
+    
+¥496
+Total price
+    
+92%
+Match index
+  
+  
+MatchBuy AI — Product Documentation
+— 02 —
+Volume I
+  
+MatchBuy AI
+Product Handbook
+Volume I
+  
+    
+II
+    
+Core Functions
+Chapter Two — Capabilities · Ref. FN-01 → FN-06
+  
+  
+Six functions, one uninterrupted journey from item to purchase.
+  
+    
+      
+01
+AI Outfit Matching
+      
+Finds pieces that complement the item you chose.
+      
+    
+    
+      
+02
+Style Recognition
+      
+Reads colour, silhouette, material, style, occasion.
+      
+    
+    
+      
+03
+Complete Look Generation
+      
+Builds several products into one wearable outfit.
+      
+    
+    
+      
+04
+Cross-Platform Discovery
+      
+Searches connected stores beyond the current page.
+      
+    
+    
+      
+05
+Budget Matching
+      
+Keeps every combination inside your spending range.
+      
+    
+    
+      
+06
+Direct Shopping
+      
+Buy each piece on the platform, without leaving it.
+      
+    
+  
+  
+MatchBuy AI — Product Documentation
+— 03 —
+Volume I
+  
+MatchBuy AI
+Product Handbook
+Volume I
+  
+    
+III
+    
+Core Advantages
+Chapter Three — Value
+  
+  
+Less searching, less doubt, more of the look you wanted.
+  
+    
+01
+Less Guesswork
+Compatibility is checked before you pay.
+    
+02
+Personalised
+Adapts to your style, size and budget.
+    
+03
+Faster Shopping
+Hours of searching become seconds.
+    
+04
+Inspiration to Purchase
+An idea becomes a buyable look.
+    
+05
+Cross-Store Discovery
+Finds the missing piece elsewhere.
+    
+06
+Whole Look in One Place
+See the complete outfit before you commit.
+  
+  
+    
+“Not a wardrobe management app — it works on the product page and ends in a purchase.”
+    
+Positioning
+Statement
+  
+  
+MatchBuy AI — Product Documentation
+— 04 —
+Volume I
+  
+MatchBuy AI
+Product Handbook
+Volume I
+  
+    
+IV
+    
+Application Scenarios
+Chapter Four — Use Cases
+  
+  
+Four moments where the matching problem appears.
+  
+    
+      
+      
+        
+01
+Everyday Shopping
+        
+Situation
+A shirt you like — no idea what to wear with it.
+        
+With MatchBuy AI
+A full casual outfit in one tap.
+      
+    
+    
+      
+      
+        
+02
+Occasion Dressing
+        
+Situation
+An event tomorrow, nothing planned.
+        
+With MatchBuy AI
+Looks filtered by occasion and formality.
+      
+    
+    
+      
+“Complete my
+outfit under ¥500.”
+      
+        
+03
+Budget Shopping
+        
+Situation
+A complete look, one fixed budget.
+        
+With MatchBuy AI
+The best match inside your range.
+      
+    
+    
+      
+      
+        
+04
+Match a Specific Item
+        
+Situation
+You decided on one piece, not the rest.
+        
+With MatchBuy AI
+The look is built around your choice.
+      
+    
+  
+  
+MatchBuy AI — Product Documentation
+— 05 —
+Volume I
+  
+MatchBuy AI
+Product Handbook
+Volume I
+  
+    
+V
+    
+Journey & Numbers
+Chapter Five — Documented Example
+  
+  
+One purchase, six screens, ¥496.
+  
+    
+i
+Product
+Page
+    
+ii
+Match My
+Outfit
+    
+iii
+AI
+Analysis
+    
+iv
+Complete
+Look
+    
+v
+Item
+Details
+    
+vi
+Buy
+Now
+  
+  
+    
+      
+Outfit Specification
+      
+        
+No.
+Item
+Role
+Price
+        
+01
+White Cropped Shirt — selected
+Top
+¥129
+        
+02
+Black Wide-Leg Trousers
+Bottoms
+¥159
+        
+03
+White Sneakers
+Footwear
+¥149
+        
+04
+Black Shoulder Bag
+Accessory
+¥59
+        
+Complete Look
+4 items
+¥496
+      
+    
+    
+      
+        
+92%
+        
+Match Index
+      
+      
+        
+Palette
+Neutral
+        
+Silhouette
+Balanced
+        
+Style
+Minimalist
+        
+Occasion
+Casual
+      
+    
+  
+  
+    
+Prototype Index
+    
+i Product Page · ii Match Trigger · iii Analysis View · iv Look Builder · v Item Detail · vi Checkout. Figures shown are the default demonstration dataset.
+  
+  
+MatchBuy AI — Product Documentation
+— 06 —
+© MMXXVI
