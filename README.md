@@ -77,6 +77,7 @@ The highest-scoring candidate fills each slot; a small diversity bonus encourage
 ## Data transparency
 
 - The matching engine is rule-based: it does not call a live AI model, learn from user feedback, or retrieve live retailer inventory
+
 - Product data was captured from the retailers' own public product pages at build time; no scraping pipelines and no live-data claims
 - Stock and size availability are treated as unknown and are not displayed
 - Links are labelled so the user knows whether they open the exact product page or a general retailer page
