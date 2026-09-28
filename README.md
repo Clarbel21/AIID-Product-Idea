@@ -97,6 +97,7 @@ Built on branch `v2-trust-feedback`; `main` remains untouched as the previous pr
 - Prices are labelled **reference prices** — currency conversions captured when the product was added, not live quotes. Stock and size availability are labelled **not verified** everywhere.
 - `checked` records when the link was last verified live (the Urban Revivo/ASOS/Charles & Keith/new Forever 21 groups: 2026-09-28; older groups: `null` → shown as "not recently checked").
 - No scraping and no live data are claimed. The normalizer (`normalizeProvenance()` in `index.html`) is the adapter point where an authorized retailer feed or API could populate `price`, `availability` and `checked` later.
+- The detailed source line is deliberately **not shown on the product page** (user preference) — the record lives in the data layer and drives the exact-vs-browse button labels; the page itself shows only the reference-price and availability-not-verified labels.
 
 **Section 2 · Onboarding.** The hero shows the 3-step flow (pick a product → occasion & mood → budget) with a **See an example match** button that pre-runs a real, editable example (camel coat · date night · elegant · under ¥2,000). The brief responds visibly to every answer; catalogue cards and chips are keyboard-operable (Enter/Space, real buttons); responsive CSS covers ≤640px phones.
 

@@ -1071,7 +1071,6 @@ function renderPDP(){
     <div class="ml">${'★'.repeat(st)} ${p.rating||4.8} · reference price (not a live quote)</div>
     <div class="price-line"><span class="price">${money(p.price)}</span><span class="ml" style="margin-left:10px">reference — converted when added; confirm on the retailer’s site</span></div>
     <div class="tax-note">Sold by ${p.brand} · ${p.src.type==='exact'?'link opens this exact piece on':'link goes to'} ${p.brand.toLowerCase()} — StyleHub never handles payment · stock &amp; size availability <b>not verified</b></div>
-    <div class="ml" style="margin-top:6px">Source: ${p.src.retailer} · ${p.src.type==='exact'?'exact product page':'retailer page (browse)'} · ${p.src.checked?('link checked '+p.src.checked):'not recently checked'} · ${p.src.via}</div>
     ${p.colors&&p.colors.length>1?`
     <div class="opt-label">Colour <span class="val" id="colorName">${p.colors[state.colorIdx].name}</span></div>
     <div class="swatches">${p.colors.map((c,i)=>`<button class="swatch ${i===state.colorIdx?'sel':''}" data-action="color" data-i="${i}" title="${c.name}"><img src="${c.img}" alt="${c.name}" onerror="this.remove()"></button>`).join('')}</div>`:
@@ -1389,7 +1388,6 @@ function openItemModal(slot){
         <span class="ml">${item.brand} · screen v — item details</span>
         <h2 class="mo-name">${item.name}</h2>
         <div class="mo-price">${money(item.price)} <small>reference price · sold by ${item.brand} · availability not verified</small></div>
-        <div class="mo-note" style="border:none;padding-top:0;margin-top:4px">Source: ${item.src.retailer} · ${item.src.type==='exact'?'exact product page':'retailer page (browse)'} · ${item.src.checked?('link checked '+item.src.checked):'not recently checked'}</div>
         <div class="mo-sec">Why the algorithm matched it</div>
         <ul class="why-list">
           <li><span>${matchReason(slot,item)}</span></li>
