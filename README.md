@@ -103,3 +103,7 @@ Colours shown in the analysis table are **derived offline from each product phot
 ---
 
 *Concept prototype for coursework. All product data is captured from the retailers' own public pages and credited to them; MatchBuy is not a store.*
+
+## 9. Grounded in real user feedback
+
+The problem space was grounded in public shopper voices (Reddit's r/femalefashionadvice and r/fashionwomens35): putting outfits together takes effort and a "creative eye" people feel they lack; shoppers want outfit ideas from pieces they already own and ways to organise combinations; coordinated sets appeal because they look put-together without effort; finding reputable products online is exhausting; and people want outfit-recommendation apps that link to where pieces can be bought. Short quotes and links are displayed in the prototype (home page, "The problem, in real words"), and each pain point maps to a design decision: complete-outfit building around one item with explanations, occasion/mood/budget controls, direct retailer product links with exact-vs-browse labelling — while "use pieces I already own" and saving whole combinations are documented as future work.

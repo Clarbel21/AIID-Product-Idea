@@ -563,6 +563,31 @@ img,svg{display:block}
     </div>
   </main>
 
+  <section class="pain" id="painpoints">
+    <h3>The problem, in real words</h3>
+    <p class="sub">MatchBuy AI started from real shopper voices. These are public comments from Reddit’s r/femalefashionadvice and r/fashionwomens35 communities (short quotes, linked so you can read the full context) — and each one maps to a decision in this prototype.</p>
+    <div class="pain-grid">
+      <div class="pain-q"><span class="t">Outfits take effort</span><span class="q">“It takes a lot out of me to put together an outfit and I hate that I don’t have the creative eye for it.”</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/kj7o9y/how_do_some_people_put_outfits_together_so/" target="_blank" rel="noopener">putting outfits together effortlessly ↗</a></span></div>
+      <div class="pain-q"><span class="t">Ideas from what I own</span><span class="q">“…put together cute outfits by mixing and matching what’s already in my closet.”</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/e0kesx/" target="_blank" rel="noopener">mixing and matching pieces ↗</a></span></div>
+      <div class="pain-q"><span class="t">Organising combinations</span><span class="q">“How does everyone organize or catalogue the potential outfits you can make from individual pieces?”</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/lseohg" target="_blank" rel="noopener">organizing outfit combinations ↗</a></span></div>
+      <div class="pain-q"><span class="t">Sets save time</span><span class="q">Matching sets look “so polished and put-together without much effort” — a go-to when there is no time to build an outfit.</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/1lujr6c/people_who_wear_sets_instead_of_building_outfits/" target="_blank" rel="noopener">sets instead of building outfits ↗</a></span></div>
+      <div class="pain-q"><span class="t">Finding products is tiring</span><span class="q">“Scouring the internet for reputable brands with similar items is exhausting!”</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/1iykzux/daily_questions_thread_february_26_2025/" target="_blank" rel="noopener">personal shopping service recs ↗</a></span></div>
+      <div class="pain-q"><span class="t">Where to start?</span><span class="q">Lost hope of enjoying outfits and “don’t know where to start” with personal style.</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/q548tn/how_to_figure_out_your_personal_style/" target="_blank" rel="noopener">figuring out personal style ↗</a></span></div>
+      <div class="pain-q"><span class="t">Apps + buy links</span><span class="q">Looking for “a good digital closet app and outfit recommendation”; one reply notes an app that “will link you to where you can buy the pieces.”</span><span class="src">Reddit · <a href="https://www.reddit.com/r/fashionwomens35/comments/1pakgdj/help_whats_your_favorite_digital_closet_app_tried/" target="_blank" rel="noopener">favorite digital closet app ↗</a></span></div>
+      <div class="pain-q"><span class="t">Too much mental energy</span><span class="q">“The mental space and time” — hours browsing inspiration and feeling pushed to buy trendy items.</span><span class="src">Reddit · <a href="https://www.reddit.com/r/femalefashionadvice/comments/1wgqwl0/how_do_you_enjoy_fashion_without_letting_it/" target="_blank" rel="noopener">fashion without the brain drain ↗</a></span></div>
+    </div>
+    <div class="pain-map">
+      <b>What this means for MatchBuy AI</b>
+      <ul>
+        <li>Build a complete outfit around <b>one selected item</b>, with a short explanation of why the pieces work — shipped.</li>
+        <li>Let users set occasion, style preference and budget — shipped.</li>
+        <li>Link every recommendation directly to the <b>specific retailer product page</b>, and say clearly whether a link is an exact product or a browse-the-retailer link — shipped.</li>
+        <li><span class="future">“Use pieces I already own” so recommendations don’t always push new purchases — future work (needs a personal closet).</span></li>
+        <li><span class="future">Save and revisit whole outfit combinations — future work (today the wishlist saves individual pieces).</span></li>
+      </ul>
+    </div>
+  </section>
+
   <footer class="masthead">
     <div class="mast-in" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center">
       <span class="ml">StyleHub × MatchBuy AI — concept prototype · product links open the retailers’ real websites · prices are reference conversions · confirm details on the retailer’s site</span>
@@ -1378,7 +1403,24 @@ function closeModal(){$('#modalScrim').classList.remove('on');if(state.phase==='
 
 function addToCart(n,label){state.cart+=n;['cartBadge','cartBadgeH'].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.textContent=state.cart;b.classList.remove('hidden');b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),300);});toast(label);}
 
-/* ---------- events ---------- */
+/* ---------- real user feedback section ---------- */
+.pain{border-top:1px solid var(--rule);max-width:1280px;margin:0 auto;padding:40px 30px 48px}
+.pain h3{font-family:var(--serif);font-size:26px;font-weight:400;margin:0 0 6px}
+.pain .sub{font-size:12.5px;color:var(--ink2);margin-bottom:22px;max-width:78ch}
+.pain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:980px){.pain-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.pain-grid{grid-template-columns:1fr}}
+.pain-q{border:1px solid var(--rule);background:#FDFBFA;padding:16px;display:flex;flex-direction:column;gap:9px}
+.pain-q .t{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.pain-q .q{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.55}
+.pain-q .src{margin-top:auto;padding-top:8px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.pain-q .src a{color:inherit;text-decoration:underline}
+.pain-map{margin-top:26px;border-top:1px solid var(--rule);padding-top:18px}
+.pain-map b{letter-spacing:.2em;font-size:10px;text-transform:uppercase}
+.pain-map ul{margin:10px 0 0 16px;padding:0;font-size:12.5px;color:var(--ink2);line-height:1.9}
+.pain-map .future{opacity:.75}
+
+/* ---------- cart ---------- */
 document.addEventListener('click',e=>{
   const el=e.target.closest('[data-action]');
   if(!el)return;
