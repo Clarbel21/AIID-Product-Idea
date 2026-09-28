@@ -1,108 +1,105 @@
-# StyleHub × MatchBuy AI — Product Handbook Edition (v6.1)
+# StyleHub × MatchBuy AI
+
+> **AI outfit-matching shopping assistant** — *find the match. Complete the look. Buy it.*
+> A working prototype: a Dior-inspired storefront where every product is real, every match is explainable, and every purchase happens on the retailer's own website.
 
 **Course:** AI + Innovative Design (Master's) · **Deliverable:** clickable web prototype
 
-> *Find the match. **Complete the look.** Buy it.*
+## Submission links
 
-A Dior-inspired storefront for **StyleHub × MatchBuy AI** with a catalogue of **real products from real houses** — every card links to the product’s own page on the brand’s real website. The MatchBuy AI layer asks your occasion and mood, then a transparent scoring algorithm builds a complete look from pieces across all the houses. No cart, no payment: Buy Now goes directly to the brand.
+| | Link |
+|---|---|
+| **GitHub repository (source code)** | https://github.com/Clarbel21/AIID-Product-Idea |
+| **Public deployment (GitHub Pages)** | https://clarbel21.github.io/AIID-Product-Idea/ |
+| **Run locally** | `python serve.py` → http://localhost:8377 (or double-click `index.html`) |
+
+GitHub Pages auto-deploys on every push to `main`. (github.io can be intermittent from mainland China — the local run is identical.)
 
 ---
 
-## 1. Run / access online
+## 1. What this is
 
-- **Live online:** https://clarbel21.github.io/AIID-Product-Idea/ (GitHub Pages — auto-deploys on every push; note github.io can be intermittent from mainland China)
-- **Offline catalogue:** double-click `index.html` (catalogue and local photos work offline).
-- **Local server (manual):** `python serve.py`
+StyleHub is a curated multi-brand storefront with **105 real products from 12 real brands** (Urban Revivo, Zara, Forever 21, Nike, Adidas, ASOS, Charles & Keith, APM Monaco, JW PEI, Songmont, DeMellier, Swarovski, 73Hours). **MatchBuy AI** is the layer on top: you pick one product, answer three quick questions (occasion, mood, budget), and a transparent scoring algorithm assembles a complete outfit from pieces across all the houses.
 
-Fonts load from Google Fonts when online; graceful fallback offline.
+There is no cart and no payment: **every "Buy" button opens the product on the retailer's real website.** This is a concept prototype for studying how an AI shopping assistant should behave — honestly, explainably, and without faking intelligence.
 
-## 2. Files
+## 2. Features
 
-| File | Purpose |
+### The catalogue — real products, trustworthy data
+- 105 products, each linking to its own page on the retailer's real website
+- Every product carries a normalized source record (`src`: retailer, link type, last-checked date) — the adapter point where authorized retailer feeds could plug in
+- Prices are labelled **reference prices** (converted when the product was added — not live quotes)
+- Verified per-product **size runs** fetched from each retailer (clothing S/M/L variants incl. XXS–XXXL, shoe runs per retailer in EU/US/UK, jewellery and bags show no sizes)
+- Real product photography stored locally, so the prototype works offline
+- **See an example match** button runs a pre-filled, fully editable matching demo for first-time visitors
+
+### MatchBuy AI matching
+- Style brief: occasion (everyday / office / date / party), mood (minimal / cute / elegant / sexy), budget (¥2,000 / ¥3,000 / ¥4,000 / no limit), and which slots to fill
+- Transparent scoring across five dimensions (style, colour harmony, silhouette balance, occasion, budget) — every recommendation shows **why** it was picked
+- The look board is ordered by **body position**: outerwear → necklace → top → bottom → bag → shoes, with your selected piece at its natural place
+- Slot re-roll (⟳) re-scores any single slot; the budget line reports honestly whether the total fits or is over by how much
+
+### Wishlist & feedback
+- Heart an item on its product page → saved to the Wishlist panel (persists across reloads)
+- Rate every recommendation 👍 Helpful / 👎 Not for me, with optional reasons (style mismatch, wrong occasion, over budget, unavailable, incorrect link, other)
+- Before anything is saved, a consent notice explains what is stored — **feedback is anonymous and never leaves your device** (no backend exists)
+- A live summary shows counts, top reasons and **rule-based suggestions** for the matching weights, plus one-click JSON export
+
+## 3. How the matching works
+
+```
+score = 0.20·style + 0.22·moodFit + 0.14·colourHarmony + 0.10·silhouetteBalance
+      + 0.24·occasionFit + 0.10·budgetFit        (per candidate, per slot)
+```
+- `style` — style-family match against the chosen mood
+- `moodFit` — the item's own mood tags vs. the chosen mood
+- `colourHarmony` — neutral↔neutral / same-tone / contrast rules from photo-derived colour analysis
+- `occasionFit` — whether the item is tagged for the chosen occasion
+- `budgetFit` — keeps combinations inside the chosen budget; over-budget candidates are steered away
+- Best-scoring candidate per slot wins; one brand-diversity bonus encourages crossing houses
+
+Colours shown in the analysis table are **derived offline from each product photo** (dominant garment clusters), then hand-reviewed — they are not a live AI service.
+
+## 4. What we did in this iteration
+
+- Rebuilt the catalogue from live retailer data (Shopify product feeds, retailer product pages): 105 products across 12 houses with verified titles, prices, imagery, size runs and colours
+- Added data-provenance labelling (exact product page vs. browse-the-retailer links, reference prices, last-checked dates) with an adapter point for authorized retailer feeds
+- Added the 3-step onboarding with an editable example match
+- Made matching context-sensitive (mood + occasion now dominate the score; no more repetitive picks) and ordered the look board by human body position
+- Re-cropped model shots to the sold item (pose-assisted, then hand-reviewed) so users can picture the outfit
+- Fixed sizing to match what retailers actually sell (letters for clothing, per-retailer shoe runs, no sizes for bags/jewellery)
+- Added the anonymous, consent-gated feedback system with insights and JSON export
+- Removed the AI Try-On experiment after review (local masking quality was not realistic); documented as future work
+
+## 5. Data honesty
+
+- No scraping claims and no live-data claims: data was captured from retailer product pages at build time
+- Stock and size availability are treated as unknown and never shown; prices are marked as reference values
+- Retailer checkout stays on the retailer's website — MatchBuy never handles payment
+- No personal data is collected; feedback is device-local and exportable
+
+## 6. Removed / future work
+
+- **AI virtual try-on** — prototyped locally (pose + segmentation composite) and as a serverless integration; removed after review because fitting quality was not realistic without a generative VTON model. Future work: integrate a production VTON API with user consent.
+- **Live retailer feeds** — replace captured prices/availability with authorized retailer APIs
+- **Backend feedback analysis** — move the device-local feedback store behind a real service once real users exist
+
+## 7. Project structure
+
+| Path | Purpose |
 |---|---|
-| `index.html` | Entire prototype: home, per-house catalogue, product pages, matching algorithm, wishlist |
-| `assets/` | Real product photography downloaded from the houses (50+ shots) + generated colourways + campaign image |
-| `reference/` | The source handbook + extracted text |
+| `index.html` | Entire prototype: storefront, per-house catalogue, product pages, matching algorithm, wishlist, feedback |
+| `assets/` | Real product photography (stored locally so the site works offline) |
+| `serve.py` | Tiny local server (`python serve.py` → http://localhost:8377) |
+| `reference/` | Original project handbook material the prototype was modelled on |
+| `versions/` | Archived earlier versions of the prototype |
 
-## 3. The houses & the 90+ real products
+## 8. Tech notes
 
-| House | Pieces | Deep links |
-|---|---|---|
-| Sporty & Rich (the icon) | Cropped Tank — white/black/sky | sportyandrich.com |
-| Urban Revivo | 8 shirts, blouses & skirts | global.urbanrevivo.com product pages |
-| Zara | 5 (jacket, trench, metallic dress, parka, boots) | zara.cn product pages |
-| Forever 21 | 6 (peplum top, cami, set, fleece, shorts ×2) | forever21.com product pages |
-| Max Mara | 5 (camel coat + 4 Teddy Bear coats) | us.maxmara.com |
-| 73Hours | 5 (heels, mules, sandals) | 73hours.com.cn |
-| Nike | 5 (AF1 ×3, Dunk ×2) | nike.com product / collection pages |
-| Adidas | 5 (Samba OG colourways) | adidas.com/us/samba-og-shoes |
-| JW PEI | 5 (Cleo, Noor, Hana, Tulip, Nala) | jwpei.com product pages |
-| Songmont | 5 (tote, Luna crescents, bucket) | songmontofficial.com |
-| DeMellier | 5 (Hudson, Brooklyn, Stockholm, Florence, Siena) | demellierlondon.com product pages |
-| Swarovski | 8 (Classica, Mesmera, Gema, Matrix, Symbolica, Swan ×2, Una) | swarovski.com.cn product pages |
+- Single-file vanilla HTML/CSS/JS — no build step, no framework, no backend
+- Matching, colour analysis and feedback all run locally in the browser
+- The GitHub Pages deployment serves the same static file; nothing is generated
 
-Data provenance: Urban Revivo, DeMellier and JW PEI were pulled live from their Shopify product endpoints (exact title, price, image). Zara, Forever 21 and Swarovski were captured from their product pages. All prices are shown in **RMB** (converted where the house sells in USD/CAD — Urban Revivo from its USD global store, Charles & Keith from its CAD store, ASOS as displayed in CNY — indicative). Photos are the houses’ own product imagery, stored locally so the prototype works offline.
+---
 
-Removed in this version: Brandy Melville and Charles & Keith (website access issues, per feedback) and the Sporty & Rich “icon” section (per feedback).
-
-## 4. The matching algorithm — why moods differ
-
-`matchOutfit()` scores every compatible piece in the edit for each needed slot (top / bottom / shoes / bag / jewelry — the slots depend on the anchor’s category):
-
-```
-score = 50
- + 30  mood match      − 25  mood mismatch   (cute · elegant · sexy · minimal)
- + 18  occasion match  − 12  occasion mismatch (everyday · office · date · party)
- + colour harmony      (light↔dark contrast +10, same tone +8, warm/cool clash +4)
- + 8   cross-house bonus
- − price drift (a piece > 4× the anchor’s price)
- + stable tie-break
-```
-
-Because mood mismatch is *penalised*, each feeling builds a genuinely different look. Verified on the same anchor: **Minimal** → pinstripe skirt + cream Samba + navy Hana tote + Classica pendant; **Cute** → denim skirt + taupe Samba + Cleo bag + Symbolica stars; **Elegant** → fishtail skirt + pony-hair AF1 LX + Swan earrings; **Sexy** → suede micro shorts + pink Noor bag + pink Swan bracelet.
-
-## 5. Feature notes (per latest feedback)
-
-- **Real imagery only** — all product photos are the houses’ own shots; no generated stand-ins. (The Zara images required the browser session to download due to CDN protection — they’re stored locally now.)
-- **No unverified policies** — the “30-day returns / free shipping” claims were removed; the product page now says returns & shipping follow *each house’s own policy*, and Buy Now happens on the house’s site.
-- **Sizes only where they make sense** — jewelry and bags show no size selector; shoes show EU sizes, clothing shows XS–XL (category defaults in `DEF_SIZES`).
-- **Wishlist fixed** — the panel now opens correctly, hearts **fill and pop in blush** when tapped, and the list persists in `localStorage`. Stale entries for removed products are filtered on load.
-- **Sporty & Rich section removed** per feedback. To re-enable true colour switching elsewhere, add `colors:[{name,img},…]` to any product.
-- **Direct shopping (FN-06)** — Buy Now opens the piece on the house’s real website; StyleHub never handles payment.
-- **Budget matching (FN-05)** — the style brief asks your budget (Under ¥2,000 / ¥2,000–3,000 / ¥3,000–4,000 / No limit); the scoring steers every slot and the results line reports honestly (fits / over by X).
-
-## 6. Modify
-
-- **Products:** the `CATALOGUE` array — `{id, brand, name, price(RMB), img, url, cat, tone, moods, occs, styles, why}`. `cat` ∈ top/outerwear/bottom/dress/shoes/bag/accessory.
-- **Houses/links:** `BRANDS` (with `url`) + `BRAND_ORDER`.
-- **Matching weights:** the `matchOutfit()` scoring block; stylist sentences in `matchReason()`.
-- **Size defaults per category:** the `DEF_SIZES` map.
-
-## 7. Demo script
-
-1. **Home** — scroll the houses: five real products each, every card opens the real product page.
-2. **Pick a piece** (e.g., the Zara metallic dress) → **Match My Outfit** → occasion *Party* + feeling *Sexy*.
-3. **The look** — assembled board from four houses with match index and budget line.
-4. **Change the mood to Elegant** — the picks change; the algorithm decides.
-5. **Item details → Buy Now on {house} ↗** — direct to the real product page.
-6. **Wishlist** — ♡ pieces → panel → reload → still saved.
-
-## v2 branch (`v2-trust-feedback`) — trustworthy data, onboarding, feedback
-
-Built on branch `v2-trust-feedback`; `main` remains untouched as the previous prototype.
-
-**Section 1 · Data provenance.** Every product carries a normalized source record (`p.src = {retailer, url, type, checked, via}`):
-- `type: 'exact'` = the link opens that exact product page; `type: 'browse'` = it goes to the retailer's page/collection (button then reads **Browse retailer**). Currently the 5 Songmont entries are `browse` (homepage links); all others are exact product pages.
-- Prices are labelled **reference prices** — currency conversions captured when the product was added, not live quotes. Stock and size availability are labelled **not verified** everywhere.
-- `checked` records when the link was last verified live (the Urban Revivo/ASOS/Charles & Keith/new Forever 21 groups: 2026-09-28; older groups: `null` → shown as "not recently checked").
-- No scraping and no live data are claimed. The normalizer (`normalizeProvenance()` in `index.html`) is the adapter point where an authorized retailer feed or API could populate `price`, `availability` and `checked` later.
-- The detailed source line is deliberately **not shown on the product page** (user preference) — the record lives in the data layer and drives the exact-vs-browse button labels; the page itself shows only the reference-price and availability-not-verified labels.
-
-**Section 2 · Onboarding.** The hero shows the 3-step flow (pick a product → occasion & mood → budget) with a **See an example match** button that pre-runs a real, editable example (camel coat · date night · elegant · under ¥2,000). The brief responds visibly to every answer; catalogue cards and chips are keyboard-operable (Enter/Space, real buttons); responsive CSS covers ≤640px phones.
-
-**Section 3 · Feedback (anonymous, device-only).** Every recommended item can be marked 👍 Helpful or 👎 Not for me. Negative marks optionally record a reason (style mismatch · wrong occasion · over budget · unavailable · incorrect product/link · other). Before anything is saved, a consent notice explains that feedback is stored only in the browser (localStorage), anonymously, with no names/emails/photos, and is never sent anywhere. The results view shows a live summary (helpful vs not, top reasons, weakest slot) with **rule-based** suggestions for the matching weights — no training or learning is claimed. Feedback can be exported as JSON (`matchbuy-feedback.json`).
-
-**What still needs a real backend / retailer integration:** verified live prices & stock (retailer feed/API), server-side feedback collection and analysis (none exists — feedback is device-local by design), and real shopper feedback data.
-
-
-Note: the AI Try-On experiment (browser composite and the FASHN serverless integration) was removed from the prototype after review; the feature is documented as future work, not current functionality.
+*Concept prototype for coursework. All product data is captured from the retailers' own public pages and credited to them; MatchBuy is not a store.*
