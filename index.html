@@ -376,6 +376,7 @@ img,svg{display:block}
 .tryon-stage .user-ph{max-height:520px;max-width:100%;object-fit:contain}
 .tryon-steps{margin-top:18px}
 .tryon-result{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.tryon-upload-preview{max-width:180px;max-height:220px;object-fit:contain;display:block;margin:14px auto;border:1px solid var(--rule);border-radius:4px}.tryon-access{width:100%;padding:12px;border:1px solid var(--rule);background:#fff;margin:12px 0;font:inherit}.tryon-consent{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.55;padding:12px;background:#F8F6F2;margin:14px 0}.tryon-consent input{margin-top:3px;flex:0 0 auto}.tryon-consent a{color:var(--ink);text-decoration:underline}
 .to-photo{position:relative;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);min-height:440px;display:grid;place-items:center}
 .to-photo img.user{max-height:520px;max-width:100%;object-fit:contain}
 .to-photo .overlay-shirt{position:absolute;left:50%;top:24%;width:52%;transform:translateX(-50%);opacity:.96;mix-blend-mode:multiply;border-radius:4px}
@@ -1414,8 +1415,8 @@ function closeModal(){$('#modalScrim').classList.remove('on');if(state.phase==='
 
 /* ---------- try-on ---------- */
 const SAMPLE_FIGURE=`<svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="326" rx="46" ry="7" fill="#000" opacity="0.05"/><circle cx="100" cy="38" r="20" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L88 196 L82 312 L94 312 L100 210 L106 312 L118 312 L112 196 L110 170 C119 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L112 170 C121 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#DFC6B2"/></svg>`;
-function openTryon(){state.tryonPhoto=null;setJourney(5);renderTryonUpload();$('#tryonScrim').classList.add('on');}
-function closeTryon(){$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
+function openTryon(){state.tryonPhoto=null;state.tryonOutput=null;setJourney(5);renderTryonUpload();$('#tryonScrim').classList.add('on');}
+function closeTryon(){state.tryonPhoto=null;state.tryonOutput=null;$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
 function renderTryonUpload(){
   const self=getSelf();
   const fileWarning = location.protocol === 'file:'
@@ -1434,15 +1435,23 @@ function renderTryonUpload(){
     </div>`;
   $('#tryonFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{state.tryonPhoto=ev.target.result;runTryon();};rd.readAsDataURL(f);});
 }
-function runTryon(){
-  const self=getSelf();const src=state.tryonPhoto;
-  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · rendering…</span><h2>Dressing <em>you</em>…</h2>
-    <div class="tryon-stage"><div class="scanline"></div>${src?`<img class="user-ph" src="${src}" alt="your photo">`:SAMPLE_FIGURE}</div>
-    <div class="scan-steps tryon-steps"><div class="s-title">MatchBuy AI Vision · simulated pipeline</div>
-    ${['Detecting body landmarks…','Fitting the piece…','Rendering the preview…'].map((s,i)=>`<div class="step" id="tstep${i}"><span class="ico">✓</span>${s}</div>`).join('')}</div></div>`;
-  [0,1,2].forEach(i=>{setTimeout(()=>{const s=$('#tstep'+i);if(s)s.classList.add('on');},250+i*650);setTimeout(()=>{const s=$('#tstep'+i);if(s){s.classList.remove('on');s.classList.add('done');}},700+i*650);});
-  setTimeout(renderTryonResult,2500);
+async function compressTryonPhoto(file){
+  if(!/^image\/(jpeg|png|webp)$/i.test(file.type))throw new Error('Unsupported image type');
+  const bitmap=await createImageBitmap(file);
+  const scale=Math.min(1,1296/Math.max(bitmap.width,bitmap.height));
+  const canvas=document.createElement('canvas');
+  canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+  canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+  canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
+  bitmap.close&&bitmap.close();
+  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Could not compress image')),'image/jpeg',0.84));
+  if(blob.size>2.5*1024*1024)throw new Error('Image is too large after compression');
+  return await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(new Error('Could not read image'));
+    reader.readAsDataURL(blob);
+  });
 }
 let _mpCache = null;
 async function mpTasks(){
@@ -1526,8 +1535,6 @@ async function garmentCutout(img, seg, pid, cat){
     const r = dd[i], g = dd[i+1], b = dd[i+2];
     if (corners.some(p => Math.abs(r-p[0]) + Math.abs(g-p[1]) + Math.abs(b-p[2]) < 92)) dd[i+3] = 0;
   }
-  x.putImageData(d, 0, 0);
-  return c;
 }
 function setStatus(t){ const el = document.getElementById('tryonStatus'); if (el) el.textContent = t; }
 async function tryonComposite(canvas, photoSrc, garmentSrc, cat, productId){
@@ -1631,7 +1638,6 @@ function renderTryonResult(){
         : 'Try-on could not load its pose detector. Check your internet connection and reload the page. (' + String(e).slice(0, 90) + ')';
     });
 }
-
 /* ---------- cart ---------- */
 function addToCart(n,label){state.cart+=n;['cartBadge','cartBadgeH'].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.textContent=state.cart;b.classList.remove('hidden');b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),300);});toast(label);}
 
@@ -1692,7 +1698,7 @@ document.addEventListener('click',e=>{
     case 'open-tryon': openTryon(); break;
     case 'close-tryon': closeTryon(); break;
     case 'tryon-sample': {state.tryonPhoto=null;runTryon();} break;
-    case 'tryon-again': renderTryonUpload(); break;
+    case 'tryon-again': state.tryonPhoto=null;state.tryonOutput=null;renderTryonUpload();break;
     case 'open-guide': $('#guideScrim').classList.add('on'); break;
     case 'close-guide': $('#guideScrim').classList.remove('on'); break;
     case 'noop': toast('Cart lives on each house’s own website — StyleHub never holds payment'); break;
