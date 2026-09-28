@@ -2,7 +2,7 @@ const crypto = require("node:crypto");
 
 const FASHN = "https://api.fashn.ai/v1";
 const MAX_REQUEST_CHARS = 4 * 1024 * 1024;
-const MAX_OUTPUT_BYTES = 4 * 1024 * 1024;
+const MAX_OUTPUT_BYTES = 3 * 1024 * 1024;
 const CATEGORY_PROMPTS = {
   top: "upper-body top",
   outerwear: "outerwear garment",
