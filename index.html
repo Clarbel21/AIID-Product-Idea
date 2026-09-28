@@ -1440,22 +1440,115 @@ function runTryon(){
   [0,1,2].forEach(i=>{setTimeout(()=>{const s=$('#tstep'+i);if(s)s.classList.add('on');},250+i*650);setTimeout(()=>{const s=$('#tstep'+i);if(s){s.classList.remove('on');s.classList.add('done');}},700+i*650);});
   setTimeout(renderTryonResult,2500);
 }
+let _mpCache = null;
+async function mpTasks(){
+  if (_mpCache) return _mpCache;
+  const vision = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14');
+  const files = await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+  const pose = await vision.PoseLandmarker.createFromOptions(files, { baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task' }, runningMode: 'IMAGE', numPoses: 1 });
+  const seg = await vision.ImageSegmenter.createFromOptions(files, { baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite' }, runningMode: 'IMAGE', outputCategoryMask: false, outputConfidenceMasks: true });
+  _mpCache = { pose, seg };
+  return _mpCache;
+}
+function loadImg(src){ return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
+function cutoutGarment(img){
+  const s = 620 / Math.max(img.naturalWidth, img.naturalHeight);
+  const c = document.createElement('canvas');
+  c.width = Math.max(2, Math.round(img.naturalWidth * s)); c.height = Math.max(2, Math.round(img.naturalHeight * s));
+  const x = c.getContext('2d'); x.drawImage(img, 0, 0, c.width, c.height);
+  const d = x.getImageData(0, 0, c.width, c.height), dd = d.data, cw = c.width, ch = c.height;
+  const corners = [[2, 2], [cw - 3, 2], [2, ch - 3], [cw - 3, ch - 3]].map(([px, py]) => { const i = (py * cw + px) * 4; return [dd[i], dd[i + 1], dd[i + 2]]; });
+  for (let i = 0; i < dd.length; i += 4){
+    const r = dd[i], g = dd[i + 1], b = dd[i + 2];
+    if (corners.some(p => Math.abs(r - p[0]) + Math.abs(g - p[1]) + Math.abs(b - p[2]) < 92)) dd[i + 3] = 0;
+  }
+  x.putImageData(d, 0, 0);
+  return c;
+}
+async function personMaskCanvas(img, seg){
+  const res = seg.segment(img);
+  const cm = res.confidenceMasks && res.confidenceMasks[0];
+  if (!cm) return null;
+  const arr = cm.getAsFloat32Array();
+  const mw = cm.width, mh = cm.height;
+  const c = document.createElement('canvas'); c.width = mw; c.height = mh;
+  const x = c.getContext('2d'); const id = x.createImageData(mw, mh);
+  for (let i = 0; i < arr.length; i++){ const p = Math.max(0, Math.min(1, arr[i])); id.data[i*4] = 255; id.data[i*4+1] = 255; id.data[i*4+2] = 255; id.data[i*4+3] = Math.round(p * 255); }
+  x.putImageData(id, 0, 0);
+  if (res.close) res.close();
+  return c;
+}
+async function tryonComposite(canvas, photoSrc, garmentSrc, cat){
+  const img = await loadImg(photoSrc), gimg = await loadImg(garmentSrc);
+  const W = 720, H = Math.round(W * img.naturalHeight / img.naturalWidth);
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, W, H);
+  const { pose, seg } = await mpTasks();
+  const pres = pose.detect(canvas);
+  const lm = pres && pres.landmarks && pres.landmarks[0];
+  if (!lm) return 'no-pose';
+  const X = n => lm[n].x * W, Y = n => lm[n].y * H;
+  const shW = Math.abs(X(12) - X(11)), shY = Math.min(Y(11), Y(12));
+  const hipY = (Y(23) + Y(24)) / 2, hipX = Math.abs(X(24) - X(23));
+  const kneeY = (Y(25) + Y(26)) / 2, ankY = (Y(27) + Y(28)) / 2;
+  const midX = (X(11) + X(12) + X(23) + X(24)) / 4;
+  const torso = Math.max(hipY - shY, 20);
+  let rw, rh, cx, cy;
+  if (cat === 'bottom'){ rw = Math.max(hipX * 1.7, shW * 1.15); rh = (kneeY - hipY) * 1.85; cx = midX; cy = (hipY + Math.min(ankY, hipY + rh)) / 2; }
+  else if (cat === 'dress'){ rw = shW * 1.3; rh = (kneeY - shY) * 1.25; cx = midX; cy = shY + rh / 2 - torso * 0.12; }
+  else if (cat === 'outerwear'){ rw = shW * 1.45; rh = torso * 1.75; cx = midX; cy = shY + rh / 2 - torso * 0.1; }
+  else if (cat === 'shoes'){ rw = Math.abs(X(27) - X(28)) * 2.4 + shW * 0.5; rh = rw * 0.62; cx = (X(27) + X(28)) / 2; cy = ankY - rh * 0.12; }
+  else { rw = shW * 1.28; rh = torso * 1.32; cx = midX; cy = shY + rh / 2 - torso * 0.12; }
+  // garment cutout, scaled into the target rect
+  const cut = cutoutGarment(gimg);
+  const sc = Math.min(rw / cut.width, rh / cut.height);
+  const gw = cut.width * sc, gh = cut.height * sc;
+  const layer = document.createElement('canvas'); layer.width = W; layer.height = H;
+  const lx = layer.getContext('2d');
+  lx.filter = 'blur(1.4px)';                                   // feather the cut edges
+  lx.drawImage(cut, cx - gw / 2, cy - gh / 2, gw, gh);
+  lx.filter = 'none';
+  // keep the garment only on the person (soft mask), so nothing pastes onto the background
+  const pm = await personMaskCanvas(img, seg);
+  if (pm){ lx.globalCompositeOperation = 'destination-in'; lx.drawImage(pm, 0, 0, W, H); lx.globalCompositeOperation = 'source-over'; }
+  ctx.drawImage(layer, 0, 0);
+  return 'ok';
+}
 function renderTryonResult(){
-  const self=getSelf();
-  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated result</span></span>
-    <h2>The piece, <em>imagined on you.</em></h2>
+  const self = getSelf();
+  $('#tryon').innerHTML = `<button class="mo-close" data-action="close-tryon">✕</button>
+    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated composite</span></span>
+    <h2>The piece, <em>cut out &amp; placed on you.</em></h2>
     <div class="tryon-result">
-      <figure class="to-photo"><span class="ribbon">AI imagined · simulated</span>${state.tryonPhoto?`<img class="user" src="${state.tryonPhoto}" alt="your photo">`:SAMPLE_FIGURE}
-        <span class="overlay-shirt"><img src="${self.img}" alt="" onerror="this.remove()"></span>
+      <figure class="to-photo"><span class="ribbon">AI imagined · simulated</span>
+        <canvas id="tryonCanvas" style="width:100%;display:block;background:#F6F5F0"></canvas>
+        <div class="ml" id="tryonStatus" style="padding:10px 12px">cutting out the piece · reading your pose…</div>
         <figcaption>${self.name.toLowerCase()}${(state.occasion&&state.mood)?` · for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:''}</figcaption></figure>
       <div class="to-piece">
         <figure class="tile"><img src="${self.img}" alt=""><figcaption>The piece · ${money(self.price)}</figcaption></figure>
-        <p class="to-note">In production, a generative try-on model would re-draw the garment onto <b>your</b> photo — body-aware fit, fabric drape and lighting. This concept build composites a preview locally so you can feel the flow.</p>
+        <p class="to-note">This build runs a <b>local pose + segmentation composite</b>: the piece is cut out of its photo and placed onto your body — sized from your shoulders, hips and knees. No generative model and no upload: everything runs in this page.</p>
         <div class="to-btns"><button class="btn btn-ghost" data-action="tryon-again"><span class="b-title">↺ Another photo</span></button>
         <a class="btn btn-primary" href="${self.url||BRANDS[self.brand].url}" target="_blank" rel="noopener"><span class="b-title">Buy on ${self.brand.toLowerCase()} ↗</span></a></div>
         <div class="privacy">🔒 Your photo never leaves this page · nothing is uploaded</div>
       </div></div>`;
+  const cat = self.cat;
+  const canvas = $('#tryonCanvas');
+  if (!(state.tryonPhoto) || ['bag','accessory'].includes(cat)){
+    const status = $('#tryonStatus');
+    if (status) status.textContent = cat === 'bag' || cat === 'accessory'
+      ? 'Try-on works on clothing & shoes — bags and jewellery are shown on the product page.'
+      : 'No photo — showing the sample figure. Upload a full-body photo for your own preview.';
+    return;
+  }
+  tryonComposite(canvas, state.tryonPhoto, self.img, cat === 'top' || cat === 'outerwear' || cat === 'bottom' || cat === 'dress' || cat === 'shoes' ? cat : 'top')
+    .then(r => {
+      const st = $('#tryonStatus'); if (!st) return;
+      if (r === 'no-pose') st.textContent = 'Couldn\'t find a body pose in this photo — try a full-body shot with the whole person visible.';
+      else if (r === 'ok') st.textContent = 'Composite complete — the piece is cut out and placed on your body (simulated).';
+      else st.textContent = 'Try-on preview unavailable.';
+    })
+    .catch(() => { const st = $('#tryonStatus'); if (st) st.textContent = 'The local try-on model could not load (offline?) — check your connection and try again.'; });
 }
 
 /* ---------- cart ---------- */
