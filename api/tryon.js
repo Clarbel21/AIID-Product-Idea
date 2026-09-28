@@ -118,7 +118,7 @@ async function startPrediction(req, res) {
           num_images: 1,
           output_format: "jpeg",
           return_base64: true
-        })
+        }
       })
     });
   } catch (_) {
