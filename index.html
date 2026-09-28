@@ -558,7 +558,6 @@ img,svg{display:block}
           <div class="wm-sub">× MatchBuy AI</div>
         </div>
         <div class="mast-right">
-          <button class="hicon" data-action="noop" title="Wishlist">♡</button>
           <button class="hicon" data-action="open-wl" title="Wishlist">♡<span class="hcount hidden" id="wishCountPDP">0</span></button>
           <button class="hicon" data-action="noop" title="Cart">🛍<span class="hcount hidden" id="cartBadge">0</span></button>
         </div>
@@ -756,6 +755,9 @@ const CATALOGUE = [
   {id:'f21d', brand:'FOREVER 21', name:'Off-Shoulder Fleece Sweatshirt', price:149, img:'assets/f21d.jpg', cat:'top', tone:'light', moods:['cute'], occs:['everyday'], styles:['sporty'], url:'https://www.forever21.com/products/01409735', why:'Off-shoulder fleece — the cosy weekend piece.'},
   {id:'f21e', brand:'FOREVER 21', name:'Faux-Suede Belted Micro Shorts', price:299, img:'assets/f21e.jpg', cat:'bottom', tone:'warm', moods:['sexy'], occs:['date','party'], styles:['romantic'], url:'https://www.forever21.com/collections/womens-shorts/products/01409573', why:'Suede with a belted waist — the going-out short.'},
   {id:'f21f', brand:'FOREVER 21', name:'Rhinestone-Fringe Leather Shorts', price:259, img:'assets/f21f.jpg', cat:'bottom', tone:'dark', moods:['sexy'], occs:['party'], styles:['bold'], url:'https://www.forever21.com/collections/womens-shorts/products/01371141', why:'Rhinestone fringe on faux leather — maximum party.'},
+  {id:'f21g', brand:'FOREVER 21', name:'Floral Graphic Tube Top', price:79, img:'assets/f21g.jpg', cat:'top', tone:'light', moods:['cute'], occs:['everyday','date'], styles:['romantic','casual'], url:'https://www.forever21.com/products/01409717', why:'Floral graphic tube — an easy warm-day staple.'},
+  {id:'f21h', brand:'FOREVER 21', name:'Asymmetrical Lace-Trim Satin Cami', price:139, img:'assets/f21h.jpg', cat:'top', tone:'light', moods:['cute','sexy'], occs:['date','party'], styles:['romantic'], url:'https://www.forever21.com/products/01409669', why:'Satin with an asymmetric lace panel — soft with an edge.'},
+  {id:'f21i', brand:'FOREVER 21', name:'Ruched Button-Front Halter Top', price:249, img:'assets/f21i.jpg', cat:'top', tone:'light', moods:['sexy','elegant'], occs:['date','party'], styles:['bold'], url:'https://www.forever21.com/products/01409894', why:'Ruched halter with button front — made for date night.'},
   /* ZARA — real products */
   {id:'zara1', brand:'ZARA', name:'Soft Double-Breasted Jacket', price:429, img:'assets/zara1.jpg', cat:'outerwear', tone:'light', moods:['elegant','minimal'], occs:['office','everyday'], styles:['classic'], url:'https://www.zara.cn/cn/en/soft-double-breasted-jacket-p06318329.html', why:'Soft tailoring, double-breasted — the layer that pulls it together.'},
   {id:'zara2', brand:'ZARA', name:'High-Neck Belted Trench Coat', price:649, img:'assets/zara2.jpg', cat:'outerwear', tone:'warm', moods:['elegant'], occs:['office','everyday'], styles:['classic'], url:'https://www.zara.cn/cn/en/high-neck-belted-trench-coat-p08073252.html', why:'High neck, belted waist — the trench does the entering-room work.'},
@@ -982,7 +984,6 @@ function renderPDP(){
   const p=product(), self=getSelf();
   $('#heroArt').innerHTML=`
     <span class="hero-badge">✨ MatchBuy AI</span>
-    <button class="hero-fav ${isWished()?'on':''}" data-action="wish" data-id="${p.id}" title="Wishlist">${isWished()?'♥':'♡'}</button>
     <div class="ph-frame">${media(self,false)}</div>`;
   const sizes=(p.sizes||sizesFor(p.cat));
   const showSizes=!((p.cat==='accessory'||p.cat==='bag')||(sizes.length===1&&sizes[0]==='One size'));
