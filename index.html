@@ -79,8 +79,9 @@ img,svg{display:block}
 .wish:hover{transform:scale(1.08)}
 .wish.on{color:#C04A5A;background:var(--blush-t)}
 .hero-fav.on{color:#C04A5A;background:var(--blush-t)}
+.hicon.pdp-fav.on{color:#C04A5A;background:var(--blush-t)}
 @keyframes wishPop{50%{transform:scale(1.3)}}
-.wish.on,.hero-fav.on{animation:wishPop .3s}
+.wish.on,.hero-fav.on,.pdp-fav.on{animation:wishPop .3s}
 .match-cta{position:absolute;left:8px;right:8px;bottom:8px;background:var(--ink);color:var(--paper);font-size:9px;letter-spacing:.26em;text-transform:uppercase;padding:10px 6px;text-align:center;opacity:0;transform:translateY(8px);transition:all .25s;border-radius:2px;z-index:2}
 .cat-card:hover .match-cta{opacity:1;transform:none}
 .cat-brand{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray);margin:11px 0 3px}
@@ -482,7 +483,6 @@ img,svg{display:block}
           <div class="wm-sub">× MatchBuy AI</div>
         </div>
         <div class="mast-right">
-          <button class="hicon" data-action="open-wl" title="Wishlist">♡<span class="hcount hidden" id="wishCount">0</span></button>
           <button class="hicon" data-action="noop" title="Cart">🛍<span class="hcount hidden" id="cartBadgeH">0</span></button>
         </div>
       </div>
@@ -558,7 +558,7 @@ img,svg{display:block}
           <div class="wm-sub">× MatchBuy AI</div>
         </div>
         <div class="mast-right">
-          <button class="hicon" data-action="open-wl" title="Wishlist">♡<span class="hcount hidden" id="wishCountPDP">0</span></button>
+          <button class="hicon pdp-fav" id="pdpFav" data-action="wish" title="Love this item">♡</button>
           <button class="hicon" data-action="noop" title="Cart">🛍<span class="hcount hidden" id="cartBadge">0</span></button>
         </div>
       </div>
@@ -805,19 +805,19 @@ const CATALOGUE = [
   {id:'zara4', brand:'ZARA', name:'ZW Collection Hooded Parka', price:649, img:'assets/zara4.jpg', cat:'outerwear', tone:'dark', moods:['minimal','cute'], occs:['everyday'], styles:['casual'], url:'https://www.zara.cn/cn/en/zw-collection-hooded-pocket-parka-p06539240.html', why:'ZW utility parka — the everyday layer with pockets for everything.'},
   {id:'zara5', brand:'ZARA', name:'Split Suede Heeled Ankle Boots', price:649, img:'assets/zara5.jpg', cat:'shoes', tone:'warm', moods:['elegant','sexy'], occs:['date','office','party'], styles:['classic'], url:'https://www.zara.cn/cn/en/split-suede-heeled-anble-boot-p12106810.html', why:'Split suede and a heel — boots that work from desk to dinner.'},
   /* NIKE — real products · nike.com */
-  {brand:'NIKE', id:'nk-vom5-mah', retailer:'NIKE', name:'Zoom Vomero 5 · Mahogany', category:'shoes', price:1229, img:'assets/nike-vomero5-olive.jpg', url:'https://www.nike.com/t/zoom-vomero-5-womens-shoe-with-reflective-accents-81TPKW/HQ0458-202', colourFamily:'warm', colourName:'Mahogany', style:'sporty', silhouette:'sneaker', occasions:['casual','office'], material:'Mesh & leather', moods:['minimal','elegant'], tags:['vomero'], why:'The cult Vomero in mahogany — vintage runner shape, modern cushioning.'},
-  {brand:'NIKE', id:'nk-vom5-wht', retailer:'NIKE', name:'Zoom Vomero 5 · White', category:'shoes', price:1229, img:'assets/nike-vomero5-white.jpg', url:'https://www.nike.com/t/zoom-vomero-5-womens-shoes-81TPKW/IV4311-100', colourFamily:'light', colourName:'Photon dust', style:'minimal', silhouette:'sneaker', occasions:['casual','office'], material:'Mesh & leather', moods:['minimal','cute'], tags:['vomero'], why:'All-white Vomero — the cleanest possible base for any cropped look.'},
-  {brand:'NIKE', id:'nk-vic4', retailer:'NIKE', name:'Victory Pro 4 Golf Shoes', category:'shoes', price:949, img:'assets/nike-victory4-golf.jpg', url:'https://www.nike.com/t/victory-pro-4-golf-shoes-N2eIegYv/FZ7611-104', colourFamily:'light', colourName:'Sail/olive', style:'sporty', silhouette:'sneaker', occasions:['casual','office'], material:'Leather', moods:['minimal'], tags:['golf'], why:'Golf-core is a thing — crisp leather with a spiked outsole.'},
-  {brand:'NIKE', id:'nk-am95', retailer:'NIKE', name:'Air Max 95 Big Bubble · WNBA', category:'shoes', price:1099, img:'assets/nike-am95-wnba.jpg', url:'https://www.nike.com/t/air-max-95-big-bubble-wnba-all-star-weekend-womens-shoes-C8qkmu3G/IV5831-001', colourFamily:'light', colourName:'Photon dust/multi', style:'sporty', silhouette:'sneaker', occasions:['casual','party'], material:'Mesh & leather', moods:['cute','sexy'], tags:['air max'], why:'Big-bubble Air Max — a chunky, confident counterpoint to soft tailoring.'},
-  {brand:'NIKE', id:'nk-p6000', retailer:'NIKE', name:'P-6000', category:'shoes', price:829, img:'assets/nike-p6000.jpg', url:'https://www.nike.com/t/p-6000-womens-shoes-SGxVgg/BV1021-022', colourFamily:'light', colourName:'Metallic silver', style:'sporty', silhouette:'sneaker', occasions:['casual','office'], material:'Leather & textile', moods:['minimal','cute'], tags:['p-6000'], why:'Y2K P-6000 lines — the retro-future sneaker that matches everything metallic.'},
-  {brand:'NIKE', id:'nk-v5rnr', retailer:'NIKE', name:'V5 RNR · White', category:'shoes', price:689, img:'assets/nike-v5rnr.jpg', url:'https://www.nike.com/t/v5-rnr-womens-shoes-4Lts7n/IO7801-101', colourFamily:'light', colourName:'White', style:'sporty', silhouette:'sneaker', occasions:['casual'], material:'Textile', moods:['cute','minimal'], tags:['v5 rnr'], why:'V5 RNR — a fresh white runner for easy, everyday fits.'},
+  {brand:'NIKE', id:'nk-vom5-mah', name:'Zoom Vomero 5 · Mahogany', cat:'shoes', price:1229, img:'assets/nike-vomero5-olive.jpg', url:'https://www.nike.com/t/zoom-vomero-5-womens-shoe-with-reflective-accents-81TPKW/HQ0458-202', tone:'warm', colourName:'Mahogany', style:'sporty', silhouette:'sneaker', occs:['casual','office'], material:'Mesh & leather', moods:['minimal','elegant'], tags:['vomero'], why:'The cult Vomero in mahogany — vintage runner shape, modern cushioning.'},
+  {brand:'NIKE', id:'nk-vom5-wht', name:'Zoom Vomero 5 · White', cat:'shoes', price:1229, img:'assets/nike-vomero5-white.jpg', url:'https://www.nike.com/t/zoom-vomero-5-womens-shoes-81TPKW/IV4311-100', tone:'light', colourName:'Photon dust', style:'minimal', silhouette:'sneaker', occs:['casual','office'], material:'Mesh & leather', moods:['minimal','cute'], tags:['vomero'], why:'All-white Vomero — the cleanest possible base for any cropped look.'},
+  {brand:'NIKE', id:'nk-vic4', name:'Victory Pro 4 Golf Shoes', cat:'shoes', price:949, img:'assets/nike-victory4-golf.jpg', url:'https://www.nike.com/t/victory-pro-4-golf-shoes-N2eIegYv/FZ7611-104', tone:'light', colourName:'Sail/olive', style:'sporty', silhouette:'sneaker', occs:['casual','office'], material:'Leather', moods:['minimal'], tags:['golf'], why:'Golf-core is a thing — crisp leather with a spiked outsole.'},
+  {brand:'NIKE', id:'nk-am95', name:'Air Max 95 Big Bubble · WNBA', cat:'shoes', price:1099, img:'assets/nike-am95-wnba.jpg', url:'https://www.nike.com/t/air-max-95-big-bubble-wnba-all-star-weekend-womens-shoes-C8qkmu3G/IV5831-001', tone:'light', colourName:'Photon dust/multi', style:'sporty', silhouette:'sneaker', occs:['casual','party'], material:'Mesh & leather', moods:['cute','sexy'], tags:['air max'], why:'Big-bubble Air Max — a chunky, confident counterpoint to soft tailoring.'},
+  {brand:'NIKE', id:'nk-p6000', name:'P-6000', cat:'shoes', price:829, img:'assets/nike-p6000.jpg', url:'https://www.nike.com/t/p-6000-womens-shoes-SGxVgg/BV1021-022', tone:'light', colourName:'Metallic silver', style:'sporty', silhouette:'sneaker', occs:['casual','office'], material:'Leather & textile', moods:['minimal','cute'], tags:['p-6000'], why:'Y2K P-6000 lines — the retro-future sneaker that matches everything metallic.'},
+  {brand:'NIKE', id:'nk-v5rnr', name:'V5 RNR · White', cat:'shoes', price:689, img:'assets/nike-v5rnr.jpg', url:'https://www.nike.com/t/v5-rnr-womens-shoes-4Lts7n/IO7801-101', tone:'light', colourName:'White', style:'sporty', silhouette:'sneaker', occs:['casual'], material:'Textile', moods:['cute','minimal'], tags:['v5 rnr'], why:'V5 RNR — a fresh white runner for easy, everyday fits.'},
   /* ADIDAS — real products · adidas.com */
-  {brand:'ADIDAS', id:'ad-g7-black', retailer:'ADIDAS', name:'Galaxy 7 Running Shoes · Black', category:'shoes', price:369, img:'assets/adidas-galaxy7-white.jpg', url:'https://www.adidas.com/us/galaxy-7-running-shoes/ID8765.html', colourFamily:'dark', colourName:'Black', style:'sporty', silhouette:'sneaker', occasions:['casual','office'], material:'Textile', moods:['minimal'], tags:['galaxy 7'], why:'The Galaxy 7 on sale — a black everyday runner that disappears into any look.'},
-  {brand:'ADIDAS', id:'ad-sxl', retailer:'ADIDAS', name:'Samba XLG · White', category:'shoes', price:399, img:'assets/adidas-samba-xlg.jpg', url:'https://www.adidas.com/us/samba-xlg-shoes/IE1377.html', colourFamily:'light', colourName:'White', style:'sporty', silhouette:'sneaker', occasions:['casual','date'], material:'Leather', moods:['cute','minimal'], tags:['samba xlg'], why:'The XLG Samba in white — 50% off and the easiest wear in the edit.'},
-  {brand:'ADIDAS', id:'ad-vlc', retailer:'ADIDAS', name:'VL Court Bold · Grey', category:'shoes', price:399, img:'assets/adidas-vl-court.jpg', url:'https://www.adidas.com/us/vl-court-bold-shoes/IF9784.html', colourFamily:'light', colourName:'Grey', style:'casual', silhouette:'sneaker', occasions:['casual','office'], material:'Leather', moods:['minimal','elegant'], tags:['vl court'], why:'A grey VL Court — 30% off, quietly matches everything neutral.'},
-  {brand:'ADIDAS', id:'ad-gazb', retailer:'ADIDAS', name:'Gazelle Bold · Black', category:'shoes', price:519, img:'assets/adidas-gazelle-bold.jpg', url:'https://www.adidas.com/us/gazelle-bold-shoes/HQ6912.html', colourFamily:'dark', colourName:'Black', style:'classic', silhouette:'sneaker', occasions:['date','party','office'], material:'Leather', moods:['elegant','sexy'], tags:['gazelle bold'], why:'The Gazelle Bold platform — black leather, 40% off, goes with everything.'},
-  {brand:'ADIDAS', id:'ad-stl', retailer:'ADIDAS', name:'Stella McCartney Dropset 4 · Beige', category:'shoes', price:1299, img:'assets/adidas-stella-dropset4.jpg', cat2:'shoes', tone:'light', url:'https://www.adidas.com/us/adidas-by-stella-mccartney-dropset-4-sneaker/KJ6183.html', colourFamily:'light', colourName:'Beige', style:'minimal', silhouette:'sneaker', occasions:['office','casual'], material:'Recycled textile', moods:['minimal','elegant'], tags:['stella'], why:'Stella McCartney training shoe — the designer tier of the edit.'},
-  {brand:'ADIDAS', id:'ad-dr4', retailer:'ADIDAS', name:'Dropset 4 · Pink', category:'shoes', price:1039, img:'assets/adidas-dropset4-power.jpg', url:'https://www.adidas.com/us/dropset-4-power-training-shoes/KJ0421.html', colourFamily:'light', colourName:'Pink', style:'sporty', silhouette:'sneaker', occasions:['casual'], material:'Textile', moods:['cute','sexy'], tags:['dropset'], why:'Pink Dropset 4 — training shoes that make the athleisure case.'},
+  {brand:'ADIDAS', id:'ad-g7-black', name:'Galaxy 7 Running Shoes · Black', cat:'shoes', price:369, img:'assets/adidas-galaxy7-white.jpg', url:'https://www.adidas.com/us/galaxy-7-running-shoes/ID8765.html', tone:'dark', colourName:'Black', style:'sporty', silhouette:'sneaker', occs:['casual','office'], material:'Textile', moods:['minimal'], tags:['galaxy 7'], why:'The Galaxy 7 on sale — a black everyday runner that disappears into any look.'},
+  {brand:'ADIDAS', id:'ad-sxl', name:'Samba XLG · White', cat:'shoes', price:399, img:'assets/adidas-samba-xlg.jpg', url:'https://www.adidas.com/us/samba-xlg-shoes/IE1377.html', tone:'light', colourName:'White', style:'sporty', silhouette:'sneaker', occs:['casual','date'], material:'Leather', moods:['cute','minimal'], tags:['samba xlg'], why:'The XLG Samba in white — 50% off and the easiest wear in the edit.'},
+  {brand:'ADIDAS', id:'ad-vlc', name:'VL Court Bold · Grey', cat:'shoes', price:399, img:'assets/adidas-vl-court.jpg', url:'https://www.adidas.com/us/vl-court-bold-shoes/IF9784.html', tone:'light', colourName:'Grey', style:'casual', silhouette:'sneaker', occs:['casual','office'], material:'Leather', moods:['minimal','elegant'], tags:['vl court'], why:'A grey VL Court — 30% off, quietly matches everything neutral.'},
+  {brand:'ADIDAS', id:'ad-gazb', name:'Gazelle Bold · Black', cat:'shoes', price:519, img:'assets/adidas-gazelle-bold.jpg', url:'https://www.adidas.com/us/gazelle-bold-shoes/HQ6912.html', tone:'dark', colourName:'Black', style:'classic', silhouette:'sneaker', occs:['date','party','office'], material:'Leather', moods:['elegant','sexy'], tags:['gazelle bold'], why:'The Gazelle Bold platform — black leather, 40% off, goes with everything.'},
+  {brand:'ADIDAS', id:'ad-stl', name:'Stella McCartney Dropset 4 · Beige', cat:'shoes', price:1299, img:'assets/adidas-stella-dropset4.jpg', tone:'light', url:'https://www.adidas.com/us/adidas-by-stella-mccartney-dropset-4-sneaker/KJ6183.html', tone:'light', colourName:'Beige', style:'minimal', silhouette:'sneaker', occs:['office','casual'], material:'Recycled textile', moods:['minimal','elegant'], tags:['stella'], why:'Stella McCartney training shoe — the designer tier of the edit.'},
+  {brand:'ADIDAS', id:'ad-dr4', name:'Dropset 4 · Pink', cat:'shoes', price:1039, img:'assets/adidas-dropset4-power.jpg', url:'https://www.adidas.com/us/dropset-4-power-training-shoes/KJ0421.html', tone:'light', colourName:'Pink', style:'sporty', silhouette:'sneaker', occs:['casual'], material:'Textile', moods:['cute','sexy'], tags:['dropset'], why:'Pink Dropset 4 — training shoes that make the athleisure case.'},
   /* JW PEI — live catalogue data */
   {id:'jp1', brand:'JW PEI', name:'Hana Medium Tote · Claret', price:1019, img:'assets/jwp1.jpg', cat:'bag', tone:'warm', moods:['cute','elegant'], occs:['office','date'], styles:['minimal'], url:'https://www.jwpei.com/products/hana-medium-tote-bag-claret', why:'Claret grained leather with gold feet — a quiet statement for work and after.'},
   {id:'jp2', brand:'JW PEI', name:'Noor Top Handle · Elephant Grey', price:719, img:'assets/jwpei2.jpg', cat:'bag', tone:'cool', moods:['minimal','sexy'], occs:['everyday','office'], styles:['minimal'], url:'https://www.jwpei.com/products/noor-top-handle-bag-elephant-gray', why:'Sculpted grey top handle — the quiet one that sharpens neutrals.'},
@@ -852,7 +852,7 @@ const state = {
   view:'home', productId:'ur1', phase:'idle',
   colorIdx:0, sizePDP:'M', sizeModal:null, modalSlot:null,
   altIdx:{}, look:null, timers:[],
-  journeyStep:1, occasion:null, mood:null, budget:null, brandFilter:'any', slots:['bottom','shoes','bag','accessory'], budget:null, slots:['bottom','shoes','bag','accessory'], budget:null, slots:['bottom','shoes','bag','accessory'],
+  journeyStep:1, occasion:null, mood:null, budget:null, slots:['bottom','shoes','bag','accessory'],
   cart:0, tryonPhoto:null,
   wishlist:[],
 };
@@ -872,7 +872,7 @@ function getSelf(){
           why:'This is the piece you selected — MatchBuy AI scores the whole edit against it.'};
 }
 function artForCat(cat){return {top:'shirt', outerwear:'coat', bottom:'wideleg', shoes:'sneaker', bag:'shoulder', accessory:'silver'}[cat]||'shirt';}
-const DEF_SIZES={top:['XS','S','M','L','XL'],outerwear:['XS','S','M','L','XL'],bottom:['36','38','40','42'],dress:['XS','S','M','L'],shoes:['36','37','38','39','40'],bag:['One size'],accessory:['One size']};
+const DEF_SIZES={top:['XS','S','M','L','XL'],outerwear:['XS','S','M','L','XL'],bottom:['XS','S','M','L','XL'],dress:['XS','S','M','L'],shoes:['36','37','38','39','40'],bag:['One size'],accessory:['One size']};
 function sizesFor(cat){return DEF_SIZES[cat]||['S','M','L'];}
 function occLabel(){const o=OCCASIONS.find(o=>o.id===state.occasion);return o?o.en:'';}
 function budgetEntry(){return BUDGETS.find(b=>b.id===state.budget)||null;}
@@ -923,9 +923,9 @@ function silBalance(a,b){
 }
 function scoreDimensions(a, c, slot){
   const target = styleFamily(state.mood==='minimal'?'minimal':state.mood==='elegant'?'elegant':state.mood==='cute'?'romantic':state.mood==='sexy'?'expressive':'casual');
-  const cStyle = styleFamily(c.style || 'minimal');
+  const cStyle = styleFamily(c.style || (c.styles && c.styles[0]) || 'minimal');
   let style = (cStyle===target) ? 96 : 74;
-  const colour = colourHarmony(a.colourFamily||'light', c.colourFamily||'light');
+  const colour = colourHarmony(a.tone || a.colourFamily || 'light', c.tone || c.colourFamily || 'light');
   const silhouette = silBalance(a.silhouette||'fitted', c.silhouette||'relaxed');
   let occasion = 60;
   if(c.occs && c.occs.includes(state.occasion)) occasion = 96;
@@ -949,7 +949,6 @@ function matchOutfit(){
     let best = null, bestS = -1, bestDims = null;
     for (const c of CATALOGUE) {
       if (c.id === self.id || c.cat !== slot || chosen.includes(c)) continue;
-      if (state.brandFilter === 'same' && c.brand !== self.brand) continue;
       const d = scoreDimensions(self, c);
       let s = d.total;
       if (!used.includes(c.brand)) s += 6;
@@ -1005,11 +1004,9 @@ function renderHome(){
     return `<section class="bsection" id="b-${b.replace(/[^A-Z]/g,'')}">
       <div class="bhead"><h2>${b}</h2><span class="ml">${items.length} pieces in the edit · every card opens the real product page</span></div>
       <div class="brow">${items.map(c=>{
-        const w=state.wishlist.some(x=>x.productId===c.id);
         const host=(BRANDS[c.brand].url||'').replace(/https:\/\/(www\.)?/,'').replace(/\/$/,'');
         return `<div class="cat-card" data-action="open-product" data-id="${c.id}" role="button" tabindex="0">
           <div class="cat-photo"><div class="ph">${media(c,false)}</div>
-            <button class="wish ${w?'on':''}" data-action="wish" data-id="${c.id}" title="Wishlist">${w?'♥':'♡'}</button>
             <span class="match-cta">✨ Match this piece</span></div>
           <div class="cat-brand">${c.brand}</div><div class="cat-name">${c.name}</div>
           <div class="cat-price">${money(c.price)}</div>
@@ -1026,6 +1023,8 @@ function renderPDP(){
   $('#heroArt').innerHTML=`
     <span class="hero-badge">✨ MatchBuy AI</span>
     <div class="ph-frame">${media(self,false)}</div>`;
+  const fav=$('#pdpFav');
+  if(fav){fav.dataset.id=p.id;fav.classList.toggle('on',isWished());fav.textContent=isWished()?'♥':'♡';}
   const sizes=(p.sizes||sizesFor(p.cat));
   const showSizes=!((p.cat==='accessory'||p.cat==='bag')||(sizes.length===1&&sizes[0]==='One size'));
   if(!showSizes) state.sizePDP=sizes[0]||'One size';
@@ -1233,9 +1232,6 @@ function renderResults(){
       <div class="stat"><div class="v">${Math.min(97,avg)}%</div><div class="k">Match index</div></div>
     </div>
     ${boardHTML}${analysisHTML}${cardsHTML}
-    <div class="reveal" style="animation-delay:.45s;display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px">
-      ${['any','same','budget'].map(f=>`<button class="lm ${state.brandFilter===f?'lm-on':''}" data-action="brand-filter" data-f="${f}" style="cursor:pointer;${state.brandFilter===f?'border-color:var(--blush-d);color:var(--blush-d)':''}">${f==='any'?'ANY BRAND':f==='same'?'SAME BRAND':'UNDER BUDGET'}</button>`).join('')}
-    </div>
     <div class="budget-line reveal" style="animation-delay:.5s"><span>FN-05 · Budget matching — “${budgetLabel()}”</span><span class="ok">${total<=budgetMaxNum()?`total ${money(total)} ✓`:`over by ${money(total-budgetMaxNum())} — try ⟳`}</span></div>
     <div class="restyle-link reveal"><a data-action="restyle">↺ Change occasion or mood</a></div>`;
   renderFoot();
@@ -1373,7 +1369,6 @@ document.addEventListener('click',e=>{
     case 'pick-occ': pickBrief('occ',el.dataset.id); break;
     case 'pick-mood': pickBrief('mood',el.dataset.id); break;
     case 'pick-budget': pickBrief('budget',el.dataset.id); break;
-    case 'brand-filter': state.brandFilter = el.dataset.f; renderResults(); break;
     case 'pick-slot': {
       const s=el.dataset.id, i=state.slots.indexOf(s);
       if(i>=0 && state.slots.length>1) state.slots.splice(i,1);
