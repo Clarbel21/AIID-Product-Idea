@@ -376,6 +376,7 @@ img,svg{display:block}
 .tryon-stage .user-ph{max-height:520px;max-width:100%;object-fit:contain}
 .tryon-steps{margin-top:18px}
 .tryon-result{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.tryon-upload-preview{max-width:180px;max-height:220px;object-fit:contain;display:block;margin:14px auto;border:1px solid var(--rule);border-radius:4px}.tryon-access{width:100%;padding:12px;border:1px solid var(--rule);background:#fff;margin:12px 0;font:inherit}.tryon-consent{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.55;padding:12px;background:#F8F6F2;margin:14px 0}.tryon-consent input{margin-top:3px;flex:0 0 auto}.tryon-consent a{color:var(--ink);text-decoration:underline}
 .to-photo{position:relative;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:linear-gradient(165deg,var(--blush-t),#F0DFE2);min-height:440px;display:grid;place-items:center}
 .to-photo img.user{max-height:520px;max-width:100%;object-fit:contain}
 .to-photo .overlay-shirt{position:absolute;left:50%;top:24%;width:52%;transform:translateX(-50%);opacity:.96;mix-blend-mode:multiply;border-radius:4px}
@@ -1414,143 +1415,136 @@ function closeModal(){$('#modalScrim').classList.remove('on');if(state.phase==='
 
 /* ---------- try-on ---------- */
 const SAMPLE_FIGURE=`<svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="326" rx="46" ry="7" fill="#000" opacity="0.05"/><circle cx="100" cy="38" r="20" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L88 196 L82 312 L94 312 L100 210 L106 312 L118 312 L112 196 L110 170 C119 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#E8D5C4"/><path d="M100 60 C84 62 76 76 75 98 L77 150 C77 162 81 168 90 170 L112 170 C121 168 123 162 123 150 L125 98 C124 76 116 62 100 60 Z" fill="#DFC6B2"/></svg>`;
-function openTryon(){state.tryonPhoto=null;setJourney(5);renderTryonUpload();$('#tryonScrim').classList.add('on');}
-function closeTryon(){$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
+function openTryon(){state.tryonPhoto=null;state.tryonOutput=null;setJourney(5);renderTryonUpload();$('#tryonScrim').classList.add('on');}
+function closeTryon(){state.tryonPhoto=null;state.tryonOutput=null;$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
 function renderTryonUpload(){
   const self=getSelf();
-  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in">
-      <span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated preview</span></span>
-      <h2>See the ${self.name.toLowerCase()} <em>on you.</em></h2>
-      <p class="lede">Upload one full-body photo and MatchBuy AI Vision will imagine the piece on you. Everything stays on this page — nothing is uploaded anywhere.</p>
-      <label class="dropzone" for="tryonFile"><div class="big">Choose a full-body photo</div><span class="ml">JPG / PNG · works offline · never leaves your device</span></label>
-      <input type="file" id="tryonFile" accept="image/*" style="display:none">
-      <div class="tryon-alt"><a data-action="tryon-sample">No photo handy? Use the sample figure →</a></div>
-      <div class="privacy">🔒 Simulated for the concept prototype · a production build would use a generative try-on model</div>
-    </div>`;
-  $('#tryonFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{state.tryonPhoto=ev.target.result;runTryon();};rd.readAsDataURL(f);});
+  $('#tryon').innerHTML =
+    '<button class="mo-close" data-action="close-tryon">✕</button>' +
+    '<div class="tryon-in"><span class="ml">✦ FN-07 · NATURAL AI TRY-ON</span>' +
+    '<h2>See the piece <em>on you.</em></h2>' +
+    '<p class="lede">Upload a clear, full-body photo, then generate a virtual try-on of ' + self.name + '. The AI will try to replace the matching garment while preserving your pose and identity. Results are a visual preview, not a size or fit guarantee.</p>' +
+    '<label class="dropzone" for="tryonFile"><div class="big">Choose a full-body photo</div><span class="ml">JPG / PNG / WEBP · portrait photo works best</span></label>' +
+    '<input type="file" id="tryonFile" accept="image/jpeg,image/png,image/webp" style="display:none">' +
+    '<div id="tryonPhotoState" class="ml" style="text-align:center">No photo selected</div>' +
+    '<img id="tryonLocalPreview" class="tryon-upload-preview" alt="Private local preview" style="display:none">' +
+    '<input id="tryonAccessCode" class="tryon-access" type="password" autocomplete="off" placeholder="Private demo access code">' +
+    '<label class="tryon-consent"><input id="tryonConsent" type="checkbox"><span>I agree to send this photo to FASHN AI for try-on processing. MatchBuy will not store the photo. FASHN says base64 inputs are used for processing and the temporary copy is deleted when processing finishes (with a one-day cleanup fallback); request metadata is retained. <a href="https://docs.fashn.ai/api-overview/data-retention-privacy" target="_blank" rel="noopener noreferrer">FASHN data details</a>.</span></label>' +
+    '<button id="tryonGenerate" class="btn btn-primary" type="button" disabled><span class="b-title">Generate natural try-on</span><span class="b-sub">uses 2 FASHN credits · one image</span></button>' +
+    '<p class="privacy">Your photo stays in this browser until you consent and choose Generate. The image is then sent securely to FASHN; never paste an API key here.</p></div>';
+  const input=$('#tryonFile');
+  input.addEventListener('change',async e=>{
+    const file=e.target.files&&e.target.files[0];
+    if(!file)return;
+    try{
+      const data=await compressTryonPhoto(file);
+      state.tryonPhoto=data;
+      const preview=$('#tryonLocalPreview');
+      preview.src=data;preview.style.display='block';
+      $('#tryonPhotoState').textContent='Photo ready · compressed in your browser';
+      $('#tryonGenerate').disabled=false;
+    }catch(_){
+      state.tryonPhoto=null;
+      $('#tryonPhotoState').textContent='This photo could not be prepared. Choose a JPG, PNG, or WEBP image.';
+      $('#tryonGenerate').disabled=true;
+    }
+  });
+  $('#tryonGenerate').addEventListener('click',startNaturalTryon);
 }
-function runTryon(){
-  const self=getSelf();const src=state.tryonPhoto;
-  $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · rendering…</span><h2>Dressing <em>you</em>…</h2>
-    <div class="tryon-stage"><div class="scanline"></div>${src?`<img class="user-ph" src="${src}" alt="your photo">`:SAMPLE_FIGURE}</div>
-    <div class="scan-steps tryon-steps"><div class="s-title">MatchBuy AI Vision · simulated pipeline</div>
-    ${['Detecting body landmarks…','Fitting the piece…','Rendering the preview…'].map((s,i)=>`<div class="step" id="tstep${i}"><span class="ico">✓</span>${s}</div>`).join('')}</div></div>`;
-  [0,1,2].forEach(i=>{setTimeout(()=>{const s=$('#tstep'+i);if(s)s.classList.add('on');},250+i*650);setTimeout(()=>{const s=$('#tstep'+i);if(s){s.classList.remove('on');s.classList.add('done');}},700+i*650);});
-  setTimeout(renderTryonResult,2500);
+async function compressTryonPhoto(file){
+  if(!/^image\/(jpeg|png|webp)$/i.test(file.type))throw new Error('Unsupported image type');
+  const bitmap=await createImageBitmap(file);
+  const scale=Math.min(1,1296/Math.max(bitmap.width,bitmap.height));
+  const canvas=document.createElement('canvas');
+  canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+  canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+  canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
+  bitmap.close&&bitmap.close();
+  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Could not compress image')),'image/jpeg',0.84));
+  if(blob.size>3.5*1024*1024)throw new Error('Image is too large after compression');
+  return await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(new Error('Could not read image'));
+    reader.readAsDataURL(blob);
+  });
 }
-let _mpCache = null;
-async function mpTasks(){
-  if (_mpCache) return _mpCache;
-  const vision = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14');
-  const files = await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
-  const pose = await vision.PoseLandmarker.createFromOptions(files, { baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task' }, runningMode: 'IMAGE', numPoses: 1 });
-  const seg = await vision.ImageSegmenter.createFromOptions(files, { baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite' }, runningMode: 'IMAGE', outputCategoryMask: false, outputConfidenceMasks: true });
-  _mpCache = { pose, seg };
-  return _mpCache;
+function renderTryonProcessing(message){
+  const self=getSelf();
+  $('#tryon').innerHTML =
+    '<button class="mo-close" data-action="close-tryon">✕</button>' +
+    '<div class="tryon-in"><span class="ml">✦ FASHN · SECURE TRY-ON</span>' +
+    '<h2>Fitting the piece <em>to your photo.</em></h2>' +
+    '<div class="tryon-stage"><img class="user-ph" src="'+state.tryonPhoto+'" alt="Your photo being processed"></div>' +
+    '<div class="scan-steps tryon-steps"><div class="s-title">Natural virtual try-on · '+self.name+'</div>' +
+    '<div class="step on" id="tryonStatus">'+message+'</div></div>' +
+    '<p class="privacy">Generating uses FASHN credits. Your photo was sent only after you checked the consent box and selected Generate.</p></div>';
 }
-function loadImg(src){ return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
-function cutoutGarment(img){
-  const s = 620 / Math.max(img.naturalWidth, img.naturalHeight);
-  const c = document.createElement('canvas');
-  c.width = Math.max(2, Math.round(img.naturalWidth * s)); c.height = Math.max(2, Math.round(img.naturalHeight * s));
-  const x = c.getContext('2d'); x.drawImage(img, 0, 0, c.width, c.height);
-  const d = x.getImageData(0, 0, c.width, c.height), dd = d.data, cw = c.width, ch = c.height;
-  const corners = [[2, 2], [cw - 3, 2], [2, ch - 3], [cw - 3, ch - 3]].map(([px, py]) => { const i = (py * cw + px) * 4; return [dd[i], dd[i + 1], dd[i + 2]]; });
-  for (let i = 0; i < dd.length; i += 4){
-    const r = dd[i], g = dd[i + 1], b = dd[i + 2];
-    if (corners.some(p => Math.abs(r - p[0]) + Math.abs(g - p[1]) + Math.abs(b - p[2]) < 92)) dd[i + 3] = 0;
+async function startNaturalTryon(){
+  if(!state.tryonPhoto)return;
+  const consent=$('#tryonConsent'),access=$('#tryonAccessCode');
+  if(!consent||!consent.checked){toast('Please review and accept the photo-processing notice first');return;}
+  if(!access||!access.value.trim()){toast('Enter the private demo access code');return;}
+  const self=getSelf();
+  renderTryonProcessing('Starting the virtual try-on…');
+  try{
+    const productImage=new URL(self.img,window.location.href).href;
+    const headers={'Content-Type':'application/json','X-MatchBuy-Access':access.value.trim()};
+    const started=await fetch('/api/tryon',{method:'POST',headers,body:JSON.stringify({
+      personImage:state.tryonPhoto,
+      productImage,
+      productName:self.name,
+      category:self.cat
+    })});
+    const startData=await readTryonResponse(started);
+    if(!started.ok)throw new Error(startData.error||'The try-on service is not configured.');
+    if(!startData.id)throw new Error('The try-on service did not return a generation ID.');
+    let completed=null;
+    for(let i=0;i<60;i++){
+      await new Promise(resolve=>setTimeout(resolve,2000));
+      const statusResponse=await fetch('/api/tryon?id='+encodeURIComponent(startData.id),{headers:{'X-MatchBuy-Access':access.value.trim()}});
+      const status=await readTryonResponse(statusResponse);
+      if(!statusResponse.ok)throw new Error(status.error||'Could not check generation status.');
+      if(status.status==='completed'&&status.image){completed=status;break;}
+      if(status.status==='failed')throw new Error(status.error||'The virtual try-on could not finish.');
+      const node=$('#tryonStatus');
+      if(node)node.textContent=status.status==='in_queue'?'Waiting for the try-on model…':'Adapting the garment to your pose…';
+    }
+    if(!completed)throw new Error('This generation is taking longer than expected. Please try again in a moment.');
+    state.tryonOutput=completed.image;
+    renderTryonResult();
+  }catch(error){
+    const message=error&&error.message?error.message:'Unknown service error';
+    $('#tryon').innerHTML =
+      '<button class="mo-close" data-action="close-tryon">✕</button>' +
+      '<div class="tryon-in"><span class="ml">TRY-ON NOT COMPLETED</span>' +
+      '<h2>We could not create the preview.</h2>' +
+      '<p class="lede">'+message.replace(/[<>]/g,'')+'</p>' +
+      '<p class="to-note">Natural try-on requires the secure /api/tryon backend, a FASHN API key stored on the server, and available FASHN credits. GitHub Pages cannot run the private API route by itself. Do not add an API key to this HTML file.</p>' +
+      '<div class="to-btns"><button class="btn btn-ghost" data-action="tryon-again"><span class="b-title">↺ Try again</span></button><button class="btn btn-primary" data-action="close-tryon"><span class="b-title">Close</span></button></div></div>';
   }
-  x.putImageData(d, 0, 0);
-  return c;
 }
-async function personMaskCanvas(img, seg){
-  const res = seg.segment(img);
-  const cm = res.confidenceMasks && res.confidenceMasks[0];
-  if (!cm) return null;
-  const arr = cm.getAsFloat32Array();
-  const mw = cm.width, mh = cm.height;
-  const c = document.createElement('canvas'); c.width = mw; c.height = mh;
-  const x = c.getContext('2d'); const id = x.createImageData(mw, mh);
-  for (let i = 0; i < arr.length; i++){ const p = Math.max(0, Math.min(1, arr[i])); id.data[i*4] = 255; id.data[i*4+1] = 255; id.data[i*4+2] = 255; id.data[i*4+3] = Math.round(p * 255); }
-  x.putImageData(id, 0, 0);
-  if (res.close) res.close();
-  return c;
-}
-async function tryonComposite(canvas, photoSrc, garmentSrc, cat){
-  const img = await loadImg(photoSrc), gimg = await loadImg(garmentSrc);
-  const W = 720, H = Math.round(W * img.naturalHeight / img.naturalWidth);
-  canvas.width = W; canvas.height = H;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0, W, H);
-  const { pose, seg } = await mpTasks();
-  const pres = pose.detect(canvas);
-  const lm = pres && pres.landmarks && pres.landmarks[0];
-  if (!lm) return 'no-pose';
-  const X = n => lm[n].x * W, Y = n => lm[n].y * H;
-  const shW = Math.abs(X(12) - X(11)), shY = Math.min(Y(11), Y(12));
-  const hipY = (Y(23) + Y(24)) / 2, hipX = Math.abs(X(24) - X(23));
-  const kneeY = (Y(25) + Y(26)) / 2, ankY = (Y(27) + Y(28)) / 2;
-  const midX = (X(11) + X(12) + X(23) + X(24)) / 4;
-  const torso = Math.max(hipY - shY, 20);
-  let rw, rh, cx, cy;
-  if (cat === 'bottom'){ rw = Math.max(hipX * 1.7, shW * 1.15); rh = (kneeY - hipY) * 1.85; cx = midX; cy = (hipY + Math.min(ankY, hipY + rh)) / 2; }
-  else if (cat === 'dress'){ rw = shW * 1.3; rh = (kneeY - shY) * 1.25; cx = midX; cy = shY + rh / 2 - torso * 0.12; }
-  else if (cat === 'outerwear'){ rw = shW * 1.45; rh = torso * 1.75; cx = midX; cy = shY + rh / 2 - torso * 0.1; }
-  else if (cat === 'shoes'){ rw = Math.abs(X(27) - X(28)) * 2.4 + shW * 0.5; rh = rw * 0.62; cx = (X(27) + X(28)) / 2; cy = ankY - rh * 0.12; }
-  else { rw = shW * 1.28; rh = torso * 1.32; cx = midX; cy = shY + rh / 2 - torso * 0.12; }
-  // garment cutout, scaled into the target rect
-  const cut = cutoutGarment(gimg);
-  const sc = Math.min(rw / cut.width, rh / cut.height);
-  const gw = cut.width * sc, gh = cut.height * sc;
-  const layer = document.createElement('canvas'); layer.width = W; layer.height = H;
-  const lx = layer.getContext('2d');
-  lx.filter = 'blur(1.4px)';                                   // feather the cut edges
-  lx.drawImage(cut, cx - gw / 2, cy - gh / 2, gw, gh);
-  lx.filter = 'none';
-  // keep the garment only on the person (soft mask), so nothing pastes onto the background
-  const pm = await personMaskCanvas(img, seg);
-  if (pm){ lx.globalCompositeOperation = 'destination-in'; lx.drawImage(pm, 0, 0, W, H); lx.globalCompositeOperation = 'source-over'; }
-  ctx.drawImage(layer, 0, 0);
-  return 'ok';
+async function readTryonResponse(response){
+  const text=await response.text();
+  try{return JSON.parse(text);}
+  catch(_){return {error:response.status===404?'The secure try-on backend is not connected to this website yet.':('Service returned an unreadable response ('+response.status+').')};}
 }
 function renderTryonResult(){
-  const self = getSelf();
-  $('#tryon').innerHTML = `<button class="mo-close" data-action="close-tryon">✕</button>
-    <div class="tryon-in"><span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated composite</span></span>
-    <h2>The piece, <em>cut out &amp; placed on you.</em></h2>
-    <div class="tryon-result">
-      <figure class="to-photo"><span class="ribbon">AI imagined · simulated</span>
-        <canvas id="tryonCanvas" style="width:100%;display:block;background:#F6F5F0"></canvas>
-        <div class="ml" id="tryonStatus" style="padding:10px 12px">cutting out the piece · reading your pose…</div>
-        <figcaption>${self.name.toLowerCase()}${(state.occasion&&state.mood)?` · for ${occLabel().toLowerCase()} · ${moodLabel().toLowerCase()}`:''}</figcaption></figure>
-      <div class="to-piece">
-        <figure class="tile"><img src="${self.img}" alt=""><figcaption>The piece · ${money(self.price)}</figcaption></figure>
-        <p class="to-note">This build runs a <b>local pose + segmentation composite</b>: the piece is cut out of its photo and placed onto your body — sized from your shoulders, hips and knees. No generative model and no upload: everything runs in this page.</p>
-        <div class="to-btns"><button class="btn btn-ghost" data-action="tryon-again"><span class="b-title">↺ Another photo</span></button>
-        <a class="btn btn-primary" href="${self.url||BRANDS[self.brand].url}" target="_blank" rel="noopener"><span class="b-title">Buy on ${self.brand.toLowerCase()} ↗</span></a></div>
-        <div class="privacy">🔒 Your photo never leaves this page · nothing is uploaded</div>
-      </div></div>`;
-  const cat = self.cat;
-  const canvas = $('#tryonCanvas');
-  if (!(state.tryonPhoto) || ['bag','accessory'].includes(cat)){
-    const status = $('#tryonStatus');
-    if (status) status.textContent = cat === 'bag' || cat === 'accessory'
-      ? 'Try-on works on clothing & shoes — bags and jewellery are shown on the product page.'
-      : 'No photo — showing the sample figure. Upload a full-body photo for your own preview.';
-    return;
-  }
-  tryonComposite(canvas, state.tryonPhoto, self.img, cat === 'top' || cat === 'outerwear' || cat === 'bottom' || cat === 'dress' || cat === 'shoes' ? cat : 'top')
-    .then(r => {
-      const st = $('#tryonStatus'); if (!st) return;
-      if (r === 'no-pose') st.textContent = 'Couldn\'t find a body pose in this photo — try a full-body shot with the whole person visible.';
-      else if (r === 'ok') st.textContent = 'Composite complete — the piece is cut out and placed on your body (simulated).';
-      else st.textContent = 'Try-on preview unavailable.';
-    })
-    .catch(() => { const st = $('#tryonStatus'); if (st) st.textContent = 'The local try-on model could not load (offline?) — check your connection and try again.'; });
+  const self=getSelf();
+  if(!state.tryonOutput){renderTryonUpload();return;}
+  $('#tryon').innerHTML =
+    '<button class="mo-close" data-action="close-tryon">✕</button>' +
+    '<div class="tryon-in"><span class="ml">✦ FASHN · AI-GENERATED VISUAL PREVIEW</span>' +
+    '<h2>The piece, <em>imagined on you.</em></h2>' +
+    '<div class="tryon-result"><figure class="to-photo"><span class="ribbon">AI virtual try-on · generated</span>' +
+    '<img class="user" src="'+state.tryonOutput+'" alt="Generated try-on showing you wearing '+self.name+'">' +
+    '<figcaption>'+self.name.toLowerCase()+'</figcaption></figure>' +
+    '<div class="to-piece"><figure class="tile"><img src="'+self.img+'" alt="'+self.name+'"><figcaption>The selected product</figcaption></figure>' +
+    '<p class="to-note">AI-generated preview. It may change garment details and does not predict exact fit, color, fabric behavior, or size. Always check the retailer’s product information.</p>' +
+    '<div class="to-btns"><button class="btn btn-ghost" data-action="tryon-again"><span class="b-title">↺ Another photo</span></button>' +
+    '<a class="btn btn-primary" href="'+(self.url||BRANDS[self.brand].url)+'" target="_blank" rel="noopener"><span class="b-title">View on '+self.brand.toLowerCase()+' ↗</span></a></div>' +
+    '<div class="privacy">Your photo was sent to FASHN only after you consented. Close this panel to clear the in-page preview.</div></div></div></div>';
 }
-
 /* ---------- cart ---------- */
 function addToCart(n,label){state.cart+=n;['cartBadge','cartBadgeH'].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.textContent=state.cart;b.classList.remove('hidden');b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),300);});toast(label);}
 
@@ -1611,7 +1605,7 @@ document.addEventListener('click',e=>{
     case 'open-tryon': openTryon(); break;
     case 'close-tryon': closeTryon(); break;
     case 'tryon-sample': {state.tryonPhoto=null;runTryon();} break;
-    case 'tryon-again': renderTryonUpload(); break;
+    case 'tryon-again': state.tryonPhoto=null;state.tryonOutput=null;renderTryonUpload();break;
     case 'open-guide': $('#guideScrim').classList.add('on'); break;
     case 'close-guide': $('#guideScrim').classList.remove('on'); break;
     case 'noop': toast('Cart lives on each house’s own website — StyleHub never holds payment'); break;
