@@ -1598,6 +1598,7 @@ async function tryonComposite(canvas, photoSrc, garmentSrc, cat, productId){
   ctx.drawImage(layer, 0, 0);
   return 'ok';
 }
+function runTryon(){ setJourney(5); renderTryonResult(); $('#tryonScrim').classList.add('on'); }
 function renderTryonResult(){
   const self = getSelf();
   $('#tryon').innerHTML = `<button class="mo-close" data-action="close-tryon">✕</button>
@@ -1621,7 +1622,7 @@ function renderTryonResult(){
     const status = $('#tryonStatus');
     if (status) status.textContent = cat === 'bag' || cat === 'accessory'
       ? 'Try-on works on clothing & shoes — bags and jewellery are shown on the product page.'
-      : 'No photo — showing the sample figure. Upload a full-body photo for your own preview.';
+      : 'No photo yet — upload a full-body photo to see the try-on.';
     return;
   }
   tryonComposite(canvas, state.tryonPhoto, self.img, cat === 'top' || cat === 'outerwear' || cat === 'bottom' || cat === 'dress' || cat === 'shoes' ? cat : 'top', self.id)
