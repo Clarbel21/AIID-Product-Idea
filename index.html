@@ -897,7 +897,7 @@ const SLOTS_FOR={
   accessory:['top','bottom','shoes','bag'],
   dress:['shoes','bag','accessory'],
 };
-const BODY_ORDER={accessory:0,top:1,outerwear:2,bottom:3,bag:4,shoes:5}; // necklace first, then down the body
+const BODY_ORDER={outerwear:0,accessory:1,top:2,bottom:3,bag:4,shoes:5}; // outer, necklace, top, bottom, bag, shoes
 function toneScore(a,b){
   const N={light:1,dark:1,warm:0,cool:0}; // neutrals pair with everything
   if(N[a]&&N[b]) return 8;
@@ -925,16 +925,15 @@ function scoreDimensions(a, c, slot){
   const target = styleFamily(state.mood==='minimal'?'minimal':state.mood==='elegant'?'elegant':state.mood==='cute'?'romantic':state.mood==='sexy'?'expressive':'casual');
   const cStyle = styleFamily(c.style || (c.styles && c.styles[0]) || 'minimal');
   let style = (cStyle===target) ? 96 : 74;
+  const moodFit = (c.moods||[]).includes(state.mood) ? 98 : ((c.moods||[]).length ? 62 : 80); // tagged for this mood wins big
   const colour = colourHarmony(a.tone || a.colourFamily || 'light', c.tone || c.colourFamily || 'light');
   const silhouette = silBalance(a.silhouette||'fitted', c.silhouette||'relaxed');
-  let occasion = 60;
-  if(c.occs && c.occs.includes(state.occasion)) occasion = 96;
-  else if((c.occs||[]).some(o => (OCCASIONS.find(x=>x.id===state.occasion)||{adj:[]}).adj && false)) occasion = 75;
+  let occasion = (c.occs && c.occs.includes(state.occasion)) ? 98 : 52; // occasion is a primary signal
   const bEntry = budgetEntry();
   const bMax = (bEntry && isFinite(bEntry.max)) ? bEntry.max : Infinity;
   let budget = isFinite(bMax) ? (c.price<=bMax ? Math.max(55, 100 - Math.round(35*(c.price/bMax))) : 35) : 85;
   const dims = {style: Math.min(99,style+2), colour: Math.min(99,colour+2), silhouette: Math.min(99,silhouette+2), occasion: Math.min(99,occasion+2), budget: Math.min(99,budget)};
-  const total = Math.round(dims.style*0.30 + dims.colour*0.25 + dims.silhouette*0.20 + dims.occasion*0.15 + dims.budget*0.10);
+  const total = Math.round(dims.style*0.20 + moodFit*0.22 + dims.colour*0.14 + dims.silhouette*0.10 + dims.occasion*0.24 + dims.budget*0.10);
   return {...dims, total};
 }
 function matchOutfit(){
@@ -953,14 +952,15 @@ function matchOutfit(){
       let s = d.total;
       if (!used.includes(c.brand)) s += 6;
       if (isFinite(bMax) && spent + c.price > bMax) s -= 40;      // budget steering
-      s += (c.id.length % 5);
+      s += [...c.id].reduce((x, ch) => x + ch.charCodeAt(0), 0) % 3; // weak stable jitter, only breaks exact ties
       if (s > bestS) { bestS = s; best = c; }
     }
     if (!best) continue;
     chosen.push(best); used.push(best.brand); spent += best.price;
   }
   state.lastSpend = spent;
-  const look = [{ slot: 'self', item: self, score: 100, dims: null }, ...chosen.map(c => ({ slot: c.cat, item: c, score: Math.min(99, Math.round(60 + 0.4 * scoreDimensions(self, c).total + 0)) })).sort((a,b)=>(BODY_ORDER[a.slot]??9)-(BODY_ORDER[b.slot]??9))];
+  const posOf = e => BODY_ORDER[e.slot === 'self' ? e.item.cat : e.slot] ?? 9; // the anchor sits at its own body position
+  const look = [{ slot: 'self', item: self, score: 100, dims: null }, ...chosen.map(c => ({ slot: c.cat, item: c, score: Math.min(99, Math.round(60 + 0.4 * scoreDimensions(self, c).total + 0)) }))].sort((a, b) => posOf(a) - posOf(b));
   state.look = look;
   return look;
 }
