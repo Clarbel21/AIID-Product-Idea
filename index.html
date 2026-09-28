@@ -1461,7 +1461,7 @@ async function compressTryonPhoto(file){
   canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
   bitmap.close&&bitmap.close();
   const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Could not compress image')),'image/jpeg',0.84));
-  if(blob.size>3.5*1024*1024)throw new Error('Image is too large after compression');
+  if(blob.size>2.5*1024*1024)throw new Error('Image is too large after compression');
   return await new Promise((resolve,reject)=>{
     const reader=new FileReader();
     reader.onload=()=>resolve(reader.result);
