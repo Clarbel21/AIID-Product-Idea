@@ -1429,9 +1429,9 @@ function renderTryonUpload(){
     '<div id="tryonPhotoState" class="ml" style="text-align:center">No photo selected</div>' +
     '<img id="tryonLocalPreview" class="tryon-upload-preview" alt="Private local preview" style="display:none">' +
     '<input id="tryonAccessCode" class="tryon-access" type="password" autocomplete="off" placeholder="Private demo access code">' +
-    '<label class="tryon-consent"><input id="tryonConsent" type="checkbox"><span>I agree to send this photo to FASHN AI for try-on processing. MatchBuy will not store the photo. FASHN says base64 inputs are used for processing and the temporary copy is deleted when processing finishes (with a one-day cleanup fallback); request metadata is retained. <a href="https://docs.fashn.ai/api-overview/data-retention-privacy" target="_blank" rel="noopener noreferrer">FASHN data details</a>.</span></label>' +
+    '<label class="tryon-consent"><input id="tryonConsent" type="checkbox"><span>I agree to send this compressed photo through MatchBuy’s private server to FASHN AI for try-on processing. MatchBuy will not retain the photo. FASHN says base64 inputs are used for processing and the temporary copy is deleted when processing finishes (with a one-day cleanup fallback); request metadata is retained. <a href="https://docs.fashn.ai/api-overview/data-retention-privacy" target="_blank" rel="noopener noreferrer">FASHN data details</a>.</span></label>' +
     '<button id="tryonGenerate" class="btn btn-primary" type="button" disabled><span class="b-title">Generate natural try-on</span><span class="b-sub">uses 2 FASHN credits · one image</span></button>' +
-    '<p class="privacy">Your photo stays in this browser until you consent and choose Generate. The image is then sent securely to FASHN; never paste an API key here.</p></div>';
+    '<p class="privacy">Your photo stays in this browser until you consent and choose Generate. The compressed image passes through MatchBuy’s private API to FASHN after consent; never paste an API key here.</p></div>';
   const input=$('#tryonFile');
   input.addEventListener('change',async e=>{
     const file=e.target.files&&e.target.files[0];
