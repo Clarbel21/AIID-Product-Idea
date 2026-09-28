@@ -2,6 +2,8 @@
 
 > A product-led outfit-matching concept prototype with direct links to retailer product pages.
 
+**Course:** AI + Innovative Design (Master's) · **Deliverable:** clickable web prototype
+
 ## Project overview
 
 StyleHub is a curated fashion storefront. MatchBuy AI helps a shopper start with one item, set an occasion, style preference and budget, then explore a coordinated outfit assembled from products in the catalogue. Each recommendation includes a short explanation and a link to the retailer.
@@ -10,7 +12,9 @@ This is a **static coursework prototype**. Despite the product name, the current
 
 ## Open the prototype
 
-- **GitHub Pages:** [clarbel21.github.io/AIID-Product-Idea](https://clarbel21.github.io/AIID-Product-Idea/)
+- **GitHub repository (source code):** https://github.com/Clarbel21/AIID-Product-Idea
+- **GitHub Pages (deployed prototype):** [clarbel21.github.io/AIID-Product-Idea](https://clarbel21.github.io/AIID-Product-Idea/)
+- **Product handbook (PDF):** [docs/Style-Hub-MatchBuy-AI-Handbook.pdf](docs/Style-Hub-MatchBuy-AI-Handbook.pdf)
 - **Local:** open `index.html` in a modern browser, or run `python serve.py` and open [http://localhost:8377](http://localhost:8377).
 - No build step, package installation or API key is required. Product images are stored in `assets/`; web fonts load from Google Fonts when an internet connection is available.
 
@@ -18,7 +22,7 @@ This is a **static coursework prototype**. Despite the product name, the current
 
 ### Product catalogue and retailer handoff
 
-The catalogue contains **94 products from 12 brands**: Urban Revivo, Forever 21, ASOS, Charles & Keith, APM Monaco, Zara, Nike, Adidas, JW PEI, Songmont, DeMellier and Swarovski. Product images are stored locally. Product links are labelled according to whether they open the specific item or a general retailer page.
+The catalogue contains **105 products from 12 brands**: Urban Revivo, Forever 21, ASOS, Charles & Keith, APM Monaco, Zara, Nike, Adidas, JW PEI, Songmont, DeMellier and Swarovski. Product images are stored locally. Product links are labelled according to whether they open the specific item or a general retailer page.
 
 Prices are reference values captured or converted when product records were added; they are not live quotes. Stock and size availability are not verified in real time. Shoppers should confirm current price, sizes and availability on the retailer’s site.
 
@@ -37,7 +41,7 @@ The score combines six weighted components:
 | Occasion fit | 0.24 | Favors items tagged for the selected occasion |
 | Budget fit | 0.10 | Scores candidate prices against the selected limit; the full outfit total is shown separately |
 
-Scores and colour pairings are prototype heuristics, not objective measures of taste or fit. Colour compatibility uses product tone tags and fixed rules; no visual-recognition model or live AI service is used.
+Scores and colour pairings are prototype heuristics, not objective measures of taste or fit. The colour labels shown in the analysis table were extracted offline from each product photograph (dominant-colour clustering) and reviewed by hand; the matching itself compares product tone tags using fixed rules. No live AI service is involved at any point.
 
 ### Wishlist and recommendation feedback
 
@@ -69,6 +73,7 @@ Current limitations include the absence of live retailer APIs, server-side feedb
 |---|---|
 | `index.html` | Storefront, catalogue, outfit matching, wishlist, feedback and public-discussion excerpts |
 | `assets/` | Locally stored product and campaign images |
+| `docs/` | Product handbook (PDF) |
 | `reference/` | Source project materials |
 | `serve.py` | Optional local web server on port 8377 |
 | `versions/` | Archived prototype versions |
