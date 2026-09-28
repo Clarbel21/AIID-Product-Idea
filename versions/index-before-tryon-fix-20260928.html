@@ -1418,9 +1418,6 @@ function openTryon(){state.tryonPhoto=null;setJourney(5);renderTryonUpload();$('
 function closeTryon(){$('#tryonScrim').classList.remove('on');if(state.phase==='done')setJourney(4);}
 function renderTryonUpload(){
   const self=getSelf();
-  const fileWarning = location.protocol === 'file:'
-    ? '<div class="privacy" style="border:1px solid var(--blush-d);padding:12px;margin:14px 0;color:var(--ink)">For Try-On, first open <b>Start StyleHub Demo.bat</b> in this project folder, then use the page it opens. Browsers block the pose-detection module when this page is opened directly as a file.</div>'
-    : '';
   $('#tryon').innerHTML=`<button class="mo-close" data-action="close-tryon">✕</button>
     <div class="tryon-in">
       <span class="ml">✦ FN-07 · AI try-on · <span style="color:var(--blush-d)">simulated preview</span></span>
@@ -1429,7 +1426,6 @@ function renderTryonUpload(){
       <label class="dropzone" for="tryonFile"><div class="big">Choose a full-body photo</div><span class="ml">JPG / PNG · works offline · never leaves your device</span></label>
       <input type="file" id="tryonFile" accept="image/*" style="display:none">
       <div class="tryon-alt"><a data-action="tryon-sample">No photo handy? Use the sample figure →</a></div>
-      ${fileWarning}
       <div class="privacy">🔒 Simulated for the concept prototype · a production build would use a generative try-on model</div>
     </div>`;
   $('#tryonFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{state.tryonPhoto=ev.target.result;runTryon();};rd.readAsDataURL(f);});
@@ -1485,7 +1481,7 @@ function bboxOf(canvas){
   if (x1 < 0) return null;
   return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
 }
-async function garmentCutout(img, seg, pid, cat){
+async function garmentCutout(img, seg, pid){
   // If the photo shows a model, segment on the full original frame (framing matters for the model);
   // for clean studio/product shots, plain background removal is the most reliable cut.
   let source = img, fromOriginal = false;
@@ -1508,13 +1504,7 @@ async function garmentCutout(img, seg, pid, cat){
     const x = c.getContext('2d'); x.drawImage(source, 0, 0, c.width, c.height);
     x.globalCompositeOperation = 'destination-in';
     x.drawImage(m.clothes, 0, 0, c.width, c.height);
-    let bb = bboxOf(c);
-    // For full-model bottom shots, remove the upper clothing while preserving
-    // the selected skirt/trouser area below it.
-    if (cat === 'bottom' && bb && bb.y < c.height * 0.08){
-      x.clearRect(0, 0, c.width, Math.min(c.height, Math.round(bb.y + bb.h * 0.23)));
-      bb = bboxOf(c);
-    }
+    const bb = bboxOf(c);
     if (bb && (bb.w * bb.h) > 0.02 * c.width * c.height) return c;
   }
   // fallback: studio-background removal by corner colour
@@ -1530,7 +1520,7 @@ async function garmentCutout(img, seg, pid, cat){
   return c;
 }
 function setStatus(t){ const el = document.getElementById('tryonStatus'); if (el) el.textContent = t; }
-async function tryonComposite(canvas, photoSrc, garmentSrc, cat, productId){
+async function tryonComposite(canvas, photoSrc, garmentSrc, cat){
   const img = await loadImg(photoSrc), gimg = await loadImg(garmentSrc);
   const W = 720, H = Math.round(W * img.naturalHeight / img.naturalWidth);
   canvas.width = W; canvas.height = H;
@@ -1548,44 +1538,43 @@ async function tryonComposite(canvas, photoSrc, garmentSrc, cat, productId){
   const mm = masksFrom(seg, img);                       // user's photo: where are MY clothes?
   if (!mm) return 'no-mask';
   setStatus('cutting the piece out of its photo…');
-  const cut = await garmentCutout(gimg, seg, productId, cat); // product photo: only the piece
+  const cut = await garmentCutout(gimg, seg, self.id);  // product photo: only the piece
   if (!cut) return 'no-cut';
   const cutBox = bboxOf(cut); if (!cutBox) return 'no-cut';
-  // Placement comes from POSE landmarks (shoulders / hips / knees / ankles) —
-  // they never misfire the way a low-res clothes mask can.
-  const shW = Math.abs(X(12) - X(11)), shY = Math.min(Y(11), Y(12));
-  const midX = (X(11) + X(12) + X(23) + X(24)) / 4;
-  const torso = Math.max((Y(23) + Y(24)) / 2 - shY, 20);
-  const hipY = (Y(23) + Y(24)) / 2, hipW = Math.abs(X(24) - X(23));
-  const kneeY = (Y(25) + Y(26)) / 2, ankY = (Y(27) + Y(28)) / 2;
+  const scale = 720 / mm.mw;                            // masks were 256-wide
   let tw, th, tx, ty;
   if (cat === 'shoes'){
+    const ankY = (Y(27) + Y(28)) / 2, shW = Math.abs(X(12) - X(11));
     tw = Math.abs(X(27) - X(28)) * 2.4 + shW * 0.5; th = tw * 0.62;
     tx = (X(27) + X(28)) / 2 - tw / 2; ty = ankY - th * 0.6;
-  } else if (cat === 'bottom'){
-    tw = Math.max(hipW * 1.7, shW * 1.15); th = (kneeY - hipY) * 1.85;
-    tx = midX - tw / 2; ty = hipY - torso * 0.08;
-  } else if (cat === 'dress'){
-    tw = shW * 1.3; th = (kneeY - shY) * 1.25;
-    tx = midX - tw / 2; ty = shY - torso * 0.12;
-  } else if (cat === 'outerwear'){
-    tw = shW * 1.45; th = torso * 1.75;
-    tx = midX - tw / 2; ty = shY - torso * 0.1;
   } else {
-    tw = shW * 1.28; th = torso * 1.32;
-    tx = midX - tw / 2; ty = shY - torso * 0.12;
+    // place the piece over MY clothes region (lower part for bottoms, upper for tops/dresses/outerwear)
+    const cb = bboxOf(mm.clothes); if (!cb) return 'no-mask';
+    let bx = cb.x * scale, by = cb.y * scale, bw = cb.w * scale, bh = cb.h * scale;
+    if (cat === 'bottom'){ by = by + bh * 0.45; bh = bh * 0.55; }
+    const cover = 1.22;
+    tw = bw * cover; th = bh * cover;
+    const fit = Math.min(tw / cutBox.w, th / cutBox.h);
+    tw = cutBox.w * fit; th = cutBox.h * fit;
+    tx = bx + bw / 2 - tw / 2; ty = by + bh / 2 - th / 2;
   }
-  const fit = Math.min(tw / cutBox.w, th / cutBox.h);
-  tw = cutBox.w * fit; th = cutBox.h * fit;
   const layer = document.createElement('canvas'); layer.width = W; layer.height = H;
   const lx = layer.getContext('2d');
   lx.filter = 'blur(1.6px)';
-  lx.drawImage(cut, cutBox.x, cutBox.y, cutBox.w, cutBox.h, tx, ty, tw, th);
+  lx.drawImage(cut, tx, ty, tw, th);
   lx.filter = 'none';
-  // the piece shows only on the person — nothing pastes onto the background
+  // the piece shows only where the user actually has a body — and only over the clothes zone for garments
   lx.globalCompositeOperation = 'destination-in';
-  lx.filter = 'blur(2.5px)';
-  lx.drawImage(mm.person, 0, 0, W, H);
+  lx.filter = 'blur(3px)';
+  if (cat === 'bottom' || cat === 'top' || cat === 'dress' || cat === 'outerwear'){
+    const cb = bboxOf(mm.clothes);
+    const zone = document.createElement('canvas'); zone.width = W; zone.height = H;
+    const zx = zone.getContext('2d'); zx.filter = 'blur(3px)';
+    zx.drawImage(mm.clothes, cb.x * scale - 8, cb.y * scale - 8, cb.w * scale + 16, cb.h * scale + 16);
+    lx.drawImage(zone, 0, 0);
+  } else {
+    lx.drawImage(mm.person, 0, 0, W, H);
+  }
   lx.filter = 'none';
   lx.globalCompositeOperation = 'source-over';
   ctx.drawImage(layer, 0, 0);
@@ -1617,19 +1606,14 @@ function renderTryonResult(){
       : 'No photo — showing the sample figure. Upload a full-body photo for your own preview.';
     return;
   }
-  tryonComposite(canvas, state.tryonPhoto, self.img, cat === 'top' || cat === 'outerwear' || cat === 'bottom' || cat === 'dress' || cat === 'shoes' ? cat : 'top', self.id)
+  tryonComposite(canvas, state.tryonPhoto, self.img, cat === 'top' || cat === 'outerwear' || cat === 'bottom' || cat === 'dress' || cat === 'shoes' ? cat : 'top')
     .then(r => {
       const st = $('#tryonStatus'); if (!st) return;
       if (r === 'no-pose') st.textContent = 'Couldn\'t find a body pose in this photo — try a full-body shot with the whole person visible.';
       else if (r === 'ok') st.textContent = 'Composite complete — the piece is cut out and placed on your body (simulated).';
       else st.textContent = 'Try-on preview unavailable.';
     })
-    .catch(e => {
-      const st = $('#tryonStatus'); if (!st) return;
-      st.textContent = location.protocol === 'file:'
-        ? 'This page was opened as a file. Close it, open Start StyleHub Demo.bat in the project folder, then try again.'
-        : 'Try-on could not load its pose detector. Check your internet connection and reload the page. (' + String(e).slice(0, 90) + ')';
-    });
+    .catch(e => { const st = $('#tryonStatus'); if (st) st.textContent = 'Try-on failed: ' + String(e).slice(0, 140); });
 }
 
 /* ---------- cart ---------- */
