@@ -24,7 +24,7 @@ Fonts load from Google Fonts when online; graceful fallback offline.
 | `assets/` | Real product photography downloaded from the houses (50+ shots) + generated colourways + campaign image |
 | `reference/` | The source handbook + extracted text |
 
-## 3. The houses & the 50+ real products
+## 3. The houses & the 90+ real products
 
 | House | Pieces | Deep links |
 |---|---|---|
@@ -41,7 +41,7 @@ Fonts load from Google Fonts when online; graceful fallback offline.
 | DeMellier | 5 (Hudson, Brooklyn, Stockholm, Florence, Siena) | demellierlondon.com product pages |
 | Swarovski | 8 (Classica, Mesmera, Gema, Matrix, Symbolica, Swan ×2, Una) | swarovski.com.cn product pages |
 
-Data provenance: Urban Revivo, DeMellier and JW PEI were pulled live from their Shopify product endpoints (exact title, price, image). Zara, Forever 21 and Swarovski were captured from their product pages. All prices are shown in **RMB** (converted where the house sells in USD/GBP — indicative). Photos are the houses’ own product imagery, stored locally so the prototype works offline.
+Data provenance: Urban Revivo, DeMellier and JW PEI were pulled live from their Shopify product endpoints (exact title, price, image). Zara, Forever 21 and Swarovski were captured from their product pages. All prices are shown in **RMB** (converted where the house sells in USD/CAD — Urban Revivo from its USD global store, Charles & Keith from its CAD store, ASOS as displayed in CNY — indicative). Photos are the houses’ own product imagery, stored locally so the prototype works offline.
 
 Removed in this version: Brandy Melville and Charles & Keith (website access issues, per feedback) and the Sporty & Rich “icon” section (per feedback).
 
